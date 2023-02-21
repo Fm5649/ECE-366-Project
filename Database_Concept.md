@@ -1,4 +1,4 @@
-Database Table Concepts
+Database Table Concept
 
 Users
 
@@ -11,3 +11,13 @@ Users
 |Total Win|Int   |0|
 |Total Loss|Int    |0|
 |ELO|Int   |0|
+
+Games
+
+|Table Member|Variable Type|Default|
+|---|---|---|
+|GameId|BigInt|NOT NULL DEFAULT nextval|
+|player1_Id|BigInt| |
+|player2_Id|BigInt|  |
+|Winner|Int|  |
+|Rounds|Int|  |
