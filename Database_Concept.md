@@ -1,5 +1,9 @@
 Database Table Concepts
 
-|User Table|Variable Type|
+Users
+
+|Table Member|Variable Type|
 |---|---|
-|UserId|LongInt|
+|UserId|BigInt|
+|Username|VarChar(50)  |
+|Password|VarChar(50)  |
