@@ -1,5 +1,0 @@
-Database Table Member Concept
-
-|User|
-|----|
-|UserId|
