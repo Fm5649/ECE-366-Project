@@ -21,3 +21,13 @@ Games
 |player2_Id|BigInt|  |
 |Winner|Int|  |
 |Rounds|Int|  |
+
+Game History
+Note: Decide how player choices will be represented. Players can attack a hand or swap. Variable for swap or attack? Show value of each hand?
+
+|Table Member|Variable Type|Default|
+|---|---|---|
+|GameId|BigInt||
+|Round Number|Int||
+|Player1_Choice|||
+|Player2_Choice|||
