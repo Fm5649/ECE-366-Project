@@ -14,13 +14,16 @@ Users
 
 Games
 
+Note: Include variable for hands of players? 
+
 |Table Member|Variable Type|Default|
 |---|---|---|
 |GameId|BigInt|NOT NULL DEFAULT nextval|
-|player1_Id|BigInt| |
-|player2_Id|BigInt|  |
-|Winner|Int|  |
-|Rounds|Int|  |
+|player1_Id|BigInt| NOT NULL|
+|player2_Id|BigInt|  NOT NULL|
+|Winner ID|Int| NULL |
+|Current Round|Int| Not NULL |
+|Total Rounds|Int| Not NULL |
 
 Game History
 
