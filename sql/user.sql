@@ -8,9 +8,9 @@ CREATE TABLE player (
   player_id bigint NOT NULL DEFAULT nextval('user_seq'),
   player_name varchar(30) NOT NULL,
   password varchar(30) NOT NULL,
-  total_games int default 0,
-  total_wins int default 0,
-  total_losses int default 0,
-  player_elo int default 0,
+  total_games int DEFAULT 0,
+  total_wins int DEFAULT 0,
+  total_losses int DEFAULT 0,
+  player_elo int DEFAULT 0,
   PRIMARY KEY (user_id)
 );
