@@ -1,7 +1,7 @@
 
-package //placeholder;
+package com.chopsticks.lil.jdbc;
 
-import //placeholder.util.DataTransferObject;
+import com.chopsticks.lil.jdbc.util.DataTransferObject;
   
 public class GameRound implements DataTransferObject
 {
