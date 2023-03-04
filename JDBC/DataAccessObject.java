@@ -1,6 +1,5 @@
 
-//placeholder, insert actual value
-package //com.chrishong.lil.jdbc.util;
+package com.chopsticks.lil.jdbc;
 
 import java.sql.*;
 import java.util.List;
