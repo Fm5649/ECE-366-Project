@@ -9,10 +9,10 @@ public class GameRound implements DataTransferObject
   private String playerTurn;
   private String playerChoice;
   private String target;
-  private int p1_LeftHand;
-  private int p1_RightHand;
-  private int p2_LeftHand;
-  private int p2_RightHand;
+  private int p1LeftHand;
+  private int p1RightHand;
+  private int p2LeftHand;
+  private int p2RightHand;
   
   //GameId get and set
   public long getId() 
@@ -61,41 +61,41 @@ public class GameRound implements DataTransferObject
   //Player 1 left hand get and set
   public int getPlayerOneLeftHand() 
   {
-    return p1_LeftHand;
+    return p1LeftHand;
   }
-  public void setPlayerOneLeftHand(int p1_LeftHand)
+  public void setPlayerOneLeftHand(int p1LeftHand)
   {
-    this.p1_LeftHand = p1_LeftHand;
+    this.p1LeftHand = p1LeftHand;
   }
   
   //Player 1 right hand get and set
   public int getPlayerOneRightHand() 
   {
-    return p1_RightHand;
+    return p1RightHand;
   }
-  public void setPlayerOneRightHand(int p1_RightHand)
+  public void setPlayerOneRightHand(int p1RightHand)
   {
-    this.p1_RightHand = p1_RightHand;
+    this.p1RightHand = p1RightHand;
   }
   
   //Player 2 left hand get and set
   public int getPlayerTwoLeftHand() 
   {
-    return p2_LeftHand;
+    return p2LeftHand;
   }
-  public void setPlayerTwoLeftHand(int p2_LeftHand)
+  public void setPlayerTwoLeftHand(int p2LeftHand)
   {
-    this.p2_LeftHand = p2_LeftHand;
+    this.p2LeftHand = p2LeftHand;
   }
   
   //Player 2 right hand get and set
   public int getPlayerTwoRightHand() 
   {
-    return p2_RightHand;
+    return p2RightHand;
   }
-  public void setPlayerTwoRightHand(int p2_RightHand)
+  public void setPlayerTwoRightHand(int p2RightHand)
   {
-    this.p2_RightHand = p2_RightHand;
+    this.p2RightHand = p2RightHand;
   }
   
   @Override
@@ -106,10 +106,10 @@ public class GameRound implements DataTransferObject
                 ", playerTurn='" + playerTurn + '\'' +
                 ", playerChoice='" + playerChoice + '\'' +
                 ", target='" + target + '\'' +
-                ", p1_LeftHand='" + p1_LeftHand + '\'' +
-                ", p1_RightHand='" + p1_RightHand + '\'' +
-                ", p2_LeftHand='" + p2_LeftHand + '\'' +
-                ", p2_RightHand='" + p2_RightHand + '\'' +
+                ", p1LeftHand='" + p1LeftHand + '\'' +
+                ", p1RightHand='" + p1RightHand + '\'' +
+                ", p2LeftHand='" + p2LeftHand + '\'' +
+                ", p2RightHand='" + p2RightHand + '\'' +
                 '}';
   }
 }
