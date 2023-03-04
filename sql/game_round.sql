@@ -6,8 +6,8 @@ CREATE TABLE game_round (
     turn_player_name varchar(30) NOT NULL, --Which users' turn it is
     player_choice varchar (50) NOT NULL, --Attack or transfer
     player_target varchar(50) NOT NULL, --"P1Hand1, P1Hand1, P2Hand1, P2Hand2" 
-    p1_choice varchar(50) NOT NULL,
-    p2_choice varchar(50) NOT NULL,
+    --p1_choice varchar(50) NOT NULL,
+    --p2_choice varchar(50) NOT NULL,
     
     player_action_amount int NOT NULL DEFAULT 0,  --Amount the player transfers or attacks with
     p1_hand1 int NOT NULL DEFAULT 5,    
