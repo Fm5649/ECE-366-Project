@@ -1,8 +1,7 @@
 //Java file for data transfer object
 
 
-//Placeholder, insert actual folder
-package //com.chrishong.lil.jdbc.util;
+package com.chopsticks.lil.jdbc;
 
 public interface DataTransferObject {
 
