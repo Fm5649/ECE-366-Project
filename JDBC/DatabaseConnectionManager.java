@@ -1,9 +1,7 @@
 //Java file for database connection manager
 
-//package com.chrishong.lil.jdbc;
-//Placeholder, place actual folder name here
 
-package //placeholder
+package com.chopsticks.lil.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
