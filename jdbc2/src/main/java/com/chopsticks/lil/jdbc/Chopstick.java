@@ -19,7 +19,7 @@ public class Chopstick {
 	@PostMapping("/getPlayerById")
 	public Player getPlayer(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		Player player = new Player();
 		try {
 			Connection connection = dcm.getConnection();
@@ -37,7 +37,7 @@ public class Chopstick {
     @PostMapping("/getPlayerByName")
 	public Player create(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		Player player = new Player();
 		try {
 			Connection connection = dcm.getConnection();
@@ -55,7 +55,7 @@ public class Chopstick {
     @PostMapping("/getGameById")
 	public void getGameById(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			GameDAO gameDAO = new GameDAO(connection);
@@ -71,7 +71,7 @@ public class Chopstick {
     @PostMapping(value = "/insertGame")
 	public void insertGame(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			GameDAO gameDAO = new GameDAO(connection);
@@ -87,7 +87,7 @@ public class Chopstick {
     @PostMapping(value = "/getGameRoundById")
 	public void getGameRoundById(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			GameRoundDAO gameDAO = new GameRoundDAO(connection);
@@ -103,7 +103,7 @@ public class Chopstick {
     @PostMapping(value = "/insertGameRound")
 	public void getGameRoundById(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			GameRoundDAO gameDAO = new GameRoundDAO(connection);
@@ -128,7 +128,7 @@ public class Chopstick {
     @PostMapping(value = "/getLeaderboardById")
 	public void getGameRoundById(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
@@ -143,7 +143,7 @@ public class Chopstick {
     @PostMapping(value = "/insertLeaderboard")
 	public void getGameRoundById(@RequestBody String message) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
-				"rps", "postgres", "password");
+				"chopsticks", "postgres", "password");
 		try {
 			Connection connection = dcm.getConnection();
 			LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
@@ -165,7 +165,7 @@ public class Chopstick {
 	public static void main(String[] args) {
 		System.out.println("Hello!");
 
-		SpringApplication.run(RpsApplication.class, args);
+		SpringApplication.run(chopsticksApplication.class, args);
 	}
 
 }
