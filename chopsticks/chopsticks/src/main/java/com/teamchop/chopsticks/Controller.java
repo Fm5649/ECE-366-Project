@@ -21,7 +21,7 @@ public class Controllers {
     public Player getPlayer(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Player player;
+        Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO playerDAO = new PlayerDAO(connection);
@@ -57,7 +57,7 @@ public class Controllers {
     public Game getGameById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Game g;
+        Game g = null;
         try {
             Connection connection = dcm.getConnection();
             GameDAO gameDAO = new GameDAO(connection);
@@ -75,7 +75,7 @@ public class Controllers {
     public Game insertGame(@RequestBody GameForm message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Game g;
+        Game g = null;
         try {
             Connection connection = dcm.getConnection();
             GameDAO gameDAO = new GameDAO(connection);
@@ -88,11 +88,11 @@ public class Controllers {
         return g;
     }
 
-    @GetMapping(value = "/getGameRoundById/{id}")
-    public Game getGameRoundById(@PathVariable long id) {
+    @PostMapping(value = "/getGameRoundById/{id}")
+    public GameRound getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound g;
+        GameRound g=null;
         try {
             Connection connection = dcm.getConnection();
             GameRoundDAO gameDAO = new GameRoundDAO(connection);
@@ -110,22 +110,23 @@ public class Controllers {
     public GameRound insertGameRound(@RequestBody GameRound message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound g;
+        GameRound g=null;
         try {
             Connection connection = dcm.getConnection();
             GameRoundDAO gameDAO = new GameRoundDAO(connection);
-
-            g = gameDAO.insertGameRound(message.getGameId(),
-                    message.getRoundNumber(),
-                    message.getPlayerTurn(),
-                    message.getPlayerChoice(),
-                    message.getPlayerHandUsed(),
-                    message.getTarget(),
-                    message.getAmount(),
-                    message.getP1Hand1(),
-                    message.getP1Hand2(),
-                    message.getP2Hand1(),
-                    message.getP2Hand2());
+            if (GameLogic.isValidMove(message)) {
+                g = gameDAO.insertGameRound(message.getGameId(),
+                        message.getRoundNumber(),
+                        message.getPlayerTurn(),
+                        message.getPlayerChoice(),
+                        message.getPlayerHandUsed(),
+                        message.getTarget(),
+                        message.getAmount(),
+                        message.getP1Hand1(),
+                        message.getP1Hand2(),
+                        message.getP2Hand1(),
+                        message.getP2Hand2());
+            }
             System.out.println(g);
         }
         catch(SQLException e) {
@@ -139,29 +140,27 @@ public class Controllers {
     public Leaderboard getLeaderboardById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Leaderboard l;
+        Leaderboard l=null;
         try {
             Connection connection = dcm.getConnection();
             LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
 
-            l = leaderDAO.findById(message);
+            l = leaderDAO.findById(id);
             System.out.println(l);
         }
         catch(SQLException e) {
             e.printStackTrace();
-            return ResponseEntity.status(404).body("internal server error");
         }
-        return ResponseEntity.ok().body(l.toString());
+        return l;
     }
     @PostMapping(value = "/insertLeaderboard")
     public Leaderboard insertLeaderboard(@RequestBody Leaderboard message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Leaderboard g;
+        Leaderboard g=null;
         try {
             Connection connection = dcm.getConnection();
             LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
-            Map<String,Object> msg = parser.parseMap(message);
             g = leaderDAO.insertLeaderboard(message.getRank(),
                     message.getUsername(),
                     message.getWins(),
