@@ -6,10 +6,10 @@ import com.chopsticks.lil.jdbc.util.DataTransferObject;
 public class Game implements DataTransferObject
 {
 
-  private long gameId;
-  private long p1Id;
-  private long p2Id;
-  private long winner;
+  private long gameId;  //ID of the game
+  private long p1Id;  //ID of player 1
+  private long p2Id;  //ID of player 2
+  private long winner;  //ID of the winner
   
   //GameId get and set
   public long getId() 
