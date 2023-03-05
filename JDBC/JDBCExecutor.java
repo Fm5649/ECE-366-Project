@@ -1,4 +1,6 @@
 
+
+
 package com.chopsticks.lil.jdbc;
 
 import java.sql.Connection;
@@ -23,8 +25,14 @@ public class JDBCExecutor
           //Create first player
           PlayerDAO playerDAO = new PlayerDAO(connection);
           
+          Player playerOne = 
+          System.out.println(playerOne.getPlayerId() + " " + playerOne.getUserName() + " " + playerOne.getPassWord());
+          
           //Create second player
           PlayerDAO playerDAO = new PlayerDAO(connection);
+          
+          Player playerTwo = 
+          System.out.println(playerTwo.getPlayerId() + " " + playerTwo.getUserName() + " " + playerTwo.getPassWord());
           
           //Create Game
           GameDAO gameDAO = new GameDAO(connection);
