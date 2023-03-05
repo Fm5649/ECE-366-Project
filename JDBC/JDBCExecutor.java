@@ -20,8 +20,14 @@ public class JDBCExecutor
             while(resultSet.next()){
                 System.out.println(resultSet.getInt(1));
             }
+          //Create first player
+          PlayerDAO playerDAO = new PlayerDAO(connection);
           
-          //Insert DAO things
+          //Create second player
+          PlayerDAO playerDAO = new PlayerDAO(connection);
+          
+          //Create Game
+          GameDAO gameDAO = new GameDAO(connection);
           
         }
         catch(SQLException e) {
