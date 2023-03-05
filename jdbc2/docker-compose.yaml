@@ -2,7 +2,7 @@ services:
   db:
     image: postgres
     volumes:
-      - $HOME/srv/postgres:/var/lib/postgresql/data
+      - C:\Users\user\Downloads\db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=password

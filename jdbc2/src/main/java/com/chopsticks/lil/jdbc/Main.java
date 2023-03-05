@@ -1,4 +1,4 @@
-package com.chopsticks.lil.jdbc;
+/*package com.chopsticks.lil.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,4 +28,4 @@ public class Main {
             e.printStackTrace();
         }
     }
-}
+}*/
