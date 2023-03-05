@@ -12,12 +12,12 @@ public class GameRoundDAO extends DataAccessObject{
         super(connection);
     }
     private static final String GET_ONE_BY_ID = "SELECT game_id, round_number, " +
-            "turn_player_name, player_choice, player_target, " +
+            "turn_player_name, player_choice, player_hand_used, player_target, " +
             "player_action_amount, p1_hand1, p1_hand2, " +
             "p2_hand1, p2_hand2, FROM game WHERE game_id=?";
 
     private static final String INSERT_GAMEROUND = "INSERT INTO game (game_id, " +
-            "round_number, turn_player_name, player_choice, player_target, " +
+            "round_number, turn_player_name, player_choice, player_hand_used, player_target, " +
             "player_action_amount, p1_hand1, p1_hand2, p2_hand1, p2_hand2) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -47,19 +47,20 @@ public class GameRoundDAO extends DataAccessObject{
         return gameRound;
     }
 
-    public GameRound insertGameRound(long gameId, int roundNumber, String playerturn, String playerChoice, String target, int amount, int p1Hand1, int p1Hand2, int p2hand1, int p2Hand2) {
+    public GameRound insertGameRound(long gameId, int roundNumber, String playerTurn, String playerChoice, String playerHandUsed, String target, int amount, int p1Hand1, int p1Hand2, int p2hand1, int p2Hand2) {
         GameRound gameRound = new GameRound();
         System.out.println(INSERT_GAMEROUND);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_GAMEROUND);) {
             statement.setLong(1, gameId);
             statement.setInt(2, roundNumber);
-            statement.setString(3, playerturn);
+            statement.setString(3, playerTurn);
             statement.setString(4, playerChoice);
-            statement.setString(5, target);
-            statement.setInt(6, p1Hand1);
-            statement.setInt(7, p1Hand2);
-            statement.setInt(8, p2hand1);
-            statement.setInt(9, p2Hand2);
+            statement.setString(5, playerHandUsed);
+            statement.setString(6, target);
+            statement.setInt(7, p1Hand1);
+            statement.setInt(8, p1Hand2);
+            statement.setInt(9, p2hand1);
+            statement.setInt(10, p2Hand2);
             statement.execute();
         } catch(SQLException e) {
             e.printStackTrace();

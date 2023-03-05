@@ -7,6 +7,7 @@ public class GameRound implements DataTransferObject {
     private int roundNumber;
     private String playerTurn;
     private String playerChoice;
+    private String playerHandUsed;
     private String target;
     private int amount;
     private int p1Hand1;
@@ -49,6 +50,14 @@ public class GameRound implements DataTransferObject {
 
     public void setPlayerChoice(String playerChoice) {
         this.playerChoice = playerChoice;
+    }
+
+    public String getPlayerHandUsed() {
+        return playerHandUsed;
+    }
+
+    public void setPlayerHandUsed(String playerHandUsed) {
+        this.playerHandUsed = playerHandUsed;
     }
 
     public String getTarget() {
