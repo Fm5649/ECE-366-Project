@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class PlayerDAO extends DataAccessObject {
 
-    private static final String GET_ONE_BY_ID = "SELECT player_id a, user_name b, password c, " +
-            "total_games d FROM player WHERE user_id=?";
+    private static final String GET_ONE_BY_ID = "SELECT player_id a, player_name b, password c, " +
+            "total_games d FROM player WHERE player_id=?";
 
-    private static final String GET_ONE_BY_USER_NAME = "SELECT user_id, user_name, password, " +
-            "total_games FROM player WHERE user_name=?";
+    private static final String GET_ONE_BY_USER_NAME = "SELECT player_id, player_name, password, " +
+            "total_games FROM player WHERE player_name=?";
 
     public PlayerDAO(Connection connection) {
         super(connection);
@@ -45,8 +45,8 @@ public class PlayerDAO extends DataAccessObject {
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                user.setPlayerId(rs.getLong("user_id"));
-                user.setPlayerName(rs.getString("user_name"));
+                user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
             }
