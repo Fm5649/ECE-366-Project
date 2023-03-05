@@ -12,7 +12,7 @@ public class GameRound implements DataTransferObject
   private String target;
   
   private String handUsed;
-  private int targetAmount;
+  private int actionAmount;
   
   private int p1LeftHand;
   private int p1RightHand;
@@ -73,14 +73,14 @@ public class GameRound implements DataTransferObject
     this.handUsed = handUsed;
   }
   
-  //target amount get and set
-  public int getTargetAmount() 
+  //action amount get and set
+  public int getActionAmount() 
   {
-    return targetAmount;
+    return actionAmount;
   }
-  public void setTargetAmount(int targetAmount)
+  public void setActionAmount(int actionAmount)
   {
-    this.targetAmount = targetAmount;
+    this.actionAmount = actionAmount;
   }
   
   //Player 1 left hand get and set
@@ -132,7 +132,7 @@ public class GameRound implements DataTransferObject
                 ", playerChoice='" + playerChoice + '\'' +               
                 ", target='" + target + '\'' +
                 ", handUsed='" + handUsed + '\'' +
-                ", targetAmount='" + targetAmount + '\'' +
+                ", actionAmount='" + actionAmount + '\'' +
                 ", p1LeftHand='" + p1LeftHand + '\'' +
                 ", p1RightHand='" + p1RightHand + '\'' +
                 ", p2LeftHand='" + p2LeftHand + '\'' +
