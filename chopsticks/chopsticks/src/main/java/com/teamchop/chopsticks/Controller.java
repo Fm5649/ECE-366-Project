@@ -88,7 +88,7 @@ public class Controllers {
         return g;
     }
 
-    @PostMapping(value = "/getGameRoundById/{id}")
+    @GetMapping(value = "/getGameRoundById/{id}")
     public Game getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
@@ -135,8 +135,8 @@ public class Controllers {
         return g;
     }
 
-    @PostMapping(value = "/getLeaderboardById")
-    public ResponseEntity<String> getLeaderboardById(@RequestBody String message) {
+    @GetMapping(value = "/getLeaderboardById/{id}")
+    public Leaderboard getLeaderboardById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Leaderboard l;
@@ -144,7 +144,7 @@ public class Controllers {
             Connection connection = dcm.getConnection();
             LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
 
-            l = leaderDAO.findById(Integer.parseInt(message));
+            l = leaderDAO.findById(message);
             System.out.println(l);
         }
         catch(SQLException e) {
@@ -154,7 +154,7 @@ public class Controllers {
         return ResponseEntity.ok().body(l.toString());
     }
     @PostMapping(value = "/insertLeaderboard")
-    public ResponseEntity<String> insertLeaderboard(@RequestBody String message) {
+    public Leaderboard insertLeaderboard(@RequestBody Leaderboard message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Leaderboard g;
@@ -162,19 +162,18 @@ public class Controllers {
             Connection connection = dcm.getConnection();
             LeaderboardDAO leaderDAO = new LeaderboardDAO(connection);
             Map<String,Object> msg = parser.parseMap(message);
-            g = leaderDAO.insertLeaderboard(Integer.parseInt((String) msg.get("rank")),
-                    (String) msg.get("amount"),
-                    Integer.parseInt((String) msg.get("wins")),
-                    Integer.parseInt((String) msg.get("losses")),
-                    Integer.parseInt((String) msg.get("totalGames")),
-                    Integer.parseInt((String) msg.get("elo")),
-                    Long.parseLong((String) msg.get("userId")));
+            g = leaderDAO.insertLeaderboard(message.getRank(),
+                    message.getUsername(),
+                    message.getWins(),
+                    message.getLosses(),
+                    message.getTotalGames(),
+                    message.getElo(),
+                    message.getUserId());
             System.out.println(g);
         }
         catch(SQLException e) {
             e.printStackTrace();
-            return ResponseEntity.status(404).body("internal server error");
         }
-        return ResponseEntity.ok().body(g.toString());
+        return g;
     }
 }
