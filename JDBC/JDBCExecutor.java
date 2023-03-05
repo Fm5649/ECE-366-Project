@@ -20,6 +20,9 @@ public class JDBCExecutor
             while(resultSet.next()){
                 System.out.println(resultSet.getInt(1));
             }
+          
+          //Insert DAO things
+          
         }
         catch(SQLException e) {
             e.printStackTrace();
