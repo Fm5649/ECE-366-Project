@@ -7,13 +7,13 @@ import com.chopsticks.lil.jdbc.util.DataTransferObject;
 public class Player implements DataTransferObject
 {
   
-  private long playerId;
-  private String userName;
-  private String passWord;
-  private int totalGames;
-  private int totalWins;
-  private int totalLosses;  
-  private int ELO;
+  private long playerId;  //ID of the player
+  private String userName;  //username of the player
+  private String passWord;  //password of the player
+  private int totalGames; //total games won by player
+  private int totalWins;  //total wins
+  private int totalLosses;   //total losses
+  private int ELO;  //ELO of the player
   
   //PlayerId get and set
   public long getId() 
