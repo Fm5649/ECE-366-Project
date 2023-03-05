@@ -8,7 +8,12 @@ public class GameRound implements DataTransferObject
   private long gameId;
   private String playerTurn;
   private String playerChoice;
+  
   private String target;
+  
+  private String handUsed;
+  private int targetAmount;
+  
   private int p1LeftHand;
   private int p1RightHand;
   private int p2LeftHand;
@@ -56,6 +61,26 @@ public class GameRound implements DataTransferObject
   public void setTarget(String target)
   {
     this.target = target;
+  }  
+    
+  //handUsed get and set
+  public String getHandUsed() 
+  {
+    return handUsed;
+  }
+  public void setHandUsed(String handUsed)
+  {
+    this.handUsed = handUsed;
+  }
+  
+  //target amount get and set
+  public int getTargetAmount() 
+  {
+    return targetAmount;
+  }
+  public void setTargetAmount(int targetAmount)
+  {
+    this.targetAmount = targetAmount;
   }
   
   //Player 1 left hand get and set
@@ -104,8 +129,10 @@ public class GameRound implements DataTransferObject
       return "GameRound{" +
                 "gameId=" + gameId +
                 ", playerTurn='" + playerTurn + '\'' +
-                ", playerChoice='" + playerChoice + '\'' +
+                ", playerChoice='" + playerChoice + '\'' +               
                 ", target='" + target + '\'' +
+                ", handUsed='" + handUsed + '\'' +
+                ", targetAmount='" + targetAmount + '\'' +
                 ", p1LeftHand='" + p1LeftHand + '\'' +
                 ", p1RightHand='" + p1RightHand + '\'' +
                 ", p2LeftHand='" + p2LeftHand + '\'' +
