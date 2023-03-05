@@ -5,19 +5,20 @@ import com.chopsticks.lil.jdbc.util.DataTransferObject;
   
 public class GameRound implements DataTransferObject
 {
-  private long gameId;
-  private String playerTurn;
-  private String playerChoice;
+  private long gameId;  //Id of game being played
+  private int turnNumber; //Current turn
+  private String playerTurn;  //Which player's turn it is
+  private String playerChoice;  //choice of player (attack or transfer)
   
-  private String target;
+  private String target;  //target of player (which hand they chose)
   
-  private String handUsed;
-  private int actionAmount;
+  private String handUsed;  //which hand the player used for action
+  private int actionAmount; //the action amount (how much the player attacked for or how much they transferred)
   
-  private int p1LeftHand;
-  private int p1RightHand;
-  private int p2LeftHand;
-  private int p2RightHand;
+  private int p1LeftHand; //Value of player 1 left hand
+  private int p1RightHand;  //Value of player 1 right hand
+  private int p2LeftHand; //Value of player 2 left hand
+  private int p2RightHand;  //Value of player 2 right hand
   
   //GameId get and set
   public long getId() 
@@ -31,6 +32,16 @@ public class GameRound implements DataTransferObject
   public void setGameId(long gameId)
   {
     this.gameId = gameId;
+  }
+  
+  //Turn Number get and set
+  public int getTurnNumber() 
+  {
+    return turnNumber;
+  }
+  public void setTurnNumber(int turnNumber)
+  {
+    this.turnNumber = turnNumber;
   }
   
   //Player Turn get and set
