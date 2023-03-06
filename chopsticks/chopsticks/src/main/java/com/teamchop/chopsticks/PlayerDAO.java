@@ -18,6 +18,9 @@ public class PlayerDAO extends DataAccessObject {
     private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, elo)" +
             " = (?, ?, ?, ?) WHERE player_id=?";
 
+    private static final String INSERT_PLAYER = "INSERT INTO player (player_name, password) VALUES (?,?)" +
+            "RETURNING *";
+
     public PlayerDAO(Connection connection) {
         super(connection);
     }
@@ -52,6 +55,29 @@ public class PlayerDAO extends DataAccessObject {
                 user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return user;
+    }
+
+    public Player insertUserName(String userName, String password) {
+        Player user = new Player();
+        System.out.println(INSERT_PLAYER);
+        try(PreparedStatement statement = this.connection.prepareStatement(INSERT_PLAYER);) {
+            statement.setString(1, userName);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerName(rs.getString("player_name"));
+                user.setPassword(rs.getString("password"));
+                user.setTotalGames(rs.getInt("total_games"));
+                user.setTotalWins(rs.getInt("total_wins"));
+                user.setTotalLosses(rs.getInt("total_losses"));
+                user.setPlayerElo(rs.getInt("player_elo"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
