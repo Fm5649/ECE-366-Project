@@ -90,7 +90,7 @@ public class Controllers {
         return player;
     }
     
-    @GetMapping("/deletePlayerById/{id}")
+    @DeleteMapping("/deletePlayerById/{id}")
     public Player deletePlayerById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
