@@ -8,6 +8,8 @@ curl -X GET -H "Content-Type: application/json" http://localhost:8080/getPlayerB
 
 curl -X GET -H "Content-Type: application/json" http://localhost:8080/getPlayerById/2
 
+curl -X POST -H "Content-Type: application/json" -d "{\"p\":\"testing\"}" http://localhost:8080/updatePlayer 
+
 curl -X POST -H "Content-Type: application/json" -d "{\"playerId\":\"2\",\"userName\":\"playerTwo\",\"password\":\"passwordTwo\",\"totalGames\":\"3\",\"totalWins\":\"4\",\"totalLosses\":\"3\",\"playerElo\":\"37\"}" http://localhost:8080/updatePlayer
 
 curl -X POST -H "Content-Type: application/json" -d "{\"p1\":\"2\",\"p2\":\"3\"}" http://localhost:8080/insertGame
