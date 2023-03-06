@@ -126,6 +126,7 @@ public class PlayerDAO extends DataAccessObject {
         try(PreparedStatement statement = this.connection.prepareStatement(DELETE_BY_ID);) {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
+            rs.deleteRow();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("a"));
                 user.setPlayerName(rs.getString("b"));
