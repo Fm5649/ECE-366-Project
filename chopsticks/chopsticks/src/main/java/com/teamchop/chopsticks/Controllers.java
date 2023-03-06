@@ -72,6 +72,24 @@ public class Controllers {
         return player;
     }
 
+    @PostMapping("/updatePlayer")
+    public Player create(@RequestBody Player p) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        Player player = new Player();
+        try {
+            Connection connection = dcm.getConnection();
+            PlayerDAO PlayerDAO = new PlayerDAO(connection);
+
+            player = PlayerDAO.updateStats(p);
+            System.out.println(player);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return player;
+    }
+
     @GetMapping("/getGameById/{id}")
     public Game getGameById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",

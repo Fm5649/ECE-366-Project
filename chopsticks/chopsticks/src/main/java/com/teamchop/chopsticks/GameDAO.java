@@ -11,7 +11,7 @@ public class GameDAO extends DataAccessObject{
     public GameDAO(Connection connection) {
         super(connection);
     }
-    private static final String GET_ONE_BY_ID = "SELECT game_id, p1_id, p2_id, winner_id, " +
+    private static final String GET_ONE_BY_ID = "SELECT game_id, p1_id, p2_id, winner_id " +
             "FROM game WHERE game_id=?";
 
     private static final String INSERT_GAME = "INSERT INTO game (p1_id, p2_id) " +

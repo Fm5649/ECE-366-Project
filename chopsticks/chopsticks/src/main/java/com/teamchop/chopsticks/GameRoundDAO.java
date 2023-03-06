@@ -63,6 +63,17 @@ public class GameRoundDAO extends DataAccessObject{
             statement.setInt(10, p2hand1);
             statement.setInt(11, p2Hand2);
             statement.execute();
+            gameRound.setGameId(gameId);
+            gameRound.setRoundNumber(roundNumber);
+            gameRound.setAmount(amount);
+            gameRound.setTarget(target);
+            gameRound.setP1Hand1(p1Hand1);
+            gameRound.setP1Hand2(p1Hand2);
+            gameRound.setP2Hand1(p2Hand2);
+            gameRound.setP2Hand2(p2Hand2);
+            gameRound.setPlayerChoice(playerChoice);
+            gameRound.setPlayerHandUsed(playerHandUsed);
+            gameRound.setPlayerTurn(playerTurn);
         } catch(SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
