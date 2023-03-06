@@ -1,7 +1,6 @@
 //In player dao
 
-private static final String DELETE_BY_ID = "DELETE player_id a, player_name b, password c, " +
-            "total_games d FROM player WHERE player_id=?";
+private static final String DELETE_BY_ID = "DELETE player_id a, player_name b, password c, " FROM player WHERE player_id=?";
 
 public Player deleteById(long id) {
         Player user = new Player();
@@ -13,7 +12,10 @@ public Player deleteById(long id) {
                 user.setPlayerId(rs.getLong("a"));
                 user.setPlayerName(rs.getString("b"));
                 user.setPassword(rs.getString("c"));
-                user.setTotalGames(rs.getInt("d"));
+                user.setTotalGames(rs.getInt("total_games"));
+                user.setTotalWins(rs.getInt("total_wins"));
+                user.setTotalLosses(rs.getInt("total_losses"));
+                user.setPlayerElo(rs.getInt("player_elo"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
