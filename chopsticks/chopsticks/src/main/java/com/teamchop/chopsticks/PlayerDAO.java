@@ -38,7 +38,7 @@ public class PlayerDAO extends DataAccessObject {
                 user.setPlayerId(rs.getLong("a"));
                 user.setPlayerName(rs.getString("b"));
                 user.setPassword(rs.getString("c"));
-                user.setTotalGames(rs.getInt("total_games"));
+                user.setTotalGames(rs.getInt("d"));
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
