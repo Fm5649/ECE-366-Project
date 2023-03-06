@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d "{\"gameId\":\"10\",\"playerTurn\":\"Jang\",\"playerChoice\":\"Attack\",\"amount\":\"2\",\"playerHandUsed\":\"p2Hand1\",\"target\":\"p1Hand1\",\"p1Hand1\":\"3\",\"p1Hand2\":\"1\",\"p2Hand1\":\"2\",\"p2Hand2\":\"1\",\"roundNumber\":\"2\"}" http://localhost:8080/insertGameRound
