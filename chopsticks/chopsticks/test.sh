@@ -20,4 +20,3 @@ curl -X POST -H "Content-Type: application/json" -d "{\"gameId\":\"1\",\"playerT
 
 curl -X POST -H "Content-Type: application/json" -d "{\"gameId\":\"1\",\"playerTurn\":\"playerTwo\",\"playerChoice\":\"Attack\",\"amount\":\"1\",\"playerHandUsed\":\"p2Hand2\",\"target\":\"p1Hand2\",\"p1Hand1\":\"1\",\"p1Hand2\":\"4\",\"p2Hand1\":\"2\",\"p2Hand2\":\"1\",\"roundNumber\":\"3\"}" http://localhost:8080/insertGameRound
 
-curl -X POST -H "Content-Type: application/json" -d "{\"gameId\":\"10\",\"playerTurn\":\"Jang\",\"playerChoice\":\"Attack\",\"amount\":\"2\",\"playerHandUsed\":\"p2Hand1\",\"target\":\"p1Hand1\",\"p1Hand1\":\"3\",\"p1Hand2\":\"1\",\"p2Hand1\":\"2\",\"p2Hand2\":\"1\",\"roundNumber\":\"2\"}" http://localhost:8080/insertGameRound
