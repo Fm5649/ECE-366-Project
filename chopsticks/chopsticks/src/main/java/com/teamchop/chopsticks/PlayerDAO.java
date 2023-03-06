@@ -15,6 +15,9 @@ public class PlayerDAO extends DataAccessObject {
     private static final String GET_ONE_BY_USER_NAME = "SELECT player_id, player_name, password, " +
             "total_games FROM player WHERE player_name=?";
 
+    private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, elo)" +
+            " = (?, ?, ?, ?) WHERE player_id=?";
+
     public PlayerDAO(Connection connection) {
         super(connection);
     }
@@ -55,5 +58,19 @@ public class PlayerDAO extends DataAccessObject {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    public void updateStats(Player p) {
+        System.out.println(UPDATE_STATS);
+        try(PreparedStatement statement = this.connection.prepareStatement(UPDATE_STATS);) {
+            statement.setInt(1, p.getTotalGames());
+            statement.setInt(2, p.getTotalWins());
+            statement.setInt(3, p.getTotalLosses());
+            statement.setInt(4, p.getPlayerElo());
+            ResultSet rs = statement.executeQuery();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 }

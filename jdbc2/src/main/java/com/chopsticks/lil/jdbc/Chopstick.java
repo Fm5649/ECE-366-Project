@@ -2,10 +2,7 @@ package com.chopsticks.lil.jdbc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -20,7 +17,7 @@ import java.util.Map;
 public class Chopstick {
 	private JsonParser parser = JsonParserFactory.getJsonParser();
 	@PostMapping("/getPlayerById")
-	public ResponseEntity<String> getPlayer(@RequestBody String message) {
+	public ResponseEntity<String> getPlayer(@PathVariable long id) {
 		DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
 				"chopsticks", "postgres", "password");
 		Player player = new Player();

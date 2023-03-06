@@ -16,10 +16,10 @@ public class GameRoundDAO extends DataAccessObject{
             "player_action_amount, p1_hand1, p1_hand2, " +
             "p2_hand1, p2_hand2, FROM game WHERE game_id=?";
 
-    private static final String INSERT_GAMEROUND = "INSERT INTO game (game_id, " +
+    private static final String INSERT_GAMEROUND = "INSERT INTO game_round (game_id, " +
             "round_number, turn_player_name, player_choice, player_hand_used, player_target, " +
             "player_action_amount, p1_hand1, p1_hand2, p2_hand1, p2_hand2) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
     public GameRound findById(long id) {
         GameRound gameRound = new GameRound();
@@ -57,10 +57,11 @@ public class GameRoundDAO extends DataAccessObject{
             statement.setString(4, playerChoice);
             statement.setString(5, playerHandUsed);
             statement.setString(6, target);
-            statement.setInt(7, p1Hand1);
-            statement.setInt(8, p1Hand2);
-            statement.setInt(9, p2hand1);
-            statement.setInt(10, p2Hand2);
+            statement.setInt(7, amount);
+            statement.setInt(8, p1Hand1);
+            statement.setInt(9, p1Hand2);
+            statement.setInt(10, p2hand1);
+            statement.setInt(11, p2Hand2);
             statement.execute();
         } catch(SQLException e) {
             e.printStackTrace();
