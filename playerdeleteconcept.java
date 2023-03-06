@@ -1,3 +1,5 @@
+//In player dao
+
 private static final String DELETE_BY_ID = "DELETE player_id a, player_name b, password c, " +
             "total_games d FROM player WHERE player_id=?";
 
