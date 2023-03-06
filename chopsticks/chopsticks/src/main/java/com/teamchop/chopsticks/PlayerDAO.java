@@ -9,11 +9,9 @@ import java.sql.SQLException;
 
 public class PlayerDAO extends DataAccessObject {
 
-    private static final String GET_ONE_BY_ID = "SELECT player_id a, player_name b, password c, " +
-            "total_games d FROM player WHERE player_id=?";
+    private static final String GET_ONE_BY_ID = "SELECT * FROM player WHERE player_id=?";
 
-    private static final String GET_ONE_BY_USER_NAME = "SELECT player_id, player_name, password, " +
-            "total_games FROM player WHERE player_name=?";
+    private static final String GET_ONE_BY_USER_NAME = "SELECT * FROM player WHERE player_name=?";
  
     private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, player_elo)" +
             " = (?, ?, ?, ?) WHERE player_id=? RETURNING *";
@@ -21,8 +19,7 @@ public class PlayerDAO extends DataAccessObject {
     private static final String INSERT_PLAYER = "INSERT INTO player (player_name, password) VALUES (?,?)" +
             "RETURNING *";
     
-    private static final String DELETE_BY_ID = "DELETE player_id a, player_name b, " 
-            + "password c FROM player WHERE player_id=?";
+    private static final String DELETE_BY_ID = "DELETE FROM player WHERE player_id=? RETURNING *";
 
     public PlayerDAO(Connection connection) {
         super(connection);
@@ -35,9 +32,9 @@ public class PlayerDAO extends DataAccessObject {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                user.setPlayerId(rs.getLong("a"));
-                user.setPlayerName(rs.getString("b"));
-                user.setPassword(rs.getString("c"));
+                user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerName(rs.getString("player_name"));
+                user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
@@ -127,9 +124,9 @@ public class PlayerDAO extends DataAccessObject {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                user.setPlayerId(rs.getLong("a"));
-                user.setPlayerName(rs.getString("b"));
-                user.setPassword(rs.getString("c"));
+                user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerName(rs.getString("player_name"));
+                user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
