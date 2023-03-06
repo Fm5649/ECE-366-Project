@@ -10,7 +10,7 @@ curl -X GET -H "Content-Type: application/json" http://localhost:8080/getPlayerB
 
 curl -X POST -H "Content-Type: application/json" -d "{\"p1\":\"2\",\"p2\":\"3\"}" http://localhost:8080/insertGame
 
-curl -X POST -H "Content-Type: application/json" http://localhost:8080/getGameById/1
+curl -X GET -H "Content-Type: application/json" http://localhost:8080/getGameById/1
 
 curl -X POST -H "Content-Type: application/json" -d "{\"gameId\":\"1\",\"playerTurn\":\"playerOne\",\"playerChoice\":\"Attack\",\"amount\":\"1\",\"playerHandUsed\":\"p1Hand1\",\"target\":\"p2Hand1\",\"p1Hand1\":\"1\",\"p1Hand2\":\"1\",\"p2Hand1\":\"1\",\"p2Hand2\":\"1\",\"roundNumber\":\"1\"}" http://localhost:8080/insertGameRound
 
