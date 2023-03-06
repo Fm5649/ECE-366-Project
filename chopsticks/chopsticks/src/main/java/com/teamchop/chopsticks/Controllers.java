@@ -89,6 +89,24 @@ public class Controllers {
         }
         return player;
     }
+    
+    @GetMapping("/deletePlayerById/{id}")
+    public Player deletePlayerById(@PathVariable long id) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        Player player = null;
+        try {
+            Connection connection = dcm.getConnection();
+            PlayerDAO playerDAO = new PlayerDAO(connection);
+
+            player = playerDAO.deleteById(id);
+            System.out.println(player);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return player;
+    }
 
     @GetMapping("/getGameById/{id}")
     public Game getGameById(@PathVariable long id) {
