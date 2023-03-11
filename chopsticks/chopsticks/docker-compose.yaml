@@ -1,6 +1,9 @@
 services:
   db:
     image: postgres
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=password

@@ -1,0 +1,2 @@
+CREATE DATABASE chopsticks;
+GRANT ALL PRIVILEGES ON DATABASE chopsticks TO postgres;
