@@ -2,9 +2,19 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-    const [userChoice, setUserChoice] = useState("");
-    const [compChoice, setCompChoice] = useState("");
+    const [playerOne, setPlayerOne] = useState({leftHand: 1, rightHand: 1});
+    const [playerTwo, setPlayertwo] = useState({leftHand: 1, rightHand: 1});
+    const [currentPlayer, setCurrentPlayer] = useState(1);
     const [winner, setWinner] = useState("");
+    const [transferAmount, setTransferAmount] = useState(1);
+
+    const action = (fromHand, toHand) => {
+        if (currentPlayer === 1) {
+            if ((fromHand === 'P1H1' && toHand=='P1H2') || (fromHand === 'P1H2' && toHand=='P1H1')) {
+                
+            }
+        }
+    }
 
     useEffect(() => {
         console.log(`Userchoice: ${userChoice}`);
