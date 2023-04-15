@@ -1,4 +1,3 @@
-/*
 package com.teamchop.chopsticks;
 
 import com.teamchop.chopsticks.util.DataAccessObject;
@@ -53,4 +52,3 @@ public class FriendListDAO extends DataAccessObject{
     }
   //INSERT CODE HERE
 }
-*/
