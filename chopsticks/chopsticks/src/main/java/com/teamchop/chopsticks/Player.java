@@ -10,6 +10,8 @@ public class Player implements DataTransferObject {
     private int totalWins;
     private int totalLosses;
     private int playerElo;
+    private int achievementFirstWin;
+    private int achievementFirstGame;
 
     public long getId() {
         return playerId;
@@ -69,6 +71,30 @@ public class Player implements DataTransferObject {
     public void setPlayerElo(int playerElo) {
         this.playerElo = playerElo;
     }
+    
+    public int getPlayerElo() {
+        return playerElo;
+    }
+
+    public void setPlayerElo(int playerElo) {
+        this.playerElo = playerElo;
+    }
+    
+    public int getAchievementFirstWin() {
+        return achievementFirstWin;
+    }
+
+    public void setAchievementFirstWin(int achievementFirstWin) {
+        this.achievementFirstWin = achievementFirstWin;
+    }
+    
+    public int getAchievementFirstGame() {
+        return achievementFirstGame;
+    }
+
+    public void setAchievementFirstGame(int achievementFirstGame) {
+        this.achievementFirstGame = achievementFirstGame;
+    }
 
     @Override
     public String toString() {
@@ -80,6 +106,8 @@ public class Player implements DataTransferObject {
                 ", totalWins=" + totalWins +
                 ", totalLosses=" + totalLosses +
                 ", playerElo=" + playerElo +
+                ", achievementFirstWin=" + achievementFirstWin +
+                ", achievementFirstGame=" + achievementFirstGame +
                 '}';
     }
 }
