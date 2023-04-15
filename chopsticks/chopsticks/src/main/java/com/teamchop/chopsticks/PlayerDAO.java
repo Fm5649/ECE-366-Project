@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class PlayerDAO extends DataAccessObject {
 
+    private static final String GET_USERS = "SELECT * FROM player";
+
     private static final String GET_ONE_BY_ID = "SELECT * FROM player WHERE player_id=?";
 
     private static final String GET_ONE_BY_USER_NAME = "SELECT * FROM player WHERE player_name=?";
@@ -23,6 +25,30 @@ public class PlayerDAO extends DataAccessObject {
 
     public PlayerDAO(Connection connection) {
         super(connection);
+    }
+
+    public List<Player> getPlayers() {
+        List<Player> playerList = new ArrayList<>*();
+        System.out.println(GET_PLAYERS);
+        try(PreparedStatement statement = this.connection.prepareStatement(GET_PLAYERS);) {
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Player player = new Player();
+                player.setPlayerId(rs.getlong("player_id"));
+                player.setPlayerName(rs.getString("player_name"));
+                player.setPassword(rs.getString("password"));
+                player.setTotalGames(rs.getInt("total_games"));
+                player.setTotalWins(rs.getInt("total_wins"));
+                player.setTotalLosses(rs.getInt("total_losses"));
+                player.setPlayerElo(rs.getInt("player_elo"));
+                playerList.add(player);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }
+        return playerList;
     }
 
     public Player findById(long id) {
