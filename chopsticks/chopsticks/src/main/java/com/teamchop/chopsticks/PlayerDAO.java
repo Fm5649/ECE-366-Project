@@ -41,6 +41,8 @@ public class PlayerDAO extends DataAccessObject {
                 player.setTotalWins(rs.getInt("total_wins"));
                 player.setTotalLosses(rs.getInt("total_losses"));
                 player.setPlayerElo(rs.getInt("player_elo"));
+                player.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                player.setAchievementFirstGame(rs.getInt("achievement_first_game"));
                 playerList.add(player);
             }
         } catch(SQLException e) {
@@ -65,6 +67,8 @@ public class PlayerDAO extends DataAccessObject {
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
+                user.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                user.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -87,6 +91,8 @@ public class PlayerDAO extends DataAccessObject {
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
+                user.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                user.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -110,6 +116,8 @@ public class PlayerDAO extends DataAccessObject {
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
+                user.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                user.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -135,6 +143,8 @@ public class PlayerDAO extends DataAccessObject {
                 p.setTotalWins(rs.getInt("total_wins"));
                 p.setTotalLosses(rs.getInt("total_losses"));
                 p.setPlayerElo(rs.getInt("player_elo"));
+                p.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                p.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,6 +167,8 @@ public class PlayerDAO extends DataAccessObject {
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
+                user.setAchievementFirstWin(rs.getInt("achievement_first_win"));
+                user.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
