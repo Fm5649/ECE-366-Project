@@ -35,7 +35,7 @@ public class LeaderboardDAO extends DataAccessObject{
                 leaderboard.setLosses(rs.getInt("leaderboard_losses"));
                 leaderboard.setTotalGames(rs.getInt("leaderboard_total_games"));
                 leaderboard.setElo(rs.getInt("leaderboard_elo"));
-                leaderboard.setUserId(rs.getInt("leaderboard_losses"));
+                leaderboard.setUserId(rs.getLong("leaderboard_player_id"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
