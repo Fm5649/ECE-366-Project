@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerDAO extends DataAccessObject {
 
-    private static final String GET_USERS = "SELECT * FROM player";
+    private static final String GET_PLAYERS = "SELECT * FROM player";
 
     private static final String GET_ONE_BY_ID = "SELECT * FROM player WHERE player_id=?";
 
@@ -28,13 +30,13 @@ public class PlayerDAO extends DataAccessObject {
     }
 
     public List<Player> getPlayers() {
-        List<Player> playerList = new ArrayList<>*();
+        List<Player> playerList = new ArrayList<>();
         System.out.println(GET_PLAYERS);
         try(PreparedStatement statement = this.connection.prepareStatement(GET_PLAYERS);) {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 Player player = new Player();
-                player.setPlayerId(rs.getlong("player_id"));
+                player.setPlayerId(rs.getLong("player_id"));
                 player.setPlayerName(rs.getString("player_name"));
                 player.setPassword(rs.getString("password"));
                 player.setTotalGames(rs.getInt("total_games"));

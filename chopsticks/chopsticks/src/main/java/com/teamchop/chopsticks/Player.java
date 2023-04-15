@@ -72,14 +72,6 @@ public class Player implements DataTransferObject {
         this.playerElo = playerElo;
     }
     
-    public int getPlayerElo() {
-        return playerElo;
-    }
-
-    public void setPlayerElo(int playerElo) {
-        this.playerElo = playerElo;
-    }
-    
     public int getAchievementFirstWin() {
         return achievementFirstWin;
     }

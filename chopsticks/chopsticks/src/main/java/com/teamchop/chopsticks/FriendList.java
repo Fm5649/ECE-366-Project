@@ -1,4 +1,4 @@
-package com.teamchop.chopsticks;
+/*package com.teamchop.chopsticks;
 
 import com.teamchop.chopsticks.util.DataTransferObject;
 
@@ -30,3 +30,4 @@ public class FriendList implements DataTransferObject {
                 '}';
     }
 }
+*/
