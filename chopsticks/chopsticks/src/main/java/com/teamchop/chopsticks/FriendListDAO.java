@@ -29,7 +29,7 @@ public class FriendListDAO extends DataAccessObject{
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 friendlist.setUsername(rs.getString("friendlist_username"));
-                leaderboard.setUserId(rs.getLong("friendlist_player_id"));
+                friendlist.setUserId(rs.getLong("friendlist_player_id"));
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -38,7 +38,8 @@ public class FriendListDAO extends DataAccessObject{
         return friendlist;
     }
 
-    public FriendList insertLeaderboard(String username, long userId) {
+
+    public FriendList insertFriend(String username, long userId) {
         FriendList friendlist = new FriendList();
         System.out.println(INSERT_FRIEND);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_FRIEND);) {

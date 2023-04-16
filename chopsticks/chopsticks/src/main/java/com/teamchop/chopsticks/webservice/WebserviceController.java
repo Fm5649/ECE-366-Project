@@ -1,8 +1,6 @@
 package com.teamchop.chopsticks.webservice;
 
-import com.teamchop.chopsticks.DatabaseConnectionManager;
-import com.teamchop.chopsticks.Player;
-import com.teamchop.chopsticks.PlayerDAO;
+import com.teamchop.chopsticks.*;
 import com.teamchop.chopsticks.business.PlayerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +24,7 @@ public class WebserviceController {
         return this.playerService.getPlayers();
     }
 
-    @PostMapping("/findById")
+    @PostMapping("/getPlayerById")
     public Player create(@RequestBody String message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "rps", "postgres", "password");
@@ -60,6 +58,24 @@ public class WebserviceController {
             e.printStackTrace();
         }
         return player;
+    }
+
+    @PostMapping(value = "/getGameRoundById/{id}")
+    public GameRound getGameRoundById(@PathVariable long id) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        GameRound g=null;
+        try {
+            Connection connection = dcm.getConnection();
+            GameRoundDAO gameDAO = new GameRoundDAO(connection);
+
+            g = gameDAO.findById(id);
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return g;
     }
 
 }
