@@ -20,7 +20,7 @@ public class PlayerDAO extends DataAccessObject {
     private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, player_elo)" +
             " = (?, ?, ?, ?) WHERE player_id=? RETURNING *";
 
-    private static final String INSERT_PLAYER = "INSERT INTO player (player_name, password) VALUES (?,?)" +
+    private static final String INSERT_PLAYER = "INSERT INTO player (player_email, player_name, password) VALUES (?,?)" +
             "RETURNING *";
     
     private static final String DELETE_BY_ID = "DELETE FROM player WHERE player_id=? RETURNING *";
@@ -106,12 +106,13 @@ public class PlayerDAO extends DataAccessObject {
         return user;
     }
 
-    public Player insertUserName(String userName, String password) {
+    public Player insertUserName(String email, String userName, String password) {
         Player user = new Player();
         System.out.println(INSERT_PLAYER);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_PLAYER);) {
-            statement.setString(1, userName);
-            statement.setString(2, password);
+            statement.setString(1, email);
+            statement.setString(2, userName);
+            statement.setString(3, password);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("player_id"));
