@@ -9,6 +9,8 @@ public class FriendList implements DataTransferObject {
   public long getUserId() {
       return userId;
   }
+
+  public long getId() { return userId; }
   
   public void setUserId(Long userId) {
       this.userId = userId;
