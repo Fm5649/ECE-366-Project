@@ -8,6 +8,7 @@ CREATE SEQUENCE player_seq start with 1;
 
 CREATE TABLE player (
   player_id bigint NOT NULL DEFAULT nextval('player_seq'),
+  player_email varchar(30) NOT NULL,
   player_name varchar(30) NOT NULL,
   password varchar(30) NOT NULL,
   total_games int DEFAULT 0,
