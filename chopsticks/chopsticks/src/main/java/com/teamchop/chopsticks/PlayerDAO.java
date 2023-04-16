@@ -37,6 +37,7 @@ public class PlayerDAO extends DataAccessObject {
             while(rs.next()) {
                 Player player = new Player();
                 player.setPlayerId(rs.getLong("player_id"));
+                player.setPlayerEmail(rs.getString("player_email"));
                 player.setPlayerName(rs.getString("player_name"));
                 player.setPassword(rs.getString("password"));
                 player.setTotalGames(rs.getInt("total_games"));
@@ -63,6 +64,7 @@ public class PlayerDAO extends DataAccessObject {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
@@ -87,6 +89,7 @@ public class PlayerDAO extends DataAccessObject {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
@@ -112,6 +115,7 @@ public class PlayerDAO extends DataAccessObject {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
@@ -139,6 +143,7 @@ public class PlayerDAO extends DataAccessObject {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 p.setPlayerId(rs.getLong("player_id"));
+                p.setPlayerEmail(rs.getString("player_email"));
                 p.setPlayerName(rs.getString("player_name"));
                 p.setPassword(rs.getString("password"));
                 p.setTotalGames(rs.getInt("total_games"));
@@ -163,6 +168,7 @@ public class PlayerDAO extends DataAccessObject {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user.setPlayerId(rs.getLong("player_id"));
+                user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
                 user.setPassword(rs.getString("password"));
                 user.setTotalGames(rs.getInt("total_games"));
