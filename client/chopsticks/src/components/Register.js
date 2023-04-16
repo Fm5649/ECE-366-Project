@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import styles from '../styles/RegisterStyles'
 import { Button, TextField } from '@mui/material'
@@ -10,11 +11,16 @@ function Register() {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
 
-    function handleRegister() {
+    async function handleRegister() {
         const username = usernameRef?.current?.querySelector("input").value;
         const password = passwordRef?.current?.querySelector("input").value;
 
         if(username && password) {
+            const res = await axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password},{headers: {
+                "Access-Control-Allow-Origin":
+                  "*",
+              },});
+            console.log(res);
             // Call register controller function here. 
             // If error:
             //    -> do nothing or show error message.
