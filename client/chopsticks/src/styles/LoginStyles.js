@@ -20,6 +20,9 @@ const LoginStyles = {
     usernameTextfield: {
         marginTop: '10px',
     },
+    emailTextField: {
+        marginTop: '10px',
+    },
     passwordTextfield: {
         marginTop: '10px',
     },

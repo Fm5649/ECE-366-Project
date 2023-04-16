@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameDAO extends DataAccessObject{
 
     public GameDAO(Connection connection) {
@@ -19,6 +22,9 @@ public class GameDAO extends DataAccessObject{
 
     private static final String UPDATE_WINNER = "UPDATE game SET winner_id = ? " +
             "WHERE game_id = ?";
+
+    private static final String GET_EVERY_AVAILABLE_GAME = "SELECT game_id, p1_id, p2_id, winner_id" +
+            "FROM game WHERE p1_id=? or p2_id=?";
 
     public Game findById(long id) {
         Game game = new Game();
@@ -37,6 +43,29 @@ public class GameDAO extends DataAccessObject{
             throw new RuntimeException(e);
         }
         return game;
+    }
+
+    public List<Game> findByPlayerId(long id) {
+
+        List<Game> games = new ArrayList<>();
+        System.out.println(GET_EVERY_AVAILABLE_GAME);
+        try(PreparedStatement statement = this.connection.prepareStatement(GET_EVERY_AVAILABLE_GAME);) {
+            statement.setLong(1, id);
+            statement.setLong(2, id);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                Game game = new Game();
+                game.setGameId(rs.getLong("game_id"));
+                game.setWinner(rs.getInt("winner_id"));
+                game.setPlayerOneId(rs.getInt("p1_id"));
+                game.setPlayerTwoId(rs.getInt("p2_id"));
+                games.add(game);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return games;
     }
 
     public Game insertGame(long p1Id, long p2Id) {

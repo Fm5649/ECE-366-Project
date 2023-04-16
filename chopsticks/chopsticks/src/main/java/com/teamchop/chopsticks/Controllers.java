@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -118,6 +119,24 @@ public class Controllers {
             GameDAO gameDAO = new GameDAO(connection);
 
             g = gameDAO.findById(id);
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
+    @GetMapping("/getGameByPlayerId/{id}")
+    public List<Game> getGameByPlayerId(@PathVariable long id) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        List<Game> g = new ArrayList<>();
+        try {
+            Connection connection = dcm.getConnection();
+            GameDAO gameDAO = new GameDAO(connection);
+
+            g = gameDAO.findByPlayerId(id);
             System.out.println(g);
         }
         catch(SQLException e) {
