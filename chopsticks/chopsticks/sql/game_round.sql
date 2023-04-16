@@ -20,6 +20,6 @@ CREATE TABLE game_round (
     p2_hand1 int NOT NULL DEFAULT 1,
     p2_hand2 int NOT NULL DEFAULT 1,
     
-    PRIMARY KEY (game_id, round_number),
+    PRIMARY KEY (game_id),
     FOREIGN KEY (game_id) REFERENCES game(game_id) ON DELETE CASCADE
 );
