@@ -64,7 +64,7 @@ public class Controllers {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
 
-            player = PlayerDAO.insertUserName(pForm.userName, pForm.password);
+            player = PlayerDAO.insertUserName(pForm.email,pForm.userName, pForm.password);
             System.out.println(player);
         }
         catch(SQLException e) {
