@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 
 import styles from '../styles/RegisterStyles'
@@ -33,8 +34,10 @@ function Register() {
             }
 
             alert ('user created')
-
-            navigate("/login")
+            axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password},{headers: {
+                    "Access-Control-Allow-Origin":
+                      "*",
+                  },}).then((res) => {console.log(res); navigate("/home")});
         })
         .catch(function(error) { 
             var error_code = error.code

@@ -22,6 +22,7 @@ public class FriendListDAO extends DataAccessObject{
 
     public FriendList findById(long id) {
         FriendList friendlist = new FriendList();
+        Leaderboard leaderboard = new Leaderboard();
         System.out.println(GET_ONE_BY_ID);
         try(PreparedStatement statement = this.connection.prepareStatement(GET_ONE_BY_ID);) {
             statement.setLong(1, id);
@@ -36,6 +37,7 @@ public class FriendListDAO extends DataAccessObject{
         }
         return friendlist;
     }
+
 
     public FriendList insertFriend(String username, long userId) {
         FriendList friendlist = new FriendList();
