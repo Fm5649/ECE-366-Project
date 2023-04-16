@@ -1,8 +1,8 @@
-curl -X POST -H "Content-Type: application/json" -d "{\"userName\":\"testing\",\"password\":\"apassword\"}" http://localhost:8080/insertPlayer 
+curl -X POST -H "Content-Type: application/json" -d "{\"email\":\"test@cooper.edu\",\"userName\":\"testing\",\"password\":\"apassword\"}" http://localhost:8080/insertPlayer 
 
-curl -X POST -H "Content-Type: application/json" -d "{\"userName\":\"playerOne\",\"password\":\"passwordOne\"}" http://localhost:8080/insertPlayer
+curl -X POST -H "Content-Type: application/json" -d "{\"email\":\"p1@cooper.edu\",\"userName\":\"playerOne\",\"password\":\"passwordOne\"}" http://localhost:8080/insertPlayer
 
-curl -X POST -H "Content-Type: application/json" -d "{\"userName\":\"playerTwo\",\"password\":\"passwordTwo\"}" http://localhost:8080/insertPlayer
+curl -X POST -H "Content-Type: application/json" -d "{\"email\":\"p2@cooper.edu\",\"userName\":\"playerTwo\",\"password\":\"passwordTwo\"}" http://localhost:8080/insertPlayer
 
 curl -X GET -H "Content-Type: application/json" http://localhost:8080/getPlayerById/1
 
