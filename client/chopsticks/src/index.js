@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import './index.css';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import reportWebVitals from './tests/reportWebVitals';
+
 import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -21,3 +26,27 @@ root.render(
         </Routes>
     </BrowserRouter>
 );
+
+// Import the functions you need from the SDKs you need
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyDTIO7R9ies2-Kx3cihkgb1Dli80tCbN84",
+    authDomain: "chopsticks-137ff.firebaseapp.com",
+    databaseURL: "https://chopsticks-137ff-default-rtdb.firebaseio.com",
+    projectId: "chopsticks-137ff",
+    storageBucket: "chopsticks-137ff.appspot.com",
+    messagingSenderId: "185246451443",
+    appId: "1:185246451443:web:78714feeeb3acced521986",
+    measurementId: "G-YRHW81P15K"
+  };
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export {app};
+export {auth};
