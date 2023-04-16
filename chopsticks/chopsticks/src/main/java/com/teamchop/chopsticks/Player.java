@@ -4,6 +4,7 @@ import com.teamchop.chopsticks.util.DataTransferObject;
 
 public class Player implements DataTransferObject {
     private long playerId;
+    private String playerEmail;
     private String playerName;
     private String password;
     private int totalGames;
@@ -22,6 +23,14 @@ public class Player implements DataTransferObject {
     }
     public void setPlayerId(long playerId) {
         this.playerId = playerId;
+    }
+    
+    public String getPlayerEmail() {
+        return playerEmail;
+    }
+
+    public void setPlayerEmail(String playerEmail) {
+        this.playerEmail = playerEmail;
     }
 
     public String getPlayerName() {
@@ -92,6 +101,7 @@ public class Player implements DataTransferObject {
     public String toString() {
         return "Player{" +
                 "playerId=" + playerId +
+                ", playerEmail='" + playerEmail + '\'' +
                 ", playerName='" + playerName + '\'' +
                 ", password='" + password + '\'' +
                 ", totalGames=" + totalGames +
