@@ -2,8 +2,8 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-    const [playerOne, setPlayerOne] = useState({leftHand: 1, rightHand: 1});
-    const [playerTwo, setPlayertwo] = useState({leftHand: 1, rightHand: 1});
+    const [playerOne, setPlayerOne] = useState({Hand1: 1, Hand2: 1});
+    const [playerTwo, setPlayertwo] = useState({Hand1: 1, Hand2: 1});
     const [currentPlayer, setCurrentPlayer] = useState(1);
     const [winner, setWinner] = useState("");
     const [transferAmount, setTransferAmount] = useState(1);

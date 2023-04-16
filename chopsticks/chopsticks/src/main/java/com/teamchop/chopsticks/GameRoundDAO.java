@@ -11,6 +11,8 @@ public class GameRoundDAO extends DataAccessObject{
     public GameRoundDAO(Connection connection) {
         super(connection);
     }
+
+    private static final String UPDATE_HANDS = "UPDATE game_round SET (p1_hand1, p1_hand2, p2_hand1, p2_hand2) = (?, ?, ?, ?) WHERE game_id=? RETURNING *";
     private static final String GET_ONE_BY_ID = "SELECT game_id, round_number, " +
             "turn_player_name, player_choice, player_hand_used, player_target, " +
             "player_action_amount, p1_hand1, p1_hand2, " +
@@ -21,6 +23,34 @@ public class GameRoundDAO extends DataAccessObject{
             "player_action_amount, p1_hand1, p1_hand2, p2_hand1, p2_hand2) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
+
+    public GameRound updateHands(GameRound g) {
+        GameRound gameRound = new GameRound();
+        System.out.println(UPDATE_HANDS);
+        try(PreparedStatement statement = this.connection.prepareStatement(UPDATE_HANDS);) {
+            statement.setInt(1, g.getP1Hand1());
+            statement.setInt(2, g.getP1Hand2());
+            statement.setInt(3, g.getP2Hand1());
+            statement.setInt(4, g.getP2Hand2());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                gameRound.setGameId(rs.getLong("game_id"));
+                gameRound.setRoundNumber(rs.getInt("round_number"));
+                gameRound.setPlayerTurn(rs.getString("turn_player_name"));
+                gameRound.setPlayerChoice(rs.getString("player_choice"));
+                gameRound.setTarget(rs.getString("player_target"));
+                gameRound.setAmount(rs.getInt("player_action_amount"));
+                gameRound.setP1Hand1(rs.getInt("p1_hand1"));
+                gameRound.setP1Hand2(rs.getInt("p1_hand2"));
+                gameRound.setP2Hand1(rs.getInt("p2_hand1"));
+                gameRound.setP2Hand2(rs.getInt("p2_hand2"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return gameRound;
+    }
     public GameRound findById(long id) {
         GameRound gameRound = new GameRound();
         System.out.println(GET_ONE_BY_ID);
@@ -38,7 +68,6 @@ public class GameRoundDAO extends DataAccessObject{
                 gameRound.setP1Hand2(rs.getInt("p1_hand2"));
                 gameRound.setP2Hand1(rs.getInt("p2_hand1"));
                 gameRound.setP2Hand2(rs.getInt("p2_hand2"));
-
             }
         } catch(SQLException e) {
             e.printStackTrace();

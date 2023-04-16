@@ -144,6 +144,24 @@ public class Controllers {
         return g;
     }
 
+    @PostMapping("/updateHands")
+    public GameRound create(@RequestBody GameRound g) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        GameRound gameRound = new GameRound();
+        try {
+            Connection connection = dcm.getConnection();
+            GameRoundDAO GameRoundDAO = new GameRoundDAO(connection);
+
+            g = GameRoundDAO.updateHands(g);
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return gameRound;
+    }
+
     @PostMapping(value = "/getGameRoundById/{id}")
     public GameRound getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
