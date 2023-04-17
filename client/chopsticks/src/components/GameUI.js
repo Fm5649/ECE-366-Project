@@ -33,8 +33,12 @@ function GameUI() {
         Attack
       </button>
       <button
-        onClick={() => setAction("Transfer")}>
-        Transfer
+        onClick={() => setAction("Transfer to Left")}>
+        Transfer to Left
+      </button>
+      <button
+        onClick={() => setAction("Transfer to Right")}>
+        Transfer to Right
       </button>
       <StyledInput
         {...inputProps}
