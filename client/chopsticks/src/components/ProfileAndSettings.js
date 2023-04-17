@@ -5,10 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect} from "react";
 import axios from "axios";
 
-import { useNavigate } from 'react-router-dom';
 import { auth } from '..';
 import { database } from '..';
-import axios from "axios";
 
 function ProfileAndSettings() {
     const [connected,setConnected] = useState(false);
@@ -27,7 +25,7 @@ function ProfileAndSettings() {
         console.log(clientRef.current);
         setConnected(true);
     }
-    
+
     useEffect(() => {
         if(!connected) return;
         const f = async () => {
@@ -44,7 +42,8 @@ function ProfileAndSettings() {
         f();
     },[connected])
     
-    
+    console.log(playerInfo);
+
     return (
         <div className ="ProfileAndSettings">
         <h1>{playerInfo.username}</h1>
