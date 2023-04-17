@@ -11,6 +11,13 @@ import { database } from '..';
 import axios from "axios";
 
 function Leaderboard() {
+  const data =[{"name":"test1"},{"name":"test2"}];
+  const listItems = data.map((d) => <li key={d.name}>{d.name}</li>);
   
+  return (
+      <div>
+      {listItems }
+      </div>
+    );
 }
 export default Leaderboard;
