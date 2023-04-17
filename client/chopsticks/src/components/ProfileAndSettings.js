@@ -11,6 +11,7 @@ import { database } from '..';
 import axios from "axios";
 
 function ProfileAndSettings() {
+    const [connected,setConnected] = useState(false);
     const [playerInfo, setPlayerInfo] = useState({
     username:null,
     totalGames:null,
@@ -22,16 +23,26 @@ function ProfileAndSettings() {
     const navigate = useNavigate();
     const clientRef = useRef();
     const { id } = useParams();
+    const joinHandler = () => {
+        console.log(clientRef.current);
+        setConnected(true);
+    }
     
-    const res = await axios.get(`http://localhost:8080/getPlayerById/${id}`);
-    const {username, totalGames, totalWins, totalLosses, ELO} = res.data;
-    playerInfo.username = username;
-    playerInfo.totalGames = totalGames;
-    playerInfo.totalWins = totalWins;
-    playerInfo.totalLosses = totalLosses;
-    playerInfo.ELO = ELO;
-    setPlayerInfo({...playerInfo});
-    console.log(playerInfo)
+    useEffect(() => {
+        if(!connected) return;
+        const f = async () => {
+            const res = await axios.get(`http://localhost:8080/getPlayerById/${id}`);
+            const {username, totalGames, totalWins, totalLosses, ELO} = res.data;
+            playerInfo.username = username;
+            playerInfo.totalGames = totalGames;
+            playerInfo.totalWins = totalWins;
+            playerInfo.totalLosses = totalLosses;
+            playerInfo.ELO = ELO;
+            setPlayerInfo({...playerInfo});
+            console.log(playerInfo)
+        }
+        f();
+    },[connected])
     
     
     return (
