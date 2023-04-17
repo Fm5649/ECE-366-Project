@@ -29,8 +29,12 @@ function GameUI() {
   return (
     <div className="GameUI">
       <h1>Current action is {action}</h1>
-      <button onClick={() => setAction("Transfer")}>
+      <button onClick={() => setAction("Attack")}>
         Attack
+      </button>
+      <button
+        onClick={() => setAction("Transfer")}>
+        Transfer
       </button>
       <StyledInput
         {...inputProps}
