@@ -71,11 +71,23 @@ function GameUI() {
         Transfer to Right
       </button>
 
-      <StyledInput
-        {...inputProps}
-        placeholder="Type in value"
-      />
-      <span>Value: {inputProps.value} </span>
+      <h1>Transfer amount is {transferAmount}</h1>
+      <button onClick={() => setAmount(1)}>
+        1
+      </button>
+      <button onClick={() => setAmount(2)}>
+        2
+      </button>
+      <button onClick={() => setAmount(3)}>
+        3
+      </button>
+      <button onClick={() => setAmount(4)}>
+        4
+      </button>
+      <button onClick={() => setAmount(5)}>
+        5
+      </button>
+      <h1> </h1>
 
       <button 
         onClick={() => onChoice("Confirm")}>
