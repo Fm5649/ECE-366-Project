@@ -5,6 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect} from "react";
 import axios from "axios";
 
+import { useNavigate } from 'react-router-dom';
+import { auth } from '..';
+import { database } from '..';
+import axios from "axios";
+
 function GameUI() {
   const [action, setAction] = useState("");
   const [transferAmount, setAmount] = useState(0);
@@ -233,9 +238,6 @@ function GameUI() {
       </button>
       <button onClick={() => setAmount(4)}>
         4
-      </button>
-      <button onClick={() => setAmount(5)}>
-        5
       </button>
       <h1> </h1>
 
