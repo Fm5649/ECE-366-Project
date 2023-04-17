@@ -84,9 +84,6 @@ function GameUI() {
       <button onClick={() => setAmount(4)}>
         4
       </button>
-      <button onClick={() => setAmount(5)}>
-        5
-      </button>
       <h1> </h1>
 
       <button 
