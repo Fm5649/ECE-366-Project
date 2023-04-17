@@ -1,0 +1,33 @@
+.leaderboard {
+    display: flex;
+    flex-direction:column;
+    grid-template-columns: 1fr 2fr 1fr;
+    font-family: sans-serif;
+    background-color: #c2b9b9af;
+    border: 1px solid #949292;
+}
+
+.leaderboard-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    font-weight: bold;
+    border-bottom: 1px solid #000000;
+}
+
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border-bottom: 1px solid #dddddd;
+}
+
+.leaderboard-rank {
+    text-align: center;
+}
+
+.leaderboard-player {
+    text-align: left;
+}
+
+.leaderboard-elo {
+    text-align: right;
+}

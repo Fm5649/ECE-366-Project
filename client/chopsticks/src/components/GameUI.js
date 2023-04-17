@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import SockJsClient from "react-stomp";
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect} from "react";
+import axios from "axios";
+
 import { auth } from '..';
 import { database } from '..';
-import axios from "axios";
 
 function GameUI() {
   const [action, setAction] = useState("");

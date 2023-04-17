@@ -16,6 +16,7 @@ import Game from './components/GameUI'
 import GameList from './components/GameList'
 import Settings from './components/Settings'
 import Leaderboards from './components/Leaderboards'
+import ProfileandSettings from './components/ProfileAndSettings'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,8 +30,8 @@ root.render(
             <Route path="/home" element={<Home/>}/>
             <Route path="/game/:id" element={<Game/>}/>
             <Route path="/gamelist" element={<GameList/>}/>
-            <Route path="/settings" element={<Settings/>}/>
             <Route path="/leaderboards" element={<Leaderboards/>}/>
+            <Route path="/settings" element={<ProfileandSettings/>}/>
         </Routes>
     </BrowserRouter>
 );
