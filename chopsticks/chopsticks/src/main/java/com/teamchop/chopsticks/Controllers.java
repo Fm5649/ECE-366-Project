@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.teamchop.chopsticks.GameLogic.getElo;
+
 @RestController
 public class Controllers {
     private JsonParser parser = JsonParserFactory.getJsonParser();
@@ -286,6 +288,12 @@ public class Controllers {
                 p.setTotalWins(p.getTotalWins()+1);
                 l.setTotalGames(p.getTotalGames()+1);
                 l.setTotalLosses(p.getTotalLosses()+1);
+                long[] ans = GameLogic.getElo(p.getPlayerElo(),l.getPlayerElo());
+                System.out.println(ans);
+                System.out.println(ans[0]);
+                System.out.println(ans[1]);
+                p.setPlayerElo((int)ans[0]);
+                l.setPlayerElo((int)ans[1]);
                 pDao.updateStats(p);
                 pDao.updateStats(l);
             }

@@ -48,6 +48,9 @@ public class WebSocketControllers {
                 p.setTotalWins(p.getTotalWins()+1);
                 l.setTotalGames(l.getTotalGames()+1);
                 l.setTotalLosses(l.getTotalLosses()+1);
+                long[] ans = GameLogic.getElo(p.getPlayerElo(),l.getPlayerElo());
+                p.setPlayerElo((int)ans[0]);
+                l.setPlayerElo((int)ans[1]);
                 pDao.updateStats(p);
                 pDao.updateStats(l);
             }
