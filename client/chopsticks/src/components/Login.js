@@ -7,6 +7,7 @@ import styles from '../styles/LoginStyles'
 import { Button, TextField } from '@mui/material'
 import { auth } from '..';
 import { database } from '..';
+import axios from "axios";
 
 function Login() {
     const [error, setError] = useState('');
@@ -17,24 +18,23 @@ function Login() {
     const passwordRef = useRef(null);
 
     const handleLogin = async() => {
+        const email = emailRef?.current?.querySelector("input").value;
+        const username = usernameRef?.current?.querySelector("input").value;
+        const password = passwordRef?.current?.querySelector("input").value;
         try {
-            await signInWithEmailAndPassword(getAuth(), email, password);
-            navigate('/');
+            //const a = await signInWithEmailAndPassword(getAuth(), email, password);
+            //console.log(a);
+            sessionStorage.setItem("username",username);
+            const res = await axios.get(`http://localhost:8080/getPlayerByName/${username}`,{headers: {
+                "Access-Control-Allow-Origin":
+                    "*",
+                }});
+            console.log(res);
+            sessionStorage.setItem("id",res.data.id);
+            navigate("/home");
         } catch (e) {
             setError(e.message);
         };
-        const email = emailRef?.curent?.querySelector("input").value;
-        const username = usernameRef?.current?.querySelector("input").value;
-        const password = passwordRef?.current?.querySelector("input").value;
-
-        if(username && password) {
-            // Call login controller function here. 
-            // If error:
-            //    -> do nothing or show error message.
-            // If success:
-            //    -> navigate to home page.
-            navigate("/home")
-        }
     }
 
     return (
