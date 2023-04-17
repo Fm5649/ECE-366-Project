@@ -28,6 +28,11 @@ function GameUI() {
   const inputProps = useInput();
   return (
     <div className="GameUI">
+      <h1>Enemy Hands</h1>
+      <span>Left Hand: 5{' '}Right Hand: 5</span>
+      <h1>Your Hands</h1>
+      <span>Left Hand: 5{' '}Right Hand: 5</span>
+
       <h1>Current action is {action}</h1>
       <button onClick={() => setAction("Attack")}>
         Attack
@@ -40,6 +45,7 @@ function GameUI() {
         onClick={() => setAction("Transfer to Right")}>
         Transfer to Right
       </button>
+
       <StyledInput
         {...inputProps}
         placeholder="Type in value"
