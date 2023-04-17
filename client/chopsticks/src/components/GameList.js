@@ -19,7 +19,6 @@ function GameList() {
         }
         f();
     },[])
-
     return (
         <div style={styles.wrapper}>
             <div style={styles.sideBarContainer}> 

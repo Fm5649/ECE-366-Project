@@ -10,9 +10,9 @@ import java.sql.SQLException;
 
 @RestController
 public class WebSocketControllers {
-    @MessageMapping("/round")
+    @MessageMapping("/insert")
     @SendTo("/topics/insert")
-    public GameRound insertGameRound(@RequestBody GameRound message) {
+    public GameRound insertGameRound(@Payload GameRound message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         GameRound g=null;

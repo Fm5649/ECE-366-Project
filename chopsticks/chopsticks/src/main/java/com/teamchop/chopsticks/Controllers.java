@@ -199,7 +199,7 @@ public class Controllers {
         return gameRound;
     }
 
-    @PostMapping(value = "/getGameRoundById/{id}")
+    @GetMapping(value = "/getGameRoundById/{id}")
     public GameRound getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");

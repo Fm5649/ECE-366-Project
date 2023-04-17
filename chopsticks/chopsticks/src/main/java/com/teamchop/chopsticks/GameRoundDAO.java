@@ -16,7 +16,7 @@ public class GameRoundDAO extends DataAccessObject{
     private static final String GET_ONE_BY_ID = "SELECT game_id, round_number, " +
             "turn_player_name, player_choice, player_hand_used, player_target, " +
             "player_action_amount, p1_hand1, p1_hand2, " +
-            "p2_hand1, p2_hand2, FROM game WHERE game_id=?";
+            "p2_hand1, p2_hand2 FROM game_round WHERE game_id=?";
 
     private static final String INSERT_GAMEROUND = "INSERT INTO game_round (game_id, " +
             "round_number, turn_player_name, player_choice, player_hand_used, player_target, " +
@@ -76,7 +76,7 @@ public class GameRoundDAO extends DataAccessObject{
         return gameRound;
     }
 
-    public GameRound insertGameRound(long gameId, int roundNumber, String playerTurn, String playerChoice, String playerHandUsed, String target, int amount, int p1Hand1, int p1Hand2, int p2hand1, int p2Hand2) {
+    public GameRound insertGameRound(long gameId, int roundNumber, String playerTurn, String playerChoice, String playerHandUsed, String target, int amount, int p1Hand1, int p1Hand2, int p2Hand1, int p2Hand2) {
         GameRound gameRound = new GameRound();
         System.out.println(INSERT_GAMEROUND);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_GAMEROUND);) {
@@ -89,7 +89,7 @@ public class GameRoundDAO extends DataAccessObject{
             statement.setInt(7, amount);
             statement.setInt(8, p1Hand1);
             statement.setInt(9, p1Hand2);
-            statement.setInt(10, p2hand1);
+            statement.setInt(10, p2Hand1);
             statement.setInt(11, p2Hand2);
             statement.execute();
             gameRound.setGameId(gameId);
@@ -98,7 +98,7 @@ public class GameRoundDAO extends DataAccessObject{
             gameRound.setTarget(target);
             gameRound.setP1Hand1(p1Hand1);
             gameRound.setP1Hand2(p1Hand2);
-            gameRound.setP2Hand1(p2Hand2);
+            gameRound.setP2Hand1(p2Hand1);
             gameRound.setP2Hand2(p2Hand2);
             gameRound.setPlayerChoice(playerChoice);
             gameRound.setPlayerHandUsed(playerHandUsed);
