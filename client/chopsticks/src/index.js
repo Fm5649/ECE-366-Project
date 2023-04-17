@@ -12,6 +12,8 @@ import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
+import Game from './components/Game'
+import GameList from './components/GameList'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -23,6 +25,8 @@ root.render(
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/home" element={<Home/>}/>
+            <Route path="/game/:id" element={<Game/>}/>
+            <Route path="/gamelist" element={<GameList/>}/>
         </Routes>
     </BrowserRouter>
 );

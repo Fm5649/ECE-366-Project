@@ -20,7 +20,7 @@ public class PlayerDAO extends DataAccessObject {
     private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, player_elo)" +
             " = (?, ?, ?, ?) WHERE player_id=? RETURNING *";
 
-    private static final String INSERT_PLAYER = "INSERT INTO player (player_email, player_name, password) VALUES (?,?)" +
+    private static final String INSERT_PLAYER = "INSERT INTO player (player_email, player_name, password) VALUES (?,?,?)" +
             "RETURNING *";
     
     private static final String DELETE_BY_ID = "DELETE FROM player WHERE player_id=? RETURNING *";
