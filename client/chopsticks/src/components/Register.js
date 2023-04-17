@@ -38,6 +38,7 @@ function Register() {
                   },}).then((res) => {alert ('user created'); console.log(res);
                   auth.currentUser.getIdToken(true).then((str) =>{
                     sessionStorage.setItem("idToken",str);
+                    sessionStorage.setItem("id",res.data.id);
                     sessionStorage.setItem("username",username);
                     navigate("/home")} )});
         })
