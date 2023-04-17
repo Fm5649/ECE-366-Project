@@ -1,5 +1,6 @@
 package com.teamchop.chopsticks;
 
+import com.teamchop.chopsticks.exception.NotFoundException;
 import com.teamchop.chopsticks.util.DataAccessObject;
 
 import java.sql.Connection;
@@ -57,12 +58,13 @@ public class PlayerDAO extends DataAccessObject {
     }
 
     public Player findById(long id) {
-        Player user = new Player();
+        Player user = null;
         System.out.println(GET_ONE_BY_ID);
         try(PreparedStatement statement = this.connection.prepareStatement(GET_ONE_BY_ID);) {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
+                user = new Player();
                 user.setPlayerId(rs.getLong("player_id"));
                 user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
@@ -82,12 +84,13 @@ public class PlayerDAO extends DataAccessObject {
     }
 
     public Player findByUserName(String name) {
-        Player user = new Player();
+        Player user = null;
         System.out.println(GET_ONE_BY_USER_NAME);
         try(PreparedStatement statement = this.connection.prepareStatement(GET_ONE_BY_USER_NAME);) {
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
+                user = new Player();
                 user.setPlayerId(rs.getLong("player_id"));
                 user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
@@ -107,7 +110,7 @@ public class PlayerDAO extends DataAccessObject {
     }
 
     public Player insertUserName(String email, String userName, String password) {
-        Player user = new Player();
+        Player user = null;
         System.out.println(INSERT_PLAYER);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_PLAYER);) {
             statement.setString(1, email);
@@ -115,6 +118,7 @@ public class PlayerDAO extends DataAccessObject {
             statement.setString(3, password);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
+                user = new Player();
                 user.setPlayerId(rs.getLong("player_id"));
                 user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));
@@ -162,12 +166,13 @@ public class PlayerDAO extends DataAccessObject {
     }
     
     public Player deleteById(long id) {
-        Player user = new Player();
+        Player user = null;
         System.out.println(DELETE_BY_ID);
         try(PreparedStatement statement = this.connection.prepareStatement(DELETE_BY_ID);) {
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
+                user = new Player();
                 user.setPlayerId(rs.getLong("player_id"));
                 user.setPlayerEmail(rs.getString("player_email"));
                 user.setPlayerName(rs.getString("player_name"));

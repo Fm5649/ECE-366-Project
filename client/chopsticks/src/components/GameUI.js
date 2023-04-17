@@ -25,8 +25,23 @@ function GameUI() {
     playerOneId:null,
     playerTwoId:null,
     gameId:null,
-    roundNumber:null
+    roundNumber:null,
+    winner:null
   });
+  useEffect(() => {
+    if (playerLeft == 0 && playerRight == 0) {
+    alert('you lost!');
+    clientRef.current.disconnect();
+  }}, [playerLeft,playerRight])
+  useEffect(() => {
+    if (enemyLeft == 0 && enemyRight == 0) {
+    alert('you won!');
+    clientRef.current.disconnect();
+  }}, [enemyLeft,enemyRight])
+  useEffect(() => {
+    if (gameinfo.winner !== null) {
+    setFinished(true)
+  }}, [gameinfo])
   const navigate = useNavigate();
     const clientRef = useRef();
     const { id } = useParams();
@@ -38,10 +53,11 @@ function GameUI() {
         if(!connected) return;
         const f = async () => {
           const res = await axios.get(`http://localhost:8080/getGameById/${id}`);
-          const {playerOneId, playerTwoId, gameId} = res.data;
+          const {playerOneId, playerTwoId, gameId, winnerId} = res.data;
           gameinfo.playerOneId = playerOneId;
           gameinfo.playerTwoId=playerTwoId;
           gameinfo.gameId = gameId;
+          gameinfo.winnerId = winnerId;
           setGameinfo({...gameinfo});
           console.log(gameinfo)
           const myid = parseInt(sessionStorage.getItem("id"));
@@ -87,16 +103,11 @@ function GameUI() {
           setEnemyRight(msg.p2Hand2);
         }
         gameinfo.roundNumber = roundNumber;
-        if (msg.p1Hand1 == 0 && msg.p1Hand2 == 0) {
-          alert('you lost!');
-          clientRef.current.disconnect();
-        } else if (msg.p2Hand1 == 0 && msg.p2Hand2 == 0) {
-          alert('you won! congrats!')
-          clientRef.current.disconnect();
-        }
         setGameinfo({...gameinfo});
       } else {
         const {playerOneId} = msg;
+        gameinfo.playerTwoId=msg.playerTwoId;
+        setGameinfo({...gameinfo});
         if (playerOneId == parseInt(sessionStorage.getItem("id"))) {
           const roundInit = {
             gameId: msg.gameId,
@@ -162,19 +173,19 @@ function GameUI() {
         alert('invalid number of fingers to transfer.');
         return;
       }
-      setPlayerLeft(playerLeft - transferAmount);
-      setPlayerRight(playerRight + transferAmount);
-      pl = pl-transferAmount;
-      pr = pr+transferAmount;
+      setPlayerLeft(playerLeft + transferAmount);
+      setPlayerRight(playerRight - transferAmount);
+      pl += transferAmount;
+      pr -= transferAmount;
     }else if (action === "Transfer to Right"){
       if(transferAmount >= playerLeft) {
         alert('invalid number of fingers to transfer.');
         return;
       }
-      setPlayerRight(playerRight - transferAmount);
-      setPlayerLeft(playerLeft + transferAmount);
-      pr -= transferAmount;
-      pl += transferAmount;
+      setPlayerRight(playerRight + transferAmount);
+      setPlayerLeft(playerLeft - transferAmount);
+      pr += transferAmount;
+      pl -= transferAmount;
     }
     console.log(pl,pr,el,er)
     const myid = parseInt(sessionStorage.getItem("id"));
@@ -209,7 +220,7 @@ function GameUI() {
       <span>Left Hand: {enemyLeft} Right Hand: {enemyRight}</span>
       <h1>Your Hands</h1>
       <span>Left Hand: {playerLeft} Right Hand: {playerRight}</span>
-      {!waiting ? <>
+      {!waiting && !finished ? <>
       <h1>Current action is {action}</h1>
       <button onClick={() => setAction("Attack Left")}>
         Attack Left

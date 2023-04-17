@@ -1,5 +1,8 @@
 package com.teamchop.chopsticks;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserRecord;
+import com.teamchop.chopsticks.exception.NotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.json.JsonParser;
@@ -41,7 +44,7 @@ public class Controllers {
     public Player create(@PathVariable String name) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Player player = new Player();
+        Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
@@ -52,6 +55,9 @@ public class Controllers {
         catch(SQLException e) {
             e.printStackTrace();
         }
+        if (player == null) {
+            throw new NotFoundException("Player not found");
+        }
         return player;
     }
 
@@ -59,16 +65,18 @@ public class Controllers {
     public Player create(@RequestBody PlayerForm pForm) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Player player = new Player();
+        Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
-
             player = PlayerDAO.insertUserName(pForm.email,pForm.userName, pForm.password);
             System.out.println(player);
         }
         catch(SQLException e) {
             e.printStackTrace();
+        }
+        if (player == null) {
+            throw new NotFoundException("Player already exists");
         }
         return player;
     }
@@ -105,6 +113,9 @@ public class Controllers {
         }
         catch(SQLException e) {
             e.printStackTrace();
+        }
+        if (player == null) {
+            throw new NotFoundException("Player not found");
         }
         return player;
     }
@@ -242,11 +253,20 @@ public class Controllers {
             if (a > 0) {
                 Game game = null;
                 GameDAO gDAO = new GameDAO(connection);
+                PlayerDAO pDao = new PlayerDAO(connection);
                 game = gDAO.findById(g.getGameId());
                 System.out.println(game);
                 game.setWinner(a == 1 ? game.getPlayerOneId() : game.getPlayerTwoId());
                 System.out.println("Winner: "+ game.getWinner());
                 gDAO.updateWinner(game.getGameId(),game.getWinner());
+                Player p = pDao.findById(game.getWinner());
+                Player l = pDao.findById(a == 1 ? game.getPlayerTwoId() : game.getPlayerOneId());
+                p.setTotalGames(p.getTotalGames()+1);
+                p.setTotalWins(p.getTotalWins()+1);
+                l.setTotalGames(p.getTotalGames()+1);
+                l.setTotalLosses(p.getTotalLosses()+1);
+                pDao.updateStats(p);
+                pDao.updateStats(l);
             }
             System.out.println(g);
 
