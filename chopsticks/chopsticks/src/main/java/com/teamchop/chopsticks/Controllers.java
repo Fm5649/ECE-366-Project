@@ -145,6 +145,24 @@ public class Controllers {
         return g;
     }
 
+    @GetMapping("/getAvailableGames/{id}")
+    public List<Game> getAvailableGames(@PathVariable long id) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        List<Game> g = new ArrayList<>();
+        try {
+            Connection connection = dcm.getConnection();
+            GameDAO gameDAO = new GameDAO(connection);
+
+            g = gameDAO.getAvailableGames(id);
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
     @PostMapping(value = "/insertGame")
     public Game insertGame(@RequestBody GameForm message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",

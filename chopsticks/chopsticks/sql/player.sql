@@ -21,3 +21,7 @@ CREATE TABLE player (
 );
 
 --Added achievements to player
+
+insert into player (player_name, player_email, "password") values ('test','test','password');
+insert into player (player_name, player_email, "password") values ('test2','test2','password');
+insert into player (player_name, player_email, "password") values ('test3','test3','password');

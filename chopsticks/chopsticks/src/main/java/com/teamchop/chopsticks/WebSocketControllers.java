@@ -1,16 +1,17 @@
 package com.teamchop.chopsticks;
+import com.teamchop.chopsticks.message.JoinMessage;
 import org.springframework.messaging.handler.annotation.*;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@Controller
+@RestController
 public class WebSocketControllers {
     @MessageMapping("/round")
-    @SendTo("/websocket/insert")
+    @SendTo("/topics/insert")
     public GameRound insertGameRound(@RequestBody GameRound message) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
@@ -50,5 +51,24 @@ public class WebSocketControllers {
         }
         return g;
     }
+    @MessageMapping("/join")
+    @SendTo("/topics/join")
+    public Game joinGame(@Payload JoinMessage message) {
+        System.out.println("received");
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        Game g = null;
+        try {
+            Connection connection = dcm.getConnection();
+            GameDAO gameDAO = new GameDAO(connection);
+            g = gameDAO.updateOpponent(message.getGameId(), message.getUserId());
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
 
 }

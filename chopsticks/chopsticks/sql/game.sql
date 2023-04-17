@@ -15,7 +15,7 @@ CREATE SEQUENCE game_seq start with 1;
 CREATE TABLE game(
   game_id bigint NOT NULL DEFAULT nextval('game_seq'),
   p1_id bigint NOT NULL,
-  p2_id bigint NOT NULL,
+  p2_id bigint DEFAULT NULL,
   --total_rounds int NOT NULL,
   --current_round int NOT NULL,
   winner_id bigint DEFAULT NULL,

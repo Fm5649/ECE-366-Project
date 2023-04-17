@@ -32,12 +32,14 @@ function Register() {
                 email : email,
                 username : username,
             }
-
-            alert ('user created')
-            axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password},{headers: {
+            axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password,email:email},{headers: {
                     "Access-Control-Allow-Origin":
                       "*",
-                  },}).then((res) => {console.log(res); navigate("/home")});
+                  },}).then((res) => {alert ('user created'); console.log(res);
+                  auth.currentUser.getIdToken(true).then((str) =>{
+                    sessionStorage.setItem("idToken",str);
+                    sessionStorage.setItem("username",username);
+                    navigate("/home")} )});
         })
         .catch(function(error) { 
             var error_code = error.code
