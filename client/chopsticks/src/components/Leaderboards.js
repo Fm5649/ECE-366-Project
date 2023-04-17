@@ -1,4 +1,6 @@
 import '../styles/Leaderboards.css';
+import SideBar from './SideBar';
+import styles from '../styles/HomeStyles'
 import React, { useState } from 'react';
 import { useRef, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
@@ -49,20 +51,26 @@ function Leaderboards() {
     const sortedPlayers = [...players].sort((a, b) => b.playerElo - a.playerElo);
 
     return (
-        <div className="leaderboard">
-            <div className="leaderboard-header">
-            <div className="leaderboard-rank">#</div>
-            <div className="leaderboard-player">Player</div>
-            <div className="leaderboard-elo">Elo</div>
+        <div style={styles.wrapper}>
+            <div style={styles.sideBarContainer}> 
+                <SideBar></SideBar>
             </div>
-        {sortedPlayers.map((player, index) => (
-            <div className="leaderboard-row" key={player.playerId}>
-            <div className="leaderboard-rank">{index + 1}</div>
-            <div className="leaderboard-player">{player.playerName}</div>
-            <div className="leaderboard-elo">{player.playerElo}</div>
-            </div>
-        ))}
-        </div>
+            <div style={styles.centerContainer}>
+                <div className="leaderboard">
+                    <div className="leaderboard-header">
+                    <div className="leaderboard-rank">#</div>
+                    <div className="leaderboard-player">Player</div>
+                    <div className="leaderboard-elo">Elo</div>
+                    </div>
+                {sortedPlayers.map((player, index) => (
+                    <div className="leaderboard-row" key={player.playerId}>
+                    <div className="leaderboard-rank">{index + 1}</div>
+                    <div className="leaderboard-player">{player.playerName}</div>
+                    <div className="leaderboard-elo">{player.playerElo}</div>
+                    </div>
+                ))}
+                </div>
+        </div></div>
     );
 }
 

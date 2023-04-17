@@ -9,7 +9,6 @@ import { auth } from '..';
 import { database } from '..';
 
 function ProfileAndSettings() {
-    const [connected,setConnected] = useState(false);
     const [playerInfo, setPlayerInfo] = useState({
     username:null,
     totalGames:null,
@@ -19,17 +18,10 @@ function ProfileAndSettings() {
     }); 
     
     const navigate = useNavigate();
-    const clientRef = useRef();
-    const { id } = useParams();
-    const joinHandler = () => {
-        console.log(clientRef.current);
-        setConnected(true);
-    }
 
     useEffect(() => {
-        if(!connected) return;
         const f = async () => {
-            const res = await axios.get(`http://localhost:8080/getPlayerById/${id}`);
+            const res = await axios.get(`http://localhost:8080/getPlayerById/${sessionStorage.getItem("id")}`);
             const {username, totalGames, totalWins, totalLosses, ELO} = res.data;
             playerInfo.username = username;
             playerInfo.totalGames = totalGames;
@@ -40,7 +32,7 @@ function ProfileAndSettings() {
             console.log(playerInfo)
         }
         f();
-    },[connected])
+    },[])
     
     console.log(playerInfo);
 
