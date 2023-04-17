@@ -12,7 +12,7 @@ import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
-import Game from './components/Game'
+import Game from './components/GameUI'
 import GameList from './components/GameList'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

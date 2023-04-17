@@ -24,7 +24,7 @@ function Home() {
                     <Button variant="contained" style={styles.startButton} onClick={createHandler}>
                         Start
                     </Button>
-                    <Button variant="contained" style={styles.joinButton}>
+                    <Button variant="contained" style={styles.joinButton} onClick={()=>{navigate('/gamelist')}}>
                         Join
                     </Button>
                 </div>
