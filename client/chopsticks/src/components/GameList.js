@@ -30,6 +30,7 @@ function GameList() {
                 </div>
                 { games.map((game,i) => 
                 <div style={styles.buttonContainer} key={i}>
+                    <div>{game.playerOneName}:</div>
                     <Button variant="contained" style={styles.joinButton} onClick={() => navigate(`/game/${game.gameId}`)}>
                         Join
                     </Button>

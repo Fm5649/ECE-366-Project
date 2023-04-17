@@ -14,6 +14,7 @@ import Register from './components/Register'
 import Home from './components/Home'
 import Game from './components/GameUI'
 import GameList from './components/GameList'
+import Settings from './components/Settings'
 import Leaderboards from './components/Leaderboards'
 import ProfileandSettings from './components/ProfileAndSettings'
 

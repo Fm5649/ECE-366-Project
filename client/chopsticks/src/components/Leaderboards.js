@@ -1,4 +1,4 @@
-import '../Leaderboards.css';
+import '../styles/Leaderboards.css';
 import React, { useState } from 'react';
 import { useRef, useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
