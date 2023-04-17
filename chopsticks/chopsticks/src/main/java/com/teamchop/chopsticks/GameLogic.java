@@ -72,10 +72,10 @@ public class GameLogic {
         return moves;
     }
     public static boolean isValidMove(GameRound g) {
-        if (g.getP1Hand1() >= 5 || g.getP1Hand1() <= 0) return false;
-        if (g.getP1Hand2() >= 5 || g.getP1Hand2() <= 0) return false;
-        if (g.getP2Hand2() >= 5 || g.getP2Hand2() <= 0) return false;
-        if (g.getP2Hand1() >= 5 || g.getP2Hand1() <= 0) return false;
+        if (g.getP1Hand1() >= 5 || g.getP1Hand1() < 0) return false;
+        if (g.getP1Hand2() >= 5 || g.getP1Hand2() < 0) return false;
+        if (g.getP2Hand2() >= 5 || g.getP2Hand2() < 0) return false;
+        if (g.getP2Hand1() >= 5 || g.getP2Hand1() < 0) return false;
         return true;
     }
     public static int  winner(GameRound g) {
