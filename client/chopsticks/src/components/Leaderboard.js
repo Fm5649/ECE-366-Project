@@ -26,7 +26,20 @@ function Leaderboard() {
   });
 
   const res = await axios.get(`http://localhost:8080/getLeaderboardById/${id}`);
-  const leaderboard = res.data;
+  const {rank, 
+         playerName,
+    totalGames,
+    totalWins,
+    totalLosses,
+    ELO} = res.data;
+  leaderboardinfo.rank = rank;
+  leaderboardinfo.playerName = playerName;
+leaderboardinfo.totalGames = totalGames;
+leaderboardinfo.totalWins = totalWins;
+leaderboardinfo.totalLosses = totalLosses;
+leaderboardinfo.ELO = ELO;
+  setLeaderboardInfo({...leaderboardinfo});
+  console.log(leaderboardinfo)
   
   return (
       <div>
