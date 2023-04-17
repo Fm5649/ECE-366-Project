@@ -1,41 +1,66 @@
 import "./App.css";
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 
-//https://react.school/ui/input
-// Styling a regular HTML input
-const StyledInput = styled.input`
-  display: block;
-  margin: 20px 0px;
-  border: 1px solid lightblue;
-`;
-
-function useInput(defaultValue) {
-  const [value, setValue] = useState(defaultValue);
-  function onChange(e) {
-    setValue(e.target.value);
-  }
-  return {
-    value,
-    onChange,
-  };
-}
-
 function GameUI() {
-  const [action, setAction] = useState("Attack");
-  const inputProps = useInput();
+  const [action, setAction] = useState("");
+  const [transferAmount, setAmount] = useState(0);
+  
+  const [playerLeft, setPlayerLeft] = useState(1);
+  const [playerRight, setPlayerRight] = useState(1);
+  const [enemyLeft, setEnemyLeft] = useState(1);
+  const [enemyRight, setEnemyRight] = useState(1);
+    
+  const onChoice = (choice) => {
+    if (action === "Attack Left"){
+      if(enemyLeft + transferAmount === 5){
+        setEnemyLeft(0);
+      }
+      if(enemyLeft + transferAmount > 5){
+        setEnemyLeft(enemyLeft + transferAmount - 5);
+      }
+      else
+      {
+        setEnemyLeft(enemyLeft + transferAmount);
+      }
+    }
+    if (action === "Attack Right"){
+      if(enemyRight + transferAmount === 5){
+        setEnemyRight(0);
+      }
+      if(enemyRight + transferAmount > 5){
+        setEnemyRight(enemyRight + transferAmount - 5);
+      }
+      else
+      {
+        setEnemyRight(enemyRight + transferAmount);
+      }
+    }
+    if (action === "Transfer to Left"){
+      setPlayerLeft(playerLeft - transferAmount);
+      setPlayerRight(playerRight + transferAmount);
+    }
+    if (action === "Transfer to Right"){
+      setPlayerRight(playerRight - transferAmount);
+      setPlayerLeft(playerLeft + transferAmount);
+    }
+}
+  
+  
   return (
     <div className="GameUI">
       <h1>Enemy Hands</h1>
-      <span>Left Hand: 5{' '}Right Hand: 5</span>
+      <span>Left Hand: {enemyLeft} Right Hand: {enemyRight}</span>
       <h1>Your Hands</h1>
-      <span>Left Hand: 5{' '}Right Hand: 5</span>
+      <span>Left Hand: {playerLeft} Right Hand: {playerRight}</span>
 
       <h1>Current action is {action}</h1>
-      <button onClick={() => setAction("Attack")}>
-        Attack
+      <button onClick={() => setAction("Attack Left")}>
+        Attack Left
+      </button>
+      <button onClick={() => setAction("Attack Right")}>
+        Attack Right
       </button>
       <button
         onClick={() => setAction("Transfer to Left")}>
@@ -51,6 +76,11 @@ function GameUI() {
         placeholder="Type in value"
       />
       <span>Value: {inputProps.value} </span>
+
+      <button 
+        onClick={() => onChoice("Confirm")}>
+        Confirm Choices
+        </button>   
     </div>
   );
 }
