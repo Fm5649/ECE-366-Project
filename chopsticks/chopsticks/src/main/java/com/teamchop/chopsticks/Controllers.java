@@ -61,6 +61,27 @@ public class Controllers {
         return player;
     }
 
+    @GetMapping("/getPlayers")
+    public List<Player> getPlayers() {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        List<Player> player = null;
+        try {
+            Connection connection = dcm.getConnection();
+            PlayerDAO PlayerDAO = new PlayerDAO(connection);
+
+            player = PlayerDAO.getPlayers();
+            System.out.println(player);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        if (player == null) {
+            throw new NotFoundException("Player not found");
+        }
+        return player;
+    }
+
     @PostMapping("/insertPlayer")
     public Player create(@RequestBody PlayerForm pForm) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",

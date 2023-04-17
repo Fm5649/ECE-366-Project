@@ -12,7 +12,7 @@ public class GameDAO extends DataAccessObject{
         super(connection);
     }
     private static final String GET_ONE_BY_ID = "select game.*, player.player_name, p2.player_name as player_name_2 from game "
-    + "inner join player on player.player_id  = game.p1_id  inner join player as p2 on  p2.player_id  = game.p2_id "+
+    + "inner join player on player.player_id  = game.p1_id  left join player as p2 on  p2.player_id  = game.p2_id "+
             "where game.game_id = ?";
 
     private static final String INSERT_GAME = "INSERT INTO game (p1_id, p2_id) " +
@@ -115,8 +115,8 @@ public class GameDAO extends DataAccessObject{
     public void updateWinner(long gameId, long winnerId) {
         System.out.println(UPDATE_WINNER);
         try(PreparedStatement statement = this.connection.prepareStatement(UPDATE_WINNER);) {
-            statement.setLong(1, gameId);
-            statement.setLong(2, winnerId);
+            statement.setLong(1, winnerId);
+            statement.setLong(2, gameId);
             statement.execute();
         } catch(SQLException e) {
             e.printStackTrace();
