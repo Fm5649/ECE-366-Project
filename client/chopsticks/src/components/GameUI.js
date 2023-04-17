@@ -43,12 +43,12 @@ function GameUI() {
       }
     }
     if (action === "Transfer to Left"){
-      setPlayerLeft(playerLeft - transferAmount);
-      setPlayerRight(playerRight + transferAmount);
-    }
-    if (action === "Transfer to Right"){
       setPlayerRight(playerRight - transferAmount);
       setPlayerLeft(playerLeft + transferAmount);
+    }
+    if (action === "Transfer to Right"){
+      setPlayerLeft(playerLeft - transferAmount);
+      setPlayerRight(playerRight + transferAmount);
     }
 }
   
