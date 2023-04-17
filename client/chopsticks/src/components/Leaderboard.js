@@ -1,3 +1,5 @@
+//Figure out how to nicely list all entires
+
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SockJsClient from "react-stomp";
@@ -14,12 +16,21 @@ function Leaderboard() {
   const data =[{"name":"test1"},{"name":"test2"}];
   const listItems = data.map((d) => <li key={d.name}>{d.name}</li>);
 
+  const [leaderboardinfo, setLeaderboardinfo] = useState({
+    rank:null,
+    playerName:null,
+    totalGames:null,
+    totalWins:null,
+    totalLosses:null,
+    ELO:null
+  });
+
   const res = await axios.get(`http://localhost:8080/getLeaderboardById/${id}`);
   const leaderboard = res.data;
   
   return (
       <div>
-      <h1> {leaderboard} </h1>
+  
       </div>
     );
 }
