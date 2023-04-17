@@ -14,7 +14,7 @@ CREATE TABLE player (
   total_games int DEFAULT 0,
   total_wins int DEFAULT 0,
   total_losses int DEFAULT 0,
-  player_elo int DEFAULT 0,
+  player_elo int DEFAULT 1000,
   achievement_first_win int DEFAULT 0,  
   achievement_first_game int DEFAULT 0,
   PRIMARY KEY (player_id)

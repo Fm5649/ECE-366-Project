@@ -87,4 +87,21 @@ public class GameLogic {
         }
         return a;
     }
+
+    public static long[] getElo(long winnerElo, long loserElo) {
+        double E_w = 1/(1+Math.pow(10,(loserElo-winnerElo)/400));
+        double E_l = 1/(1+Math.pow(10,(winnerElo-loserElo)/400));
+        long R_w = (long)(winnerElo + 32*(1.0-E_w));
+        long R_l = (long)(loserElo + 32*(0.0-E_l));
+        long[] ans = new long[2];
+        ans[0] = R_w;
+        ans[1] = R_l;
+        System.out.println(winnerElo);
+        System.out.println(loserElo);
+        System.out.println(R_w);
+        System.out.println(R_l);
+        System.out.println(E_w);
+        System.out.println(E_l);
+        return ans;
+    }
 }
