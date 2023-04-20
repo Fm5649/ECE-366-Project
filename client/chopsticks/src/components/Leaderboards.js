@@ -22,9 +22,10 @@ function Leaderboards() {
         console.log(clientRef.current);
         setConnected(true);
     }
-    console.log('poo');
     console.log(players);
 
+    // Asynchronous function to fetch all player data from database
+    // Inserts this data into players array
     const f = async () => {
         try {
             const res = await axios.get(`http://localhost:8080/getPlayers`);
@@ -43,7 +44,6 @@ function Leaderboards() {
     useEffect(()=>{}, [players]);
 
     if (players.length === 0) {
-        console.log('poo2');
         f();
         console.log(players);
     }
