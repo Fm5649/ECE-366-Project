@@ -1,3 +1,5 @@
+/* File containing the styles of UI for leaderboard page*/
+
 .leaderboard {
     display: flex;
     flex-direction:column;

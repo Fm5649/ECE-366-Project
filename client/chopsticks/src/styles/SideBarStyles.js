@@ -1,3 +1,5 @@
+// File containing the styles of UI for sidebar
+
 const SideBarStyles = {
     wrapper: {
         display: 'flex',

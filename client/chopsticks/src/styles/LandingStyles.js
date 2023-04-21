@@ -1,3 +1,5 @@
+// File containing the styles of UI for Landing page
+
 const LandingStyles = {
     wrapper: {
         display: 'grid',

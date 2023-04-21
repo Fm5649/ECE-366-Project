@@ -16,11 +16,11 @@ import Game from './components/GameUI'
 import GameList from './components/GameList'
 import Settings from './components/Settings'
 import Leaderboards from './components/Leaderboards'
-import ProfileandSettings from './components/ProfileAndSettings'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 /* The entry point of the application. */
+// set up of all paths
 root.render(
     <BrowserRouter>
         <Routes>

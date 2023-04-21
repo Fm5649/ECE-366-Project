@@ -2,27 +2,11 @@ import '../styles/Leaderboards.css';
 import SideBar from './SideBar';
 import styles from '../styles/HomeStyles'
 import React, { useState } from 'react';
-import { useRef, useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect} from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
 
 function Leaderboards() {
-    const [connected,setConnected] = useState(false);
     const [players, setPlayers] = useState([]);
-    const [playerInfo, setPlayerInfo] = useState({
-    playerId: null,
-    playerName: null,
-    playerElo: null
-    }); 
-
-    const navigate = useNavigate();
-    const clientRef = useRef();
-    const joinHandler = () => {
-        console.log(clientRef.current);
-        setConnected(true);
-    }
-    console.log(players);
 
     // Asynchronous function to fetch all player data from database
     // Inserts this data into players array
@@ -34,22 +18,25 @@ function Leaderboards() {
                 playerName: player.playerName,
                 playerElo: player.playerElo
             }));
-            console.log(players);
             setPlayers(players);
+            console.log(players);
         } catch (error) {
             console.log(error);
         }
-    } 
-
-    useEffect(()=>{}, [players]);
-
-    if (players.length === 0) {
-        f();
-        console.log(players);
     }
 
+    // Dependency array for useEffect is empty -> [], so only runs once when the
+    // component is initially mounted. 
+    useEffect(()=>{
+        f();
+    }, []);
+
+    // Players are sorted in the leaderboard by their elo
     const sortedPlayers = [...players].sort((a, b) => b.playerElo - a.playerElo);
 
+    // Displays three columns Rank # | Name | Elo
+    // Sorted by elo
+    // Placed on the screen into grid from sorted players array
     return (
         <div style={styles.wrapper}>
             <div style={styles.sideBarContainer}> 
