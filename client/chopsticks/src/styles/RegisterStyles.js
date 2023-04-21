@@ -1,3 +1,5 @@
+// File containing the styles of UI for register page
+
 const RegisterStyles = {
     wrapper: {
         display: 'grid',
@@ -20,7 +22,7 @@ const RegisterStyles = {
     usernameTextfield: {
         marginTop: '10px',
     },
-    emailTextField: {
+    emailTextfield: {
         marginTop: '10px',
     },
     passwordTextfield: {
