@@ -30,6 +30,24 @@ Commands:
 ---------------------------------------------
 In the course of developing this project, we have sought to follow the Software Engineering Code of Ethics and Professional Practice.
 
-    2.02 - Not knowingly use software that is obtained or retained either illegally or unethically.
+    1.01. Accept full responsibility for their own work.
+    
+As the creators of this project we take full responsibility for the creation and development of this project.
+
+    2.02.  Not knowingly use software that is obtained or retained either illegally or unethically.
     
 Our project does not use any software that was illegaly or unethically obtained. All software used is freely available.
+
+    3.02. Ensure proper and achievable goals and objectives for any project on which they work or propose.
+    
+In the process of developing this project we have made sure that our goals and objectives are within reach with accordance to our own abilities.
+
+    7.02. Assist colleagues in professional development.
+    
+This project was a group effort, and it required all of us to help one another with development.
+
+    8.01. Further their knowledge of developments in the analysis, specification, design, development, maintenance and testing of software and related documents, together with the management of the development process.
+    
+Our work on this project has greatly contirbued to our won understanding of the software development process and the actions and steps required.
+
+
