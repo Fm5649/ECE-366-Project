@@ -27,4 +27,4 @@ Commands:
     SELECT * FROM leaderboard;  
     
 **Project Ethics**
-
+---------------------------------------------
