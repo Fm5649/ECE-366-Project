@@ -30,6 +30,6 @@ Commands:
 ---------------------------------------------
 In the course of developing this project, we have sought to follow the Software Engineering Code of Ethics and Professional Practice.
 
-2.02 - Not knowingly use software that is obtained or retained either illegally or unethically.
+    2.02 - Not knowingly use software that is obtained or retained either illegally or unethically.
     
-    Our project does not use any software that was illegaly or unethically obtained. All software used is freely available.
+Our project does not use any software that was illegaly or unethically obtained. All software used is freely available.
