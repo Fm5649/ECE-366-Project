@@ -25,3 +25,5 @@ Commands:
     SELECT * FROM game; 
     SELECT * FROM game_round;   
     SELECT * FROM leaderboard;  
+    
+Project Ethics
