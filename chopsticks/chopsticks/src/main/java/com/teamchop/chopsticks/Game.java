@@ -57,7 +57,8 @@ public class Game implements DataTransferObject
     {
         this.winner = winner;
     }
-
+    
+    //Player one name get and set
     public String getPlayerOneName()
     {return p1Name;
     }
@@ -66,6 +67,7 @@ public class Game implements DataTransferObject
         this.p1Name = p1Name;
     }
 
+    //Player two name get and set
     public String getPlayerTwoName()
     {return p2Name;
     }
