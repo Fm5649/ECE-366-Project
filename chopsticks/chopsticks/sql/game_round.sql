@@ -8,16 +8,16 @@ CREATE TABLE game_round (
     turn_player_name varchar(30), --Which users' turn it is
     player_choice varchar (50), --Attack or transfer
     
-    player_hand_used varchar(50),
+    player_hand_used varchar(50),   --which hand the player is using for their action
     
-    player_target varchar(50), --"P1Hand1, P1Hand1, P2Hand1, P2Hand2"
+    player_target varchar(50), --"P1Hand1, P1Hand1, P2Hand1, P2Hand2", which hand is being targeted by action
     --p1_choice varchar(50) NOT NULL,
     --p2_choice varchar(50) NOT NULL,
     
     player_action_amount int NOT NULL DEFAULT 0,  --Amount the player transfers with
-    p1_hand1 int NOT NULL DEFAULT 1,    
+    p1_hand1 int NOT NULL DEFAULT 1,    --finger values for player one hands
     p1_hand2 int NOT NULL DEFAULT 1,    
-    p2_hand1 int NOT NULL DEFAULT 1,
+    p2_hand1 int NOT NULL DEFAULT 1,    --finger values for player two hands
     p2_hand2 int NOT NULL DEFAULT 1,
     
     PRIMARY KEY (game_id , round_number),
