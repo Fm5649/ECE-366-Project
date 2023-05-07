@@ -26,36 +26,36 @@ public class PlayerTest {
   @Test
     @DisplayName("Get Email successfully")
     public void testGetPlayerEmail() {
-        assertEquals(100, player.getPlayerEmail());
+        assertEquals("testing@cooper.edu", player.getPlayerEmail());
     }
   @Test
     @DisplayName("Get UserName successfully")
     public void testGetPlayerName() {
-        assertEquals(100, player.getPlayerName());
+        assertEquals("tester", player.getPlayerName());
     }
   @Test
     @DisplayName("Get Password successfully")
     public void testGetPassword() {
-        assertEquals(100, player.getPassword());
+        assertEquals("testing", player.getPassword());
     }
   @Test
     @DisplayName("Get TotalGames successfully")
     public void testGetTotalGames() {
-        assertEquals(100, player.getTotalGames());
+        assertEquals(10, player.getTotalGames());
     }
   @Test
     @DisplayName("Get TotalWins successfully")
     public void testGetTotalWins() {
-        assertEquals(100, player.getTotalWins());
+        assertEquals(7, player.getTotalWins());
     }
   @Test
     @DisplayName("Get TotalLosses successfully")
     public void testGetTotalLosses() {
-        assertEquals(100, player.getTotalLosses());
+        assertEquals(3, player.getTotalLosses());
     }
   @Test
     @DisplayName("Get ELO successfully")
     public void testGetPlayerElo() {
-        assertEquals(100, player.getPlayerElo());
+        assertEquals(1000, player.getPlayerElo());
     }
 }
