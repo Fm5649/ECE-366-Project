@@ -30,7 +30,7 @@ function Register() {
         createUserWithEmailAndPassword(auth, email, password)
         .then(function() {
             // insert player into database
-            axios.post("${process.env.REACT_APP_BACKEND_URL}/insertPlayer",{userName:username,password:password,email:email},{headers: {
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/insertPlayer`,{userName:username,password:password,email:email},{headers: {
                     "Access-Control-Allow-Origin":
                       "*"
                   },}).then((res) => {alert ('user created'); console.log(res);
