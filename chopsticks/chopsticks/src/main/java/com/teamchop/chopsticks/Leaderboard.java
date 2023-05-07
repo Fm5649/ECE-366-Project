@@ -10,6 +10,11 @@ public class Leaderboard implements DataTransferObject {
     private int losses;
     private int totalGames;
     private int elo;
+    private String idToken;
+    public String getIdToken() {
+        return idToken;
+    }
+    public void setIdToken(String s) {idToken = s;}
 
     //Id of entry get and set
     public long getId() {

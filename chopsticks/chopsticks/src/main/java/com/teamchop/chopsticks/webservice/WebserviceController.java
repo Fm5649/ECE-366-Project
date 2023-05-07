@@ -64,7 +64,7 @@ public class WebserviceController {
     public GameRound getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound g=null;
+        GameRound g = null;
         try {
             Connection connection = dcm.getConnection();
             GameRoundDAO gameDAO = new GameRoundDAO(connection);

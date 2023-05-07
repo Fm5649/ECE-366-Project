@@ -25,6 +25,11 @@ public class GameDAO extends DataAccessObject{
             "FROM game inner join player on game.p1_id = player.player_id " +
             "WHERE p1_id <> ? and p2_id is null and winner_id is null";
 
+    private static final String GET_EVERY_ONGOING_AVAILABLE_GAME = "SELECT game.*, player.player_name, p2.player_name as player_name_2 " +
+            "FROM game inner join player on game.p1_id = player.player_id " +
+            "left join player as p2 on game.p2_id = p2.player_id "+
+            "WHERE p1_id = ? or p2_id = ? and winner_id is null";
+
     private static final String UPDATE_OPPONENT = "UPDATE game SET p2_id = ? " +
             "WHERE game_id = ? and p2_id is null and p1_id <> ? RETURNING *";
 
@@ -103,6 +108,30 @@ public class GameDAO extends DataAccessObject{
                 game.setGameId(rs.getLong("game_id"));
                 game.setPlayerOneId(rs.getLong("p1_id"));
                 game.setPlayerOneName(rs.getString("player_name"));
+                games.add(game);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return games;
+    }
+
+    public List<Game> getOngoingGames(long p1Id) {
+        List<Game> games = new ArrayList<>();
+        System.out.println(GET_EVERY_ONGOING_AVAILABLE_GAME);
+        try(PreparedStatement statement = this.connection.prepareStatement(GET_EVERY_ONGOING_AVAILABLE_GAME);) {
+            statement.setLong(1, p1Id);
+            statement.setLong(2, p1Id);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            while(rs.next()) {
+                Game game = new Game();
+                game.setGameId(rs.getLong("game_id"));
+                game.setPlayerOneId(rs.getLong("p1_id"));
+                game.setPlayerTwoId(rs.getLong("p2_id"));
+                game.setPlayerOneName(rs.getString("player_name"));
+                game.setPlayerTwoName(rs.getString("player_name_2"));
                 games.add(game);
             }
         } catch(SQLException e) {

@@ -2,14 +2,19 @@ import styles from '../styles/HomeStyles'
 import SideBar from "./SideBar";
 import {useState,useEffect} from "react";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Settings() {
     const [data,setData] = useState();
+    //url can be /settings or /settings/(numeric id)
+    let {id} = useParams();
 
-    // async function to get player data given current session id 
+    // async function to get player data given current session id or id on url variable (when looking at other players)
     const createHandler = async () => {
-        const res = await axios.get(`http://localhost:8080/getPlayerById/${sessionStorage.getItem("id")}`);
+        //if url = /settings then use my own session id
+        if (!id) id = sessionStorage.getItem("id");
+        const res = await axios.get(`http://localhost:8080/getPlayerById/${id}`,{headers:
+        {"Authorization":`Bearer ${sessionStorage.getItem("idToken")}`}});
         console.log(res);
         setData(res.data);
     }

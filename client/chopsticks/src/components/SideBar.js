@@ -5,6 +5,7 @@ import { IconButton } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 
 function SideBar() {
     const navigate = useNavigate();
@@ -28,6 +29,9 @@ function SideBar() {
     // sidebar with settings/leaderboards/landing page button
     return (
         <div style={styles.wrapper}>
+            <IconButton onClick={()=>{navigate("/home")}} style={styles.settingsButton}>
+                <HomeIcon fontSize="large"/>
+            </IconButton>
             <IconButton onClick={navigateSettings} style={styles.settingsButton}>
                 <SettingsIcon fontSize="large"/>
             </IconButton>

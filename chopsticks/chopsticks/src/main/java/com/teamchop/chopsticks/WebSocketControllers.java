@@ -4,6 +4,8 @@ import org.springframework.messaging.handler.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.Headers;
+import org.springframework.messaging.handler.annotation.Header;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -62,6 +64,23 @@ public class WebSocketControllers {
 
         }
         return g;
+    }
+
+    @MessageMapping("/forfeit")
+    @SendTo("/topics/forfeit")
+    public void forfeit(@Payload JoinMessage message) {
+        DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
+                "chopsticks", "postgres", "password");
+        Game g = null;
+        try {
+            Connection connection = dcm.getConnection();
+            GameDAO gameDAO = new GameDAO(connection);
+            g = gameDAO.updateOpponent(message.getGameId(), message.getUserId());
+            System.out.println(g);
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
     @MessageMapping("/join")
     @SendTo("/topics/join")

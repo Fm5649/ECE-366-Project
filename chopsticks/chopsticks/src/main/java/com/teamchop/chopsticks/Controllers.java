@@ -2,11 +2,16 @@ package com.teamchop.chopsticks;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserRecord;
+import com.google.rpc.context.AttributeContext;
 import com.teamchop.chopsticks.exception.NotFoundException;
+import com.teamchop.chopsticks.util.Authenticate;
+import org.apache.http.protocol.HTTP;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.teamchop.chopsticks.util.Authenticate.*;
 
 import static com.teamchop.chopsticks.GameLogic.getElo;
 
@@ -25,7 +31,8 @@ public class Controllers {
     private JsonParser parser = JsonParserFactory.getJsonParser();
 
     @GetMapping("/getPlayerById/{id}")
-    public Player getPlayer(@PathVariable long id) {
+    public ResponseEntity<Player> getPlayer(@PathVariable long id,@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
+
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Player player = null;
@@ -34,40 +41,47 @@ public class Controllers {
             PlayerDAO playerDAO = new PlayerDAO(connection);
 
             player = playerDAO.findById(id);
+            boolean own = Authenticate.getFirebaseId(idToken).equals(player.getFirebaseId());
+            if (!own) player.setPassword("");
+            if (player.getId()==0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             System.out.println(player);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return player;
+        return new ResponseEntity<>(player,HttpStatus.OK);
     }
 
     @GetMapping("/getPlayerByName/{name}")
-    public Player create(@PathVariable String name) {
+    public ResponseEntity<Player> create(@PathVariable String name, @RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
-
             player = PlayerDAO.findByUserName(name);
+            boolean own = Authenticate.getFirebaseId(idToken).equals(player.getFirebaseId());
+            if (!own) player.setPassword("");
+            if (player.getId()==0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             System.out.println(player);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (player == null) {
             throw new NotFoundException("Player not found");
         }
-        return player;
+        return new ResponseEntity<>(player,HttpStatus.OK);
     }
 
     @GetMapping("/getPlayers")
     public List<Player> getPlayers() {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        List<Player> player = null;
+        List<Player> player = new ArrayList<>();
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
@@ -85,27 +99,27 @@ public class Controllers {
     }
 
     @PostMapping("/insertPlayer")
-    public Player create(@RequestBody PlayerForm pForm) {
+    public ResponseEntity<Player> create(@RequestBody PlayerForm pForm) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO PlayerDAO = new PlayerDAO(connection);
-            player = PlayerDAO.insertUserName(pForm.email,pForm.userName, pForm.password);
+            player = PlayerDAO.insertUserName(pForm.email,pForm.userName, pForm.password,pForm.firebaseId);
             System.out.println(player);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        if (player == null) {
-            throw new NotFoundException("Player already exists");
-        }
-        return player;
+        return new ResponseEntity<>(player,HttpStatus.OK);
     }
 
     @PostMapping("/updatePlayer")
-    public Player create(@RequestBody Player p) {
+    public ResponseEntity<Player> create(@RequestBody Player p, @RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
+        if (!Authenticate.getFirebaseId(idToken).equals(p.getFirebaseId()))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Player player = new Player();
@@ -119,32 +133,33 @@ public class Controllers {
         catch(SQLException e) {
             e.printStackTrace();
         }
-        return player;
+        return new ResponseEntity<>(player, HttpStatus.OK);
     }
     
     @DeleteMapping("/deletePlayerById/{id}")
-    public Player deletePlayerById(@PathVariable long id) {
+    public ResponseEntity<Player> deletePlayerById(@PathVariable long id, @RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
+
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Player player = null;
         try {
             Connection connection = dcm.getConnection();
             PlayerDAO playerDAO = new PlayerDAO(connection);
-
+            player = playerDAO.findById(id);
+            if (!Authenticate.getFirebaseId(idToken).equals(player.getFirebaseId()))
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             player = playerDAO.deleteById(id);
             System.out.println(player);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if (player == null) {
-            throw new NotFoundException("Player not found");
-        }
-        return player;
+        return new ResponseEntity<>(player,HttpStatus.OK);
     }
 
     @GetMapping("/getGameById/{id}")
-    public Game getGameById(@PathVariable long id) {
+    public ResponseEntity<Game> getGameById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
         Game g = null;
@@ -153,12 +168,14 @@ public class Controllers {
             GameDAO gameDAO = new GameDAO(connection);
 
             g = gameDAO.findById(id);
+            if (g.getId() == 0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             System.out.println(g);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return g;
+        return new ResponseEntity<>(g,HttpStatus.OK);
     }
 
     @GetMapping("/getGameByPlayerId/{id}")
@@ -197,16 +214,16 @@ public class Controllers {
         return g;
     }
 
-    @PostMapping(value = "/insertGame")
-    public Game insertGame(@RequestBody GameForm message) {
+    @GetMapping("/getOngoingGames/{id}")
+    public List<Game> getOngoingGames(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        Game g = null;
+        List<Game> g = new ArrayList<>();
         try {
             Connection connection = dcm.getConnection();
             GameDAO gameDAO = new GameDAO(connection);
-            System.out.println(message.p1);
-            g = gameDAO.insertGame(message.p1, message.p2);
+
+            g = gameDAO.getOngoingGames(id);
             System.out.println(g);
         }
         catch(SQLException e) {
@@ -215,29 +232,33 @@ public class Controllers {
         return g;
     }
 
-    @PostMapping("/updateHands")
-    public GameRound create(@RequestBody GameRound g) {
+    @PostMapping(value = "/insertGame")
+    public ResponseEntity<Game> insertGame(@RequestBody GameForm message,@RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
+        if (!Authenticate.validate(idToken))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound gameRound = new GameRound();
+        Game g = null;
         try {
-            Connection connection = dcm.getConnection();
-            GameRoundDAO GameRoundDAO = new GameRoundDAO(connection);
 
-            g = GameRoundDAO.updateHands(g);
+            Connection connection = dcm.getConnection();
+            GameDAO gameDAO = new GameDAO(connection);
+            System.out.println(message.p1);
+            g = gameDAO.insertGame(message.p1, message.p2);
             System.out.println(g);
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return gameRound;
+        return new ResponseEntity(g,HttpStatus.OK);
     }
 
     @GetMapping(value = "/getGameRoundById/{id}")
     public GameRound getGameRoundById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound g=null;
+        GameRound g=new GameRound();
         try {
             Connection connection = dcm.getConnection();
             GameRoundDAO gameDAO = new GameRoundDAO(connection);
@@ -250,62 +271,24 @@ public class Controllers {
         }
         return g;
     }
-    //long gameId, int roundNumber, String playerturn, String playerChoice, String target, int amount, int p1Hand1, int p1Hand2, int p2hand1, int p2Hand2
-    @PostMapping(value = "/insertGameRound")
-    public GameRound insertGameRound(@RequestBody GameRound message) {
+    @GetMapping(value = "/getGameRoundsById/{id}")
+    public List<GameRound> getGameRoundsById(@PathVariable long id) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
-        GameRound g=null;
+        List<GameRound> g = new ArrayList<>();
         try {
             Connection connection = dcm.getConnection();
             GameRoundDAO gameDAO = new GameRoundDAO(connection);
-            if (GameLogic.isValidMove(message)) {
-                g = gameDAO.insertGameRound(message.getGameId(),
-                        message.getRoundNumber(),
-                        message.getPlayerTurn(),
-                        message.getPlayerChoice(),
-                        message.getPlayerHandUsed(),
-                        message.getTarget(),
-                        message.getAmount(),
-                        message.getP1Hand1(),
-                        message.getP1Hand2(),
-                        message.getP2Hand1(),
-                        message.getP2Hand2());
-            }
-            int a = GameLogic.winner(message);
-            if (a > 0) {
-                Game game = null;
-                GameDAO gDAO = new GameDAO(connection);
-                PlayerDAO pDao = new PlayerDAO(connection);
-                game = gDAO.findById(g.getGameId());
-                System.out.println(game);
-                game.setWinner(a == 1 ? game.getPlayerOneId() : game.getPlayerTwoId());
-                System.out.println("Winner: "+ game.getWinner());
-                gDAO.updateWinner(game.getGameId(),game.getWinner());
-                Player p = pDao.findById(game.getWinner());
-                Player l = pDao.findById(a == 1 ? game.getPlayerTwoId() : game.getPlayerOneId());
-                p.setTotalGames(p.getTotalGames()+1);
-                p.setTotalWins(p.getTotalWins()+1);
-                l.setTotalGames(p.getTotalGames()+1);
-                l.setTotalLosses(p.getTotalLosses()+1);
-                long[] ans = GameLogic.getElo(p.getPlayerElo(),l.getPlayerElo());
-                System.out.println(ans);
-                System.out.println(ans[0]);
-                System.out.println(ans[1]);
-                p.setPlayerElo((int)ans[0]);
-                l.setPlayerElo((int)ans[1]);
-                pDao.updateStats(p);
-                pDao.updateStats(l);
-            }
-            System.out.println(g);
 
+            g = gameDAO.getAllRounds(id);
+            System.out.println(g.size());
         }
         catch(SQLException e) {
             e.printStackTrace();
-
         }
         return g;
     }
+    //long gameId, int roundNumber, String playerturn, String playerChoice, String target, int amount, int p1Hand1, int p1Hand2, int p2hand1, int p2Hand2
 
     @PostMapping(value = "/getValidMoves")
     public List<List<Integer>> getValidMoves(@RequestBody GameRound g) {
@@ -332,9 +315,11 @@ public class Controllers {
         return l;
     }
     @PostMapping(value = "/insertLeaderboard")
-    public Leaderboard insertLeaderboard(@RequestBody Leaderboard message) {
+    public ResponseEntity<Leaderboard> insertLeaderboard(@RequestBody Leaderboard message, @RequestHeader(HttpHeaders.AUTHORIZATION) String idToken) {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("db",
                 "chopsticks", "postgres", "password");
+        if (!Authenticate.validate(idToken))
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         Leaderboard g=null;
         try {
             Connection connection = dcm.getConnection();
@@ -350,7 +335,8 @@ public class Controllers {
         }
         catch(SQLException e) {
             e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        return g;
+        return new ResponseEntity(g,HttpStatus.OK);
     }
 }

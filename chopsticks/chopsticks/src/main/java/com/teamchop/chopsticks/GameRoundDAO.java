@@ -1,11 +1,15 @@
 package com.teamchop.chopsticks;
 
 import com.teamchop.chopsticks.util.DataAccessObject;
+import com.teamchop.chopsticks.util.DataTransferObject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameRoundDAO extends DataAccessObject{
 
     public GameRoundDAO(Connection connection) {
@@ -51,6 +55,7 @@ public class GameRoundDAO extends DataAccessObject{
         }
         return gameRound;
     }
+
     public GameRound findById(long id) {
         GameRound gameRound = new GameRound();
         System.out.println(GET_ONE_BY_ID);
@@ -74,6 +79,32 @@ public class GameRoundDAO extends DataAccessObject{
             throw new RuntimeException(e);
         }
         return gameRound;
+    }
+    public List<GameRound> getAllRounds(long id) {
+        List<GameRound> rounds = new ArrayList<>();
+        System.out.println(GET_ONE_BY_ID);
+        try(PreparedStatement statement = this.connection.prepareStatement(GET_ONE_BY_ID);) {
+            statement.setLong(1, id);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GameRound gameRound = new GameRound();
+                gameRound.setGameId(rs.getLong("game_id"));
+                gameRound.setRoundNumber(rs.getInt("round_number"));
+                gameRound.setPlayerTurn(rs.getString("turn_player_name"));
+                gameRound.setPlayerChoice(rs.getString("player_choice"));
+                gameRound.setTarget(rs.getString("player_target"));
+                gameRound.setAmount(rs.getInt("player_action_amount"));
+                gameRound.setP1Hand1(rs.getInt("p1_hand1"));
+                gameRound.setP1Hand2(rs.getInt("p1_hand2"));
+                gameRound.setP2Hand1(rs.getInt("p2_hand1"));
+                gameRound.setP2Hand2(rs.getInt("p2_hand2"));
+                rounds.add(gameRound);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return rounds;
     }
 
     public GameRound insertGameRound(long gameId, int roundNumber, String playerTurn, String playerChoice, String playerHandUsed, String target, int amount, int p1Hand1, int p1Hand2, int p2Hand1, int p2Hand2) {
