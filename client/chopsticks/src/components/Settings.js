@@ -17,7 +17,7 @@ function Settings() {
     const createHandler = async () => {
         //if url = /settings then use my own session id
         if (!id) id = sessionStorage.getItem("id");
-        const res = await axios.get(`http://localhost:8080/getPlayerById/${id}`,{headers:
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayerById/${id}`,{headers:
         {"Authorization":`Bearer ${sessionStorage.getItem("idToken")}`}});
         console.log(res);
         setData(res.data);

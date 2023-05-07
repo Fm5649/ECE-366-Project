@@ -14,7 +14,7 @@ function Home() {
         // gameid is automatically created by sql code
         // p1 id is stored as player 1
         // p2 is null as waiting for 2nd player
-        const res = await axios.post("http://localhost:8080/insertGame",{p1:sessionStorage.getItem("id"),p2:null},{headers:
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/insertGame`,{p1:sessionStorage.getItem("id"),p2:null},{headers:
         {"Authorization":`Bearer ${sessionStorage.getItem("idToken")}`}});
         console.log(res);
         // navigate to new page dedicated to gameID
@@ -23,7 +23,7 @@ function Home() {
     //startup get call to get all ongoing games (including games without opponent)
     useEffect(()=>{
         const f = async () => {
-            const res = await axios.get(`http://localhost:8080/getOngoingGames/${sessionStorage.getItem("id")}`)
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getOngoingGames/${sessionStorage.getItem("id")}`)
             console.log(res);
             const l = res.data.filter((o) => o.winner > 0)
             setGames(l);

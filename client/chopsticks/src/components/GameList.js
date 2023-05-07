@@ -17,7 +17,7 @@ function GameList() {
         if (!a) return;
         const f = async() => {
             // obtains a list of the available games to display
-            const res = await axios.get(`http://localhost:8080/getAvailableGames/${a}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getAvailableGames/${a}`);
             console.log(res)
             setGames(res.data);
         }

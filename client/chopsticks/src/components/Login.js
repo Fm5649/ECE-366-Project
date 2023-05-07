@@ -30,7 +30,7 @@ function Login() {
             sessionStorage.setItem("username",username);
             const token = await auth.currentUser.getIdToken();
             sessionStorage.setItem("idToken",token);
-            const res = await axios.get(`http://localhost:8080/getPlayerByName/${username}`,{headers: {
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayerByName/${username}`,{headers: {
                 "Access-Control-Allow-Origin":
                     "*",
                     "Authorization":`Bearer ${token}`
