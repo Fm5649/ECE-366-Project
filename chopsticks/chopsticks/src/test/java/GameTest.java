@@ -25,27 +25,27 @@ public class GameTest {
   @Test
     @DisplayName("Get Player One ID successfully")
     public void testGetPlayerOneId() {
-        assertEquals(10, game.getPlayerOneId());
+        assertEquals(12, game.getPlayerOneId());
     }
     @Test
     @DisplayName("Get Player Two ID successfully")
     public void testGetPlayerTwoId() {
-        assertEquals(10, game.getPlayerTwoId());
+        assertEquals(24, game.getPlayerTwoId());
     }
     @Test
     @DisplayName("Get Winner ID successfully")
     public void testGetWinner() {
-        assertEquals(10, game.getWinner());
+        assertEquals(12, game.getWinner());
     }
     @Test
     @DisplayName("Get Player One username successfully")
     public void testGetPlayerOneName() {
-        assertEquals(10, game.getPlayerOneName());
+        assertEquals("player1", game.getPlayerOneName());
     }
     @Test
     @DisplayName("Get Player Two username successfully")
     public void testGetPlayerTwoName() {
-        assertEquals(10, game.getPlayerTwoName());
+        assertEquals("secondMan", game.getPlayerTwoName());
     }
 }
 
