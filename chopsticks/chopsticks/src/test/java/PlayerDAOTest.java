@@ -1,12 +1,24 @@
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Duration;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+@ExtendWith(MockitoExtension.class)
 @DisplayName("Test PlayerDAO class")
-public class PlayerDAOTest {
+public class PlayerDAOMockitoTest {
+  
+  @Mock
+  PlayerDAO playerDAO
+    
+  @BeforeEach
+  public void setupMocks() {
+        Mockito.when().thenReturn();
+    }  
+  
   @Test
     @DisplayName("Create Player successfully")
     public void testWithdraw() {
