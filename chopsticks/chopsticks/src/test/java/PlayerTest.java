@@ -1,24 +1,33 @@
+import com.teamchop.chopsticks.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(SpringExtension.class)
 @DisplayName("Test Player class")
 public class PlayerTest {
-  @BeforeAll
-  Player player;
-  player.setPlayerId(100);
-  player.setPlayerEmail("testing@cooper.edu");
-  player.setPlayerName("tester");
-  player.setPassword("testing");
-  player.setTotalGames(10);
-  player.setTotalWins(7);
-  player.setTotalLosses(3);
-  player.setPlayerELO(1000);
-  
+
+  private Player player;
+
+  @BeforeEach
+  void setup() {
+    player = new Player();
+    player.setPlayerId(100);
+    player.setPlayerEmail("testing@cooper.edu");
+    player.setPlayerName("tester");
+    player.setPassword("testing");
+    player.setTotalGames(10);
+    player.setTotalWins(7);
+    player.setTotalLosses(3);
+    player.setPlayerElo(1000);
+  }
+
   @Test
     @DisplayName("Get ID successfully")
     public void testGetPlayerId() {
