@@ -17,6 +17,7 @@ CREATE TABLE player (
   player_elo int DEFAULT 1000,  --elo of player
   achievement_first_win int DEFAULT 0,  --variable for achievement of winning one game
   achievement_first_game int DEFAULT 0,   --variable for achievement of playing one game
+  player_firebase_id varchar,
   PRIMARY KEY (player_id)
 );
 
