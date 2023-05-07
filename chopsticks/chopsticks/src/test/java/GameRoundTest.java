@@ -1,24 +1,25 @@
-/*
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(MockitoExtension.class)
-@DisplayName("Test PlayerDAO class")
-public class PlayerDAOMockitoTest {
-  
-  @Mock
-  PlayerDAO playerDAO
+@DisplayName("Test GameRound class")
+public class GameRoundTest {
     
-  @BeforeEach
-  public void setupMocks() {
-        Mockito.when().thenReturn();
-    }  
+  @BeforeAll
+  GameRound gameRound;  
+  gameRound.setGameId(15);
+  gameRound.setRoundNumber(4);
+  gameRound.setPlayerTurn("player1");
+  gameRound.setPlayerChoice("Attack"); 
+  gameRound.setPlayerHandUsed("left");
+  gameRound.setTarget("right");
+  gameRound.setAmount(3);
+  gameRound.setP1Hand1(3);
+  gameRound.setP1Hand2(2);
+  gameRound.setP2Hand1(1);
+  gameRound.setP2Hand2(4);
   
   @Test
     @DisplayName("Create Player successfully")
@@ -28,4 +29,4 @@ public class PlayerDAOMockitoTest {
         assertEquals(200, bankAccount.getBalance());
     }
 }
-*/
+
