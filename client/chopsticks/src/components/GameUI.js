@@ -317,7 +317,7 @@ function GameUI() {
     // interface to communicate over web socket server
     // allows for real time data / messages to be sent btwn server and client
     // without the need for http requests/responses
-    <><SockJsClient url='${process.env.REACT_APP_BACKEND_URL}/ws-message' topics={['/topics/join','/topics/insert']}
+    <><SockJsClient url={`${process.env.REACT_APP_BACKEND_URL}/ws-message`} topics={['/topics/join','/topics/insert']}
     onMessage={(msg) => { console.log(msg); handleMessage(msg);}}
     ref={ (client) => { clientRef.current = client; }}
     onConnect={joinHandler}
