@@ -6,14 +6,17 @@ import { Button } from '@mui/material';
 function Landing() {
     const navigate = useNavigate();
 
+    // navigate to login on buttonpress
     function navigateLogin() {
         navigate("/login")
     }   
 
+    // navigate to register on buttonpress
     function navigateRegister() {
         navigate("/register")
     }
 
+    // basic welcome page with login/register
     return (
         <div style={styles.wrapper}>
             <div style={styles.centerContainer}>

@@ -21,6 +21,7 @@ public class GameRound implements DataTransferObject {
     }
     public void setIdToken(String s) {idToken = s;}
 
+    //Game id get and set
     public long getId()
     {
         return gameId;
@@ -34,6 +35,7 @@ public class GameRound implements DataTransferObject {
         this.gameId = gameId;
     }
 
+    //Round number get and set
     public int getRoundNumber() {
         return roundNumber;
     }
@@ -42,6 +44,7 @@ public class GameRound implements DataTransferObject {
         this.roundNumber = roundNumber;
     }
 
+    //Player turn get and set
     public String getPlayerTurn() {
         return playerTurn;
     }
@@ -50,6 +53,7 @@ public class GameRound implements DataTransferObject {
         this.playerTurn = playerTurn;
     }
 
+    //Player choice get and set
     public String getPlayerChoice() {
         return playerChoice;
     }
@@ -58,6 +62,7 @@ public class GameRound implements DataTransferObject {
         this.playerChoice = playerChoice;
     }
 
+    //Player hand use get and set
     public String getPlayerHandUsed() {
         return playerHandUsed;
     }
@@ -66,6 +71,7 @@ public class GameRound implements DataTransferObject {
         this.playerHandUsed = playerHandUsed;
     }
 
+    //Target of action get and set
     public String getTarget() {
         return target;
     }
@@ -74,6 +80,7 @@ public class GameRound implements DataTransferObject {
         this.target = target;
     }
 
+    //Action amount get and set
     public int getAmount() {
         return amount;
     }
@@ -82,6 +89,7 @@ public class GameRound implements DataTransferObject {
         this.amount = amount;
     }
 
+    //Value of Player1 Hand1 get and set
     public int getP1Hand1() {
         return p1Hand1;
     }
@@ -90,6 +98,7 @@ public class GameRound implements DataTransferObject {
         this.p1Hand1 = p1Hand1;
     }
 
+    //Value of player 1 hand 2 get and set
     public int getP1Hand2() {
         return p1Hand2;
     }
@@ -98,6 +107,7 @@ public class GameRound implements DataTransferObject {
         this.p1Hand2 = p1Hand2;
     }
 
+    //Value of player 2 hand 1 get and set
     public int getP2Hand1() {
         return p2Hand1;
     }
@@ -106,6 +116,7 @@ public class GameRound implements DataTransferObject {
         this.p2Hand1 = p2Hand1;
     }
 
+    //Value of player 2 hand 2 get and set
     public int getP2Hand2() {
         return p2Hand2;
     }

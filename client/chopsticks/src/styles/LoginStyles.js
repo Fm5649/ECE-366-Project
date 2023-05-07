@@ -1,3 +1,5 @@
+// File containing the styles of UI for login page
+
 const LoginStyles = {
     wrapper: {
         display: 'grid',
@@ -20,7 +22,7 @@ const LoginStyles = {
     usernameTextfield: {
         marginTop: '10px',
     },
-    emailTextField: {
+    emailTextfield: {
         marginTop: '10px',
     },
     passwordTextfield: {

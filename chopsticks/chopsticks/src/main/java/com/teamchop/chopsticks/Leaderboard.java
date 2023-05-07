@@ -16,6 +16,7 @@ public class Leaderboard implements DataTransferObject {
     }
     public void setIdToken(String s) {idToken = s;}
 
+    //Id of entry get and set
     public long getId() {
         return userId;
     }
@@ -28,6 +29,7 @@ public class Leaderboard implements DataTransferObject {
         this.userId = userId;
     }
 
+    //Player rank get and set
     public int getRank() {
         return rank;
     }
@@ -36,6 +38,7 @@ public class Leaderboard implements DataTransferObject {
         this.rank = rank;
     }
 
+    //Player username get and set
     public String getUsername() {
         return username;
     }
@@ -44,6 +47,7 @@ public class Leaderboard implements DataTransferObject {
         this.username = username;
     }
 
+    //Player wins get and set
     public int getWins() {
         return wins;
     }
@@ -52,6 +56,7 @@ public class Leaderboard implements DataTransferObject {
         this.wins = wins;
     }
 
+    //Player losses get and set
     public int getLosses() {
         return losses;
     }
@@ -60,6 +65,7 @@ public class Leaderboard implements DataTransferObject {
         this.losses = losses;
     }
 
+    //Player total games get and set
     public int getTotalGames() {
         return totalGames;
     }
@@ -68,6 +74,7 @@ public class Leaderboard implements DataTransferObject {
         this.totalGames = totalGames;
     }
 
+    //Player ELO get and set
     public int getElo() {
         return elo;
     }

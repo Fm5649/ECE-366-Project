@@ -1,3 +1,5 @@
+// File containing the styles of UI for Home page
+
 const HomeStyles = {
     wrapper: {
         display: 'grid',

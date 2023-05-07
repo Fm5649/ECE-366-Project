@@ -10,18 +10,23 @@ import HomeIcon from '@mui/icons-material/Home';
 function SideBar() {
     const navigate = useNavigate();
 
+    // navigates to profile/settings on button press
     function navigateSettings() {
         navigate("/settings");
     }
 
+    // navigates to leadboards on button press
     function navigateLeaderboards() {
         navigate("/leaderboards");
     }
 
+    // navigates to landing page (login/register) on button press
+    // essentially signs out
     function navigateLanding() {
         navigate("/")
     }
 
+    // sidebar with settings/leaderboards/landing page button
     return (
         <div style={styles.wrapper}>
             <IconButton onClick={()=>{navigate("/home")}} style={styles.settingsButton}>

@@ -1,3 +1,5 @@
+// File containing the styles of UI for settings/profile page
+
 const SettingsStyles = {
     wrapper: {
         display: 'grid',
