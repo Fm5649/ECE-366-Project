@@ -32,7 +32,7 @@ function Register() {
             // insert player into database
             axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password,email:email},{headers: {
                     "Access-Control-Allow-Origin":
-                      "*",
+                      "*"
                   },}).then((res) => {alert ('user created'); console.log(res);
                   auth.currentUser.getIdToken(true).then((str) =>{
                     sessionStorage.setItem("idToken",str);

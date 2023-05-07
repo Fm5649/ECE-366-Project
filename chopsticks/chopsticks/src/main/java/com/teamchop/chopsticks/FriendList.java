@@ -6,6 +6,12 @@ public class FriendList implements DataTransferObject
 {
   private long userId;
   private String username;
+  private String idToken;
+  public String getIdToken() {
+      return idToken;
+  }
+  public void setIdToken(String s) {idToken = s;}
+
 
   public long getId()
     {

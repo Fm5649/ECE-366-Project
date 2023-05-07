@@ -81,9 +81,9 @@ public class GameLogic {
     public static int  winner(GameRound g) {
         int a=0;
         if (g.getP2Hand1()==0 && g.getP2Hand2()==0) {
-            a=2;
+            a=1;
         } else if (g.getP1Hand1()==0 && g.getP1Hand2()==0) {
-            a = 1;
+            a = 2;
         }
         return a;
     }

@@ -33,6 +33,7 @@ function Login() {
             const res = await axios.get(`http://localhost:8080/getPlayerByName/${username}`,{headers: {
                 "Access-Control-Allow-Origin":
                     "*",
+                    "Authorization":`Bearer ${token}`
                 }});
             console.log(res);
             // stores the id of the current session user

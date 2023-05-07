@@ -4,9 +4,11 @@ import styles from '../styles/HomeStyles'
 import React, { useState } from 'react';
 import { useEffect} from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function Leaderboards() {
     const [players, setPlayers] = useState([]);
+    const navigate = useNavigate();
 
     // Asynchronous function to fetch all player data from database
     // Inserts this data into players array
@@ -52,7 +54,8 @@ function Leaderboards() {
                 {sortedPlayers.map((player, index) => (
                     <div className="leaderboard-row" key={player.playerId}>
                     <div className="leaderboard-rank">{index + 1}</div>
-                    <div className="leaderboard-player">{player.playerName}</div>
+                    {/*clicking on the names allows looking at the profile of other players*/}
+                    <div className="leaderboard-player" onClick={()=>navigate(`/settings/${player.playerId}`)}>{player.playerName}</div>
                     <div className="leaderboard-elo">{player.playerElo}</div>
                     </div>
                 ))}

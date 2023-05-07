@@ -10,9 +10,16 @@ public class Game implements DataTransferObject
     private long p2Id;
     private long winner;
 
+    private String idToken;
+
     private String p1Name;
 
     private String p2Name;
+
+    public String getIdToken() {
+        return idToken;
+    }
+    public void setIdToken(String s) {idToken = s;}
 
     //GameId get and set
     public long getId()

@@ -14,6 +14,12 @@ public class GameRound implements DataTransferObject {
     private int p1Hand2;
     private int p2Hand1;
     private int p2Hand2;
+    private String idToken;
+
+    public String getIdToken() {
+        return idToken;
+    }
+    public void setIdToken(String s) {idToken = s;}
 
     //Game id get and set
     public long getId()

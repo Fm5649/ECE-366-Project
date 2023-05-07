@@ -21,7 +21,7 @@ public class PlayerDAO extends DataAccessObject {
     private static final String UPDATE_STATS = "UPDATE player SET (total_games, total_wins, total_losses, player_elo)" +
             " = (?, ?, ?, ?) WHERE player_id=? RETURNING *";
 
-    private static final String INSERT_PLAYER = "INSERT INTO player (player_email, player_name, password) VALUES (?,?,?)" +
+    private static final String INSERT_PLAYER = "INSERT INTO player (player_email, player_name, password, player_firebase_id) VALUES (?,?,?,?)" +
             "RETURNING *";
     
     private static final String DELETE_BY_ID = "DELETE FROM player WHERE player_id=? RETURNING *";
@@ -40,7 +40,7 @@ public class PlayerDAO extends DataAccessObject {
                 player.setPlayerId(rs.getLong("player_id"));
                 player.setPlayerEmail(rs.getString("player_email"));
                 player.setPlayerName(rs.getString("player_name"));
-                player.setPassword(rs.getString("password"));
+                player.setPassword("");
                 player.setTotalGames(rs.getInt("total_games"));
                 player.setTotalWins(rs.getInt("total_wins"));
                 player.setTotalLosses(rs.getInt("total_losses"));
@@ -109,13 +109,14 @@ public class PlayerDAO extends DataAccessObject {
         return user;
     }
 
-    public Player insertUserName(String email, String userName, String password) {
+    public Player insertUserName(String email, String userName, String password, String firebaseId) {
         Player user = null;
         System.out.println(INSERT_PLAYER);
         try(PreparedStatement statement = this.connection.prepareStatement(INSERT_PLAYER);) {
             statement.setString(1, email);
             statement.setString(2, userName);
             statement.setString(3, password);
+            statement.setString(4,firebaseId);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 user = new Player();
@@ -127,6 +128,7 @@ public class PlayerDAO extends DataAccessObject {
                 user.setTotalWins(rs.getInt("total_wins"));
                 user.setTotalLosses(rs.getInt("total_losses"));
                 user.setPlayerElo(rs.getInt("player_elo"));
+                user.setFirebaseId(rs.getString("player_firebase_id"));
                 user.setAchievementFirstWin(rs.getInt("achievement_first_win"));
                 user.setAchievementFirstGame(rs.getInt("achievement_first_game"));
             }
