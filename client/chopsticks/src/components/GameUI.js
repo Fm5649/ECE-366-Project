@@ -83,6 +83,7 @@ function GameUI() {
           }});
           let {playerName} = res.data;
           gameinfo.playerOneName = playerName.slice();
+          //if waiting for 2nd player to join don't add second player information
           if (playerTwoId){
           res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayerById/${playerTwoId}`,{
             headers:{
@@ -100,6 +101,7 @@ function GameUI() {
           setGameinfo({...gameinfo});
           console.log(gameinfo)
           const myid = parseInt(sessionStorage.getItem("id"));
+          //if i'm the player joining the game, then send a join message through websocket
           if (gameId == id && myid != playerOneId && !playerTwoId) {
             clientRef.current.sendMessage('/ws-api/join',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
           } else if (gameId == id && (myid == playerOneId && playerTwoId != 0) || myid == playerTwoId) {
@@ -110,6 +112,7 @@ function GameUI() {
 
           } else if (gameId == id && winner > 0)
           {
+            //if the game is finished, mark it as finished to trigger the useEffect dependent on finished
             console.log(gameId,winner);
             setFinished(true);
           }
@@ -122,7 +125,7 @@ function GameUI() {
     const {roundNumber} = msg; // obtain round number
     console.log(msg,roundNumber);
 
-    if (roundNumber !== undefined && msg.gameId != 0) { // check for if game is ongoing
+    if (roundNumber !== undefined && msg.gameId == id) { // check for if game is ongoing
       const myid = parseInt(sessionStorage.getItem("id")); // current session user ID
       console.log(waiting,isMyTurn,gameinfo,gameinfo.playerOneId)
 
@@ -150,9 +153,11 @@ function GameUI() {
         }
         gameinfo.roundNumber = roundNumber;
         setGameinfo({...gameinfo});
+      //roundNumber being undefined means it is a join message, not an insert message
       } else if (roundNumber == undefined){
         const {playerOneId} = msg;
         gameinfo.playerTwoId=msg.playerTwoId;
+        gameinfo.playerTwoName = msg.playerTwoName;
         setGameinfo({...gameinfo});
         if (playerOneId == parseInt(sessionStorage.getItem("id"))) {
           const roundInit = {
@@ -180,37 +185,7 @@ function GameUI() {
     setConnected(true);
   }
 
-    // when connected is changed (through joinHandler), effect is used
-  useEffect(() => {
-    if(!connected) return;
-    const f = async () => {
-      // request to backend to obtain the gameID and set to the current one being played (game, p1, p2)
-      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameById/${id}`);
-      const {playerOneId, playerTwoId, gameId, winnerId} = res.data;
-      gameinfo.playerOneId = playerOneId;
-      gameinfo.playerTwoId=playerTwoId;
-      gameinfo.gameId = gameId;
-      gameinfo.winnerId = winnerId;
-      setGameinfo({...gameinfo});
-      console.log(gameinfo)
 
-      // checks for valid game
-      const myid = parseInt(sessionStorage.getItem("id"));
-      if (gameId == id && myid != playerOneId && playerTwoId == 0) {
-        clientRef.current.sendMessage('/ws-api/join',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
-      } else if (gameId == id && (myid == playerOneId && playerTwoId != 0) || myid == playerTwoId) {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameRoundById/${id}`);
-        console.log(res);
-        setWaiting(false);
-        handleMessage(res.data);
-      } else if (gameId == id && myid == playerOneId && playerTwoId == 0)
-      {} else {
-        alert('illegal game link');
-        navigate('/home');
-      }
-    }
-    f();
-  },[connected])
     
   
   
@@ -278,8 +253,8 @@ function GameUI() {
         alert('invalid number of fingers to transfer.');
         return;
       }
-      setPlayerRight(playerRight + transferAmount);
-      setPlayerLeft(playerLeft - transferAmount);
+      setPlayerRight((playerRight + transferAmount)%5);
+      setPlayerLeft((playerLeft - transferAmount)%5);
       pr += transferAmount;
       pl -= transferAmount;
     }
