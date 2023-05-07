@@ -36,11 +36,23 @@ public class WebSocketControllers {
             if (a > 0) {
                 Game game = null;
                 GameDAO gDAO = new GameDAO(connection);
+                PlayerDAO pDao = new PlayerDAO(connection);
                 game = gDAO.findById(g.getGameId());
                 System.out.println(game);
                 game.setWinner(a == 1 ? game.getPlayerOneId() : game.getPlayerTwoId());
                 System.out.println("Winner: "+ game.getWinner());
                 gDAO.updateWinner(game.getGameId(),game.getWinner());
+                Player p = pDao.findById(game.getWinner());
+                Player l = pDao.findById(a == 1 ? game.getPlayerTwoId() : game.getPlayerOneId());
+                p.setTotalGames(p.getTotalGames()+1);
+                p.setTotalWins(p.getTotalWins()+1);
+                l.setTotalGames(l.getTotalGames()+1);
+                l.setTotalLosses(l.getTotalLosses()+1);
+                long[] ans = GameLogic.getElo(p.getPlayerElo(),l.getPlayerElo());
+                p.setPlayerElo((int)ans[0]);
+                l.setPlayerElo((int)ans[1]);
+                pDao.updateStats(p);
+                pDao.updateStats(l);
             }
             System.out.println(g);
 

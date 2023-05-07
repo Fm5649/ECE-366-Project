@@ -20,6 +20,7 @@ public class FriendListDAO extends DataAccessObject{
             "friend_list (friendlist_player_id, friendlist_username) " +
             "VALUES (?, ?)";
 
+    //Get friend from friendlist
     public FriendList findById(long id) {
         FriendList friendlist = new FriendList();
         Leaderboard leaderboard = new Leaderboard();
@@ -38,7 +39,7 @@ public class FriendListDAO extends DataAccessObject{
         return friendlist;
     }
 
-
+    //Insert friend into friendlist
     public FriendList insertFriend(String username, long userId) {
         FriendList friendlist = new FriendList();
         System.out.println(INSERT_FRIEND);

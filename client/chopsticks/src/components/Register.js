@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
 
 import styles from '../styles/RegisterStyles'
 import { Button, TextField } from '@mui/material'
@@ -15,49 +15,41 @@ function Register() {
     const passwordRef = useRef(null);
 
     function handleRegister() {
+        // asign constants to user inputs
         const username = usernameRef?.current?.querySelector("input").value;
         const email = emailRef?.current?.querySelector("input").value;
         const password = passwordRef?.current?.querySelector("input").value;
 
+        // check for valid email and password
         if (emailValidation(email) === false || passwordValidation(password) === false) {
             alert('Invalid Email/password')
             return
         }
 
+        // creates user in firebase
         createUserWithEmailAndPassword(auth, email, password)
         .then(function() {
-            var user = auth.currentUser
-
-            var user_data = {
-                email : email,
-                username : username,
-            }
+            // insert player into database
             axios.post("http://localhost:8080/insertPlayer",{userName:username,password:password,email:email},{headers: {
                     "Access-Control-Allow-Origin":
                       "*",
                   },}).then((res) => {alert ('user created'); console.log(res);
                   auth.currentUser.getIdToken(true).then((str) =>{
                     sessionStorage.setItem("idToken",str);
+                    // store curren session user id
+                    sessionStorage.setItem("id",res.data.id);
                     sessionStorage.setItem("username",username);
+                    // navigate to home page if no errors
                     navigate("/home")} )});
         })
         .catch(function(error) { 
-            var error_code = error.code
             var error_message = error.message
 
             alert(error_message)
         })
-
-        /*if(username && password) {
-            // Call register controller function here. 
-            // If error:
-            //    -> do nothing or show error message.
-            // If success:
-            //    -> navigate to login page.
-            navigate("/login")
-        }*/
     }
 
+    // valid email check
     function emailValidation(email) {
         if (/^[^@]+@\w+(\.\w+)+\w$/.test(email) === true) {
             return true
@@ -66,6 +58,7 @@ function Register() {
         }
     }
 
+    // valid password check
     function passwordValidation(password) {
         if (password < 6) {
             return false
@@ -74,6 +67,7 @@ function Register() {
         }
     }
 
+    // display username, email and password input boxes
     return (
         <div style={styles.wrapper}>
             <div style={styles.centerContainer}>

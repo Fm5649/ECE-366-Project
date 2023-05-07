@@ -14,6 +14,7 @@ public class Player implements DataTransferObject {
     private int achievementFirstWin;
     private int achievementFirstGame;
 
+    //Player id get and set
     public long getId() {
         return playerId;
     }
@@ -25,6 +26,7 @@ public class Player implements DataTransferObject {
         this.playerId = playerId;
     }
     
+    //Player email get and set
     public String getPlayerEmail() {
         return playerEmail;
     }
@@ -33,6 +35,7 @@ public class Player implements DataTransferObject {
         this.playerEmail = playerEmail;
     }
 
+    //Username get and set
     public String getPlayerName() {
         return playerName;
     }
@@ -41,6 +44,7 @@ public class Player implements DataTransferObject {
         this.playerName = playerName;
     }
 
+    //Password get and set
     public String getPassword() {
         return password;
     }
@@ -49,6 +53,7 @@ public class Player implements DataTransferObject {
         this.password = password;
     }
 
+    //Total games get and set
     public int getTotalGames() {
         return totalGames;
     }
@@ -57,6 +62,7 @@ public class Player implements DataTransferObject {
         this.totalGames = totalGames;
     }
 
+    //Total wins get and set
     public int getTotalWins() {
         return totalWins;
     }
@@ -65,6 +71,7 @@ public class Player implements DataTransferObject {
         this.totalWins = totalWins;
     }
 
+    //Total losses get and set
     public int getTotalLosses() {
         return totalLosses;
     }
@@ -73,6 +80,7 @@ public class Player implements DataTransferObject {
         this.totalLosses = totalLosses;
     }
 
+    //ELO get and set
     public int getPlayerElo() {
         return playerElo;
     }
@@ -81,6 +89,7 @@ public class Player implements DataTransferObject {
         this.playerElo = playerElo;
     }
     
+    //Getting achievement for first win
     public int getAchievementFirstWin() {
         return achievementFirstWin;
     }
@@ -89,6 +98,7 @@ public class Player implements DataTransferObject {
         this.achievementFirstWin = achievementFirstWin;
     }
     
+    //Getting achievement for first game
     public int getAchievementFirstGame() {
         return achievementFirstGame;
     }

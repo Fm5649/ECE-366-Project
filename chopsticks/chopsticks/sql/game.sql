@@ -13,12 +13,12 @@ Variable for total points: 10 total
 CREATE SEQUENCE game_seq start with 1;
 
 CREATE TABLE game(
-  game_id bigint NOT NULL DEFAULT nextval('game_seq'),
-  p1_id bigint NOT NULL,
-  p2_id bigint DEFAULT NULL,
+  game_id bigint NOT NULL DEFAULT nextval('game_seq'),  --id of the game
+  p1_id bigint NOT NULL,  --id of player one
+  p2_id bigint DEFAULT NULL,  --id of player two
   --total_rounds int NOT NULL,
   --current_round int NOT NULL,
-  winner_id bigint DEFAULT NULL,
+  winner_id bigint DEFAULT NULL,  --id of the winner 
   PRIMARY KEY (game_id),
   FOREIGN KEY (p1_id) REFERENCES player(player_id) ON DELETE CASCADE,
   FOREIGN KEY (p2_id) REFERENCES player(player_id) ON DELETE CASCADE,

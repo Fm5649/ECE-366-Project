@@ -10,6 +10,10 @@ public class Game implements DataTransferObject
     private long p2Id;
     private long winner;
 
+    private String p1Name;
+
+    private String p2Name;
+
     //GameId get and set
     public long getId()
     {
@@ -52,6 +56,24 @@ public class Game implements DataTransferObject
     public void setWinner(long winner)
     {
         this.winner = winner;
+    }
+    
+    //Player one name get and set
+    public String getPlayerOneName()
+    {return p1Name;
+    }
+    public void setPlayerOneName(String p1Name)
+    {
+        this.p1Name = p1Name;
+    }
+
+    //Player two name get and set
+    public String getPlayerTwoName()
+    {return p2Name;
+    }
+    public void setPlayerTwoName(String p2Name)
+    {
+        this.p2Name = p2Name;
     }
 
     @Override
