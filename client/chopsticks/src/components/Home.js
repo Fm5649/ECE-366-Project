@@ -25,7 +25,8 @@ function Home() {
         const f = async () => {
             const res = await axios.get(`http://localhost:8080/getOngoingGames/${sessionStorage.getItem("id")}`)
             console.log(res);
-            setGames(res.data);
+            const l = res.data.filter((o) => o.winner > 0)
+            setGames(l);
         }
         f();
         },[])
@@ -48,7 +49,7 @@ function Home() {
                         Join
                     </Button>
                 </div>
-                <h6>Ongoing Games</h6> {/*list of all ongoing games*/}
+                {games.length > 0 ? <h6>Ongoing Games</h6> : <></>} {/*list of all ongoing games*/}
                 <div style={styles.buttonContainer}>
                     {games.map((o,i) => <Button variant="contained"
                     style={{...styles.startButton,marginBottom:'10px'}}
