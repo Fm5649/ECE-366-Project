@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 function Leaderboards() {
     const [connected,setConnected] = useState(false);
     const [players, setPlayers] = useState([]);
+   
     const [playerInfo, setPlayerInfo] = useState({
     playerId: null,
     playerName: null,
@@ -65,7 +66,7 @@ function Leaderboards() {
                 {sortedPlayers.map((player, index) => (
                     <div className="leaderboard-row" key={player.playerId}>
                     <div className="leaderboard-rank">{index + 1}</div>
-                    <div className="leaderboard-player">{player.playerName}</div>
+                    <div className="leaderboard-player" onClick={()=>navigate(`/settings/${player.playerId}`)}>{player.playerName}</div>
                     <div className="leaderboard-elo">{player.playerElo}</div>
                     </div>
                 ))}

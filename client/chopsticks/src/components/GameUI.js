@@ -4,7 +4,9 @@ import SockJsClient from "react-stomp";
 import { useNavigate } from 'react-router-dom';
 import { useRef, useEffect} from "react";
 import axios from "axios";
-
+import SideBar from './SideBar';
+import styles from '../styles/HomeStyles.js';
+import Finger from './Finger.js'
 import { auth } from '..';
 import { database } from '..';
 
@@ -19,30 +21,49 @@ function GameUI() {
   const [enemyRight, setEnemyRight] = useState(1);
   const [connected,setConnected] = useState(false);
   const [finished, setFinished] = useState(false);
+  const [history, setHistory] = useState([]);
   const [gameinfo, setGameinfo] = useState({
     playerOneId:null,
     playerTwoId:null,
     gameId:null,
     roundNumber:null,
-    winner:null
+    winner:null,
+    playerOneName:null,
+    playerTwoName:null,
+    winnerName:null
   });
+  const { id } = useParams();
+  useEffect(() => {
+    if (!finished) return;
+    const f = async () => {
+    const res = await axios.get(`http://localhost:8080/getGameRoundsById/${id}`)
+      console.log(res);
+      setHistory(res.data);
+  };
+    f();
+  },[finished])
   useEffect(() => {
     if (playerLeft == 0 && playerRight == 0) {
-    alert('you lost!');
+    //alert('you lost!');
+    setWaiting(true);
     clientRef.current.disconnect();
+    setFinished(true);
   }}, [playerLeft,playerRight])
   useEffect(() => {
     if (enemyLeft == 0 && enemyRight == 0) {
-    alert('you won!');
+    //alert('you won!');
+    setWaiting(true);
     clientRef.current.disconnect();
+    setFinished(true);
   }}, [enemyLeft,enemyRight])
   useEffect(() => {
-    if (gameinfo.winner !== null) {
+    if (gameinfo.winner) {
+      console.log(gameinfo.winner)
     setFinished(true)
   }}, [gameinfo])
   const navigate = useNavigate();
     const clientRef = useRef();
-    const { id } = useParams();
+    
     const joinHandler = () => {
         console.log(clientRef.current);
         setConnected(true);
@@ -50,16 +71,32 @@ function GameUI() {
     useEffect(() => {
         if(!connected) return;
         const f = async () => {
-          const res = await axios.get(`http://localhost:8080/getGameById/${id}`);
-          const {playerOneId, playerTwoId, gameId, winnerId} = res.data;
+          let res = await axios.get(`http://localhost:8080/getGameById/${id}`);
+          const {playerOneId, playerTwoId, gameId, winner} = res.data;
+          res = await axios.get(`http://localhost:8080/getPlayerById/${playerOneId}`,{
+            headers:{
+            "Authorization":`Bearer ${sessionStorage.getItem("idToken")}`
+          }});
+          let {playerName} = res.data;
+          gameinfo.playerOneName = playerName.slice();
+          if (playerTwoId){
+          res = await axios.get(`http://localhost:8080/getPlayerById/${playerTwoId}`,{
+            headers:{
+            "Authorization":`Bearer ${sessionStorage.getItem("idToken")}`
+          }});
+          ({playerName} = res.data);
+          gameinfo.playerTwoName = playerName;
+        }
           gameinfo.playerOneId = playerOneId;
           gameinfo.playerTwoId=playerTwoId;
           gameinfo.gameId = gameId;
-          gameinfo.winnerId = winnerId;
+          gameinfo.winner = winner;
+          if (winner == playerOneId) gameinfo.winnerName = gameinfo.playerOneName;
+          else if (winner == playerTwoId) gameinfo.winnerName = gameinfo.playerTwoName;
           setGameinfo({...gameinfo});
           console.log(gameinfo)
           const myid = parseInt(sessionStorage.getItem("id"));
-          if (gameId == id && myid != playerOneId && playerTwoId == 0) {
+          if (gameId == id && myid != playerOneId && !playerTwoId) {
             clientRef.current.sendMessage('/ws-api/join',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
           } else if (gameId == id && (myid == playerOneId && playerTwoId != 0) || myid == playerTwoId) {
             const res = await axios.get(`http://localhost:8080/getGameRoundById/${id}`);
@@ -67,10 +104,10 @@ function GameUI() {
             setWaiting(false);
             handleMessage(res.data);
 
-          } else if (gameId == id && myid == playerOneId && playerTwoId == 0)
-          {}else {
-            alert('illegal game link');
-            navigate('/home');
+          } else if (gameId == id && winner > 0)
+          {
+            console.log(gameId,winner);
+            setFinished(true);
           }
         }
         f();
@@ -79,7 +116,8 @@ function GameUI() {
     const handleMessage = async (msg) => {
       const {roundNumber} = msg;
       console.log(msg,roundNumber);
-      if (roundNumber !== undefined && msg.gameId != 0) {
+      if (msg.gameId != id) return;
+      if (roundNumber !== undefined && msg.gameId == id && id != 0) {
         const myid = parseInt(sessionStorage.getItem("id"));
         console.log(waiting,isMyTurn,gameinfo,gameinfo.playerOneId)
         if (roundNumber % 2 == 0 && myid == gameinfo.playerOneId) {
@@ -102,7 +140,7 @@ function GameUI() {
         }
         gameinfo.roundNumber = roundNumber;
         setGameinfo({...gameinfo});
-      } else {
+      } else if (roundNumber == undefined){
         const {playerOneId} = msg;
         gameinfo.playerTwoId=msg.playerTwoId;
         setGameinfo({...gameinfo});
@@ -171,8 +209,8 @@ function GameUI() {
         alert('invalid number of fingers to transfer.');
         return;
       }
-      setPlayerLeft(playerLeft + transferAmount);
-      setPlayerRight(playerRight - transferAmount);
+      setPlayerLeft((playerLeft + transferAmount) % 5);
+      setPlayerRight((playerRight - transferAmount) % 5);
       pl += transferAmount;
       pr -= transferAmount;
     }else if (action === "Transfer to Right"){
@@ -205,7 +243,11 @@ function GameUI() {
     console.log(roundInit);
     clientRef.current.sendMessage('/ws-api/insert',JSON.stringify(roundInit));
 }
-  
+  const disconnect = async () => {
+    if (id == gameinfo.gameId && ((playerLeft == 0 && playerRight == 0) || (enemyLeft == 0 && enemyRight == 0)) ) {
+      clientRef.current.sendMessage('/ws-api/forfeit',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
+    }
+  }
 
   return (
     <><SockJsClient url='http://localhost:8080/ws-message' topics={['/topics/join','/topics/insert']}
@@ -213,11 +255,15 @@ function GameUI() {
     ref={ (client) => { clientRef.current = client; }}
     onConnect={joinHandler}
      />
+     <div style={styles.wrappers}>
+      <div style={styles.sideBarContainer}>
+     <SideBar></SideBar></div>
+     {!finished ?
     <div className="GameUI">
       <h1>Enemy Hands</h1>
-      <span>Left Hand: {enemyLeft} Right Hand: {enemyRight}</span>
+      <span><Finger finger={enemyLeft} /> <Finger finger={enemyRight} /></span>
       <h1>Your Hands</h1>
-      <span>Left Hand: {playerLeft} Right Hand: {playerRight}</span>
+      <span><Finger finger={playerLeft} /> <Finger finger={playerRight} /></span>
       {!waiting && !finished ? <>
       <h1>Current action is {action}</h1>
       <button onClick={() => setAction("Attack Left")}>
@@ -254,8 +300,30 @@ function GameUI() {
         onClick={() => onChoice("Confirm")}>
         Confirm Choices
         </button></> : <h1>waiting...</h1>}
-        {finished ? <h1>Game Finished</h1> : <></>}
-    </div></>
+    </div> :  <>
+    <div style={styles.histContainer}>
+      <div style={styles.hist}>player 1: {gameinfo.playerOneName}</div>
+      <div style={styles.hist}>player 2: {gameinfo.playerTwoName}</div>
+      <div style={styles.hist}>winner: {gameinfo.winnerName}</div>
+    </div>
+    <div style={styles.histContainer}>
+      <div style={styles.hist}>round number</div>
+      <div style={styles.hist}>username</div>
+      <div style={styles.hist}>p1 left</div>
+      <div style={styles.hist}>p1 right</div>
+      <div style={styles.hist}>p2 left</div>
+      <div style={styles.hist}>p2 right</div>
+    </div>
+    {history.map((obj,i)=> <>
+      <div style={styles.histContainer}>
+      <div style={styles.hist}>{obj.roundNumber}</div>
+      <div style={styles.hist}>{obj.roundNumber % 2 == 0 ? gameinfo.playerOneName : gameinfo.playerTwoName}</div>
+      <div style={styles.hist}>{obj.p1Hand1}</div>
+      <div style={styles.hist}>{obj.p1Hand2}</div>
+      <div style={styles.hist}>{obj.p2Hand1}</div>
+      <div style={styles.hist}>{obj.p2Hand2}</div>
+      </div></>
+    )}</>}</div></>
   );
 }
 export default GameUI;

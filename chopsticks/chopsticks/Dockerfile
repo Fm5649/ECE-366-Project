@@ -8,5 +8,6 @@ RUN mvn -e package
 FROM eclipse-temurin:19-alpine
 COPY --from=build /project/target/chopsticks-0.0.1-SNAPSHOT-spring-boot.jar /app/chopsticks.jar
 ADD secret.json /app
+RUN ["ls"]
 ENTRYPOINT ["java","-jar","/app/chopsticks.jar"]
 

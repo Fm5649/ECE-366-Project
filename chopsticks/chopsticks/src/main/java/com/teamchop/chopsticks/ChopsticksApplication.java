@@ -21,8 +21,8 @@ import java.sql.Statement;
 @SpringBootApplication
 public class ChopsticksApplication {
 	public static void main(String[] args) throws IOException {
-		/**FileInputStream serviceAccount =
-				new FileInputStream("/secret.json");
+		FileInputStream serviceAccount =
+				new FileInputStream("./app/secret.json");
 
 		FirebaseOptions options = null;
 		try {
@@ -32,7 +32,7 @@ public class ChopsticksApplication {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		FirebaseApp.initializeApp(options);**/
+		FirebaseApp.initializeApp(options);
 		SpringApplication.run(ChopsticksApplication.class, args);
 	}
 

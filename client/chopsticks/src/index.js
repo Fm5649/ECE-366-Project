@@ -32,6 +32,7 @@ root.render(
             <Route path="/gamelist" element={<GameList/>}/>
             <Route path="/leaderboards" element={<Leaderboards/>}/>
             <Route path="/settings" element={<Settings/>}/>
+            <Route path="/settings/:id" element={<Settings/>}/>
         </Routes>
     </BrowserRouter>
 );

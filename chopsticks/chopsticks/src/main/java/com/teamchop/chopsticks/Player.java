@@ -13,10 +13,19 @@ public class Player implements DataTransferObject {
     private int playerElo;
     private int achievementFirstWin;
     private int achievementFirstGame;
+    private String firebaseId;
+    private String idToken;
+    public String getIdToken() {
+        return idToken;
+    }
+    public void setIdToken(String s) {idToken = s;}
 
     public long getId() {
         return playerId;
     }
+
+    public String getFirebaseId() {return firebaseId;}
+    public void setFirebaseId(String id) {firebaseId = id;}
 
     public long getPlayerId() {
         return playerId;

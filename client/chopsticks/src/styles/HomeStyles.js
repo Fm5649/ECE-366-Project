@@ -7,8 +7,16 @@ const HomeStyles = {
         height: '100vh',
         fontFamily: 'sans-serif',
     },
+    wrappers: {
+        display: 'grid',
+        gridTemplateRows: '100px',
+        gridTemplateColumns: '5% 95%',
+        width: '100vw',
+        height: '100vh',
+        fontFamily: 'sans-serif',
+    },
     sideBarContainer: {
-        gridRow: 'span 2',
+        gridRow: 'span',
         gridColumn: '1',
         borderRight: '2px solid black'
     },
@@ -26,6 +34,7 @@ const HomeStyles = {
         display: 'flex', 
         flexDirection: 'row',
         marginTop: '70px',
+        flexWrap:'wrap',
     },
     startButton: {
         fontSize: '1vw',
@@ -35,6 +44,16 @@ const HomeStyles = {
         fontSize: '1vw',
         marginLeft: '10px',
     },
+    histContainer: {
+        gridColumn:'2',
+        display:'flex',
+        flexDirection: 'row',
+        alignItems:'space-around'
+    },
+    hist: {
+        width:'10%',
+        padding:'10px'
+    }
 }   
 
 export default HomeStyles;
