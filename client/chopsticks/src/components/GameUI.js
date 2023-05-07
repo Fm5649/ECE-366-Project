@@ -162,6 +162,10 @@ function GameUI() {
         alert('invalid number of fingers to transfer.');
         return;
       }
+      if(playerRight + transferAmount === 5){
+        alert('cannot make transfer that leads to 5 fingers.');
+        return;
+      }
       setPlayerLeft(playerLeft - transferAmount);
       setPlayerRight(playerRight + transferAmount);
       pl = pl-transferAmount;
@@ -169,6 +173,10 @@ function GameUI() {
     }else if (action === "Transfer to Right"){
       if(transferAmount >= playerLeft) {
         alert('invalid number of fingers to transfer.');
+        return;
+      }
+      if(playerLeft + transferAmount === 5){
+        alert('cannot make transfer that leads to 5 fingers.');
         return;
       }
       setPlayerRight(playerRight - transferAmount);
