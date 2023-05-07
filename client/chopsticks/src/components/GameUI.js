@@ -39,7 +39,7 @@ function GameUI() {
   useEffect(() => {
     if (!finished) return;
     const f = async () => {
-    const res = await axios.get(`http://localhost:8080/getGameRoundsById/${id}`)
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameRoundsById/${id}`)
       console.log(res);
       setHistory(res.data);
   };
@@ -75,16 +75,16 @@ function GameUI() {
     useEffect(() => {
         if(!connected) return;
         const f = async () => {
-          let res = await axios.get(`http://localhost:8080/getGameById/${id}`);
+          let res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameById/${id}`);
           const {playerOneId, playerTwoId, gameId, winner} = res.data;
-          res = await axios.get(`http://localhost:8080/getPlayerById/${playerOneId}`,{
+          res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayerById/${playerOneId}`,{
             headers:{
             "Authorization":`Bearer ${sessionStorage.getItem("idToken")}`
           }});
           let {playerName} = res.data;
           gameinfo.playerOneName = playerName.slice();
           if (playerTwoId){
-          res = await axios.get(`http://localhost:8080/getPlayerById/${playerTwoId}`,{
+          res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayerById/${playerTwoId}`,{
             headers:{
             "Authorization":`Bearer ${sessionStorage.getItem("idToken")}`
           }});
@@ -103,7 +103,7 @@ function GameUI() {
           if (gameId == id && myid != playerOneId && !playerTwoId) {
             clientRef.current.sendMessage('/ws-api/join',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
           } else if (gameId == id && (myid == playerOneId && playerTwoId != 0) || myid == playerTwoId) {
-            const res = await axios.get(`http://localhost:8080/getGameRoundById/${id}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameRoundById/${id}`);
             console.log(res);
             setWaiting(false);
             handleMessage(res.data);
@@ -185,7 +185,7 @@ function GameUI() {
     if(!connected) return;
     const f = async () => {
       // request to backend to obtain the gameID and set to the current one being played (game, p1, p2)
-      const res = await axios.get(`http://localhost:8080/getGameById/${id}`);
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameById/${id}`);
       const {playerOneId, playerTwoId, gameId, winnerId} = res.data;
       gameinfo.playerOneId = playerOneId;
       gameinfo.playerTwoId=playerTwoId;
@@ -199,7 +199,7 @@ function GameUI() {
       if (gameId == id && myid != playerOneId && playerTwoId == 0) {
         clientRef.current.sendMessage('/ws-api/join',JSON.stringify({gameId:id, userId:sessionStorage.getItem("id")}));
       } else if (gameId == id && (myid == playerOneId && playerTwoId != 0) || myid == playerTwoId) {
-        const res = await axios.get(`http://localhost:8080/getGameRoundById/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getGameRoundById/${id}`);
         console.log(res);
         setWaiting(false);
         handleMessage(res.data);
@@ -317,7 +317,7 @@ function GameUI() {
     // interface to communicate over web socket server
     // allows for real time data / messages to be sent btwn server and client
     // without the need for http requests/responses
-    <><SockJsClient url='http://localhost:8080/ws-message' topics={['/topics/join','/topics/insert']}
+    <><SockJsClient url={`${process.env.REACT_APP_BACKEND_URL}/ws-message`} topics={['/topics/join','/topics/insert']}
     onMessage={(msg) => { console.log(msg); handleMessage(msg);}}
     ref={ (client) => { clientRef.current = client; }}
     onConnect={joinHandler}
