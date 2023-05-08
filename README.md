@@ -28,8 +28,8 @@ Commands:
 
 **JaCoCo Testing**
 ---------------------------------------------
-![Screenshot (59)](https://user-images.githubusercontent.com/100239942/236948655-14631a81-c996-4d89-a8ce-af16867e3ac0.png)
-  
+  ![Screenshot (58)](https://user-images.githubusercontent.com/100239942/236953758-265ebc5c-bd51-4cd6-b027-ce62eee15ac4.png)
+
  ![Screenshot (60)](https://user-images.githubusercontent.com/100239942/236953552-48c63a57-d18d-4766-80fa-fc03b36efe57.png)
 ![Screenshot (61)](https://user-images.githubusercontent.com/100239942/236953553-65d2f866-5180-42fb-8ae1-9098b8f3ce6e.png)
    
