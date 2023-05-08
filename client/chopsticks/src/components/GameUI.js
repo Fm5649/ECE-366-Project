@@ -154,7 +154,7 @@ function GameUI() {
         gameinfo.roundNumber = roundNumber;
         setGameinfo({...gameinfo});
       //roundNumber being undefined means it is a join message, not an insert message
-      } else if (roundNumber == undefined){
+      } else if (roundNumber == undefined && msg.gameId == id){
         const {playerOneId} = msg;
         gameinfo.playerTwoId=msg.playerTwoId;
         gameinfo.playerTwoName = msg.playerTwoName;

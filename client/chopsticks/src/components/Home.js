@@ -25,7 +25,7 @@ function Home() {
         const f = async () => {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getOngoingGames/${sessionStorage.getItem("id")}`)
             console.log(res);
-            const l = res.data.filter((o) => o.winner > 0)
+            const l = res.data.filter((o) => o.winner == 0)
             setGames(l);
         }
         f();
