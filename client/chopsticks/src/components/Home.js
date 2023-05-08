@@ -25,7 +25,7 @@ function Home() {
         const f = async () => {
             const res = await axios.get(`http://localhost:8080/getOngoingGames/${sessionStorage.getItem("id")}`)
             console.log(res);
-            const l = res.data.filter((o) => o.winner > 0)
+            const l = res.data.filter((o) => o.winner == 0)
             setGames(l);
         }
         f();

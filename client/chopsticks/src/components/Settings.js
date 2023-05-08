@@ -30,7 +30,7 @@ function Settings() {
     useEffect(()=>{createHandler();},[])
 
     // Display sidebar for navigation. Main screen shows name, email, elo, totalgames/wins/losses
-    return (
+    return (<>
         <div style={styles.wrapper}>
             <div style={styles.sideBarContainer}> 
                 <SideBar></SideBar>
@@ -43,6 +43,8 @@ function Settings() {
                 <h3>Total games won: {data?.totalWins}</h3>
                 <h3>Total games lost: {data?.totalLosses}</h3>
             </div>
+        </div>
+        <div>
             <div style={styles.centerContainer}>
                 <h2>History</h2>
                 {games.map((o,i) => 
@@ -51,11 +53,11 @@ function Settings() {
                     <Button variant="contained" style={styles.joinButton} onClick={()=>{navigate(`/game/${o.gameId}`)}}>
                     View
                 </Button>
-                <div style={{padding:'10px'}}>{id == data?.playerId ? 'WIN' : 'LOSS'}</div>
+                <div style={{padding:'10px'}}>{parseInt(id) == data?.winner ? 'LOSS' : 'WIN'}</div>
                 </div>
                 )}
             </div>
-        </div>
+        </div></>
     );
 }
 
