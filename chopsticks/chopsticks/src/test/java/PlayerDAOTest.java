@@ -5,15 +5,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 @DisplayName("Test PlayerDAO class")
 public class PlayerDAOTest {
 
   private Player player;
+  @Mock
   private PlayerDAO playerDAO;
 
   @BeforeEach
@@ -28,6 +33,9 @@ public class PlayerDAOTest {
     player.setTotalLosses(3);
     player.setPlayerElo(1000);
   }
+  public void setupMocks() {
+        Mockito.when(playerDAO.deleteById(100)).thenReturn(player);      
+    }
   @Test
     @DisplayName("Delete player by id successfully")
     public void testGetPlayerId() {
