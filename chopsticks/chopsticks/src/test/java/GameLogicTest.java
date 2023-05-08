@@ -26,7 +26,7 @@ public class GameLogicTest{
     public void setupMocks() {
         Mockito.when(gameLogic.validMoves(gameRound)).thenReturn(4);
         Mockito.when(gameLogic.isValidMove(gameRound)).thenReturn(5);
-        Mockito.when(gameLogic.winner(gameRound)).thenReturn(1));      
+        Mockito.when(gameLogic.winner(gameRound)).thenReturn(1);      
     }
                      
  @Test
