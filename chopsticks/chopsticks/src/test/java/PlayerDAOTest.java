@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerDAOTest {
 
   private Player player;
-  private PlayerDAO playerDAO
+  private PlayerDAO playerDAO;
 
   @BeforeEach
   void setup() {
