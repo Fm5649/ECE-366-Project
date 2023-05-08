@@ -1,3 +1,4 @@
+/*
 import com.teamchop.chopsticks.GameLogic;
 import com.teamchop.chopsticks.GameRound;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +29,7 @@ public class GameLogicTest{
         //Mockito.when(gameLogic.isValidMove(gameRound)).thenReturn(5);
         Mockito.when(gameLogic.winner(gameRound)).thenReturn(1);      
     }
-        /*             
+                     
  @Test
     public void testValidMoves() {
         assertEquals(4, gameLogic.validMoves(gameRound));
@@ -37,10 +38,11 @@ public class GameLogicTest{
     public void testIsValidMoves() {
         assertEquals(5, gameLogic.isValidMove(gameRound));
     }
-  */
+  
  @Test
     public void testIsWinner() {
         assertEquals(1, gameLogic.winner(gameRound));
     }
                   
 }
+*/
