@@ -1,4 +1,5 @@
 import com.teamchop.chopsticks.GameLogic;
+import com.teamchop.chopsticks.GameRound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,27 +17,29 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Test Game Logic class")
 public class GameLogicTest{
+  
+  private GameRound gameRound;
   @Mock
     GameLogic gameLogic;
   
   @BeforeEach
     public void setupMocks() {
-        Mockito.when(gameLogic.validMoves("g")).thenReturn(4);
-        Mockito.when(gameLogic.isValidMove("d")).thenReturn(5);
-        Mockito.when(gameLogic.winner("c")).thenReturn(1));      
+        Mockito.when(gameLogic.validMoves(gameRound)).thenReturn(4);
+        Mockito.when(gameLogic.isValidMove(gameRound)).thenReturn(5);
+        Mockito.when(gameLogic.winner(gameRound)).thenReturn(1));      
     }
                      
  @Test
     public void testValidMoves() {
-        assertEquals(4, calculateMethods.divide("g"));
+        assertEquals(4, gameLogic.validMoves("g"));
     }
  @Test
     public void testIsValidMoves() {
-        assertEquals(5, calculateMethods.divide("d"));
+        assertEquals(5, gameLogic.isValidMove("d"));
     }
  @Test
     public void testIsWinner() {
-        assertEquals(1, calculateMethods.divide("c"));
+        assertEquals(1, gameLogic.winner("c"));
     }
                   
 }
