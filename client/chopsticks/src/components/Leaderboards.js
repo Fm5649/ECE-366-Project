@@ -14,7 +14,7 @@ function Leaderboards() {
     // Inserts this data into players array
     const f = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/getPlayers`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/getPlayers`);
             const players = res.data.map(player=> ({
                 playerId: player.playerId,
                 playerName: player.playerName,

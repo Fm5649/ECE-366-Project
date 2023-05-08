@@ -29,7 +29,7 @@ function Game() {
         // allows for real time data to be sent btwn server and client
         // without the need for http requests/responses
         <>
-        <SockJsClient url='http://localhost:8080/ws-message' topics={['/topics/join','/topics/insert']}
+        <SockJsClient url={`${process.env.REACT_APP_BACKEND_URL}/ws-message`} topics={['/topics/join','/topics/insert']}
             onMessage={(msg) => { console.log(msg); }}
             ref={ (client) => { clientRef.current = client; }}
             onConnect={joinHandler}
