@@ -26,6 +26,9 @@ Commands:
     SELECT * FROM game_round;   
     SELECT * FROM leaderboard;  
     
+![Screenshot (59)](https://user-images.githubusercontent.com/100239942/236948655-14631a81-c996-4d89-a8ce-af16867e3ac0.png)
+  
+    
 **Project Ethics**
 ---------------------------------------------
 In the course of developing this project, we have sought to follow the Software Engineering Code of Ethics and Professional Practice.
