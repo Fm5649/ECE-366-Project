@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Test Game Logic class")
 public class GameLogicTest{
   @Mock
-    gameLogic = new GameLogic();
+    GameLogic gameLogic;
   
   @BeforeEach
     public void setupMocks() {
         Mockito.when(gameLogic.validMoves("g")).thenReturn(4);
-        Mockito.when(gameLogic.isValidMove("d").thenReturn(5);
-        Mockito.when(gameLogic.winner("c").thenReturn(1);      
+        Mockito.when(gameLogic.isValidMove("d")).thenReturn(5);
+        Mockito.when(gameLogic.winner("c")).thenReturn(1));      
     }
                      
  @Test
