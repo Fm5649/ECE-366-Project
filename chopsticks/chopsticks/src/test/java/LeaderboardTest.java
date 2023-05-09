@@ -64,6 +64,6 @@ public class LeaderboardTest {
     }
   @Test
     public void testToString(){
-            assertEquals("GameRound{userId=50, rank=1, userName='player1', wins=1000, losses=0, totalGames=1000, playerELO=2500}",gameRound.toString());
+            assertEquals("Leaderboard{userId=50, rank=1, userName='player1', wins=1000, losses=0, totalGames=1000, playerELO=2500}",gameRound.toString());
     }
 }
