@@ -17,14 +17,14 @@ public class FriendListTest {
   @BeforeEach
   void setup() {
     friendList = new FriendList();
-    friendList.setUserId(50);
+    friendList.setUserId(50L);
     friendList.setUsername("person");
     friendList.setIdToken("player1");
   }
   @Test
     @DisplayName("Get ID successfully")
     public void testGetUserId() {
-        assertEquals(50, friendList.getUserId());
+        assertEquals(50L, friendList.getUserId());
     }
   @Test
     @DisplayName("Get username successfully")
