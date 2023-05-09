@@ -1,31 +1,26 @@
 Chopsticks Game
 ---------------------------------------------
-Enter the ECE-366-Project/chopsticks/chopsticks directory   
-Command:  
-    cd chopsticks/chopsticks  
+Game is hosted online at http://52.249.210.200/
+Create user or login -> then able to create/join game or check settings/leaderboard
+database can be viewed on dBeaver using database/backend ip 20.246.192.106 port 5432 and username: postgres and password: password
+---------------------------------------------
+To Run:
+Enter the ECE-366-Project/ directory   
 
-Files are setup to create the database and setup spring boot using docker compose. The sql files are copied to the docker-entrypoint-initdb.d directory in the chopsticks-db-1 container. The sql files are run to create the database "chopsticks" and the necessary tables and sequences.  
+Docker compose build and docker compose up creates the database and backend container. Also creates the database. 
 Command:  
     docker compose build  
     docker compose up  
-
-The shell script used for testing can then be run:  
-Command:    
-    bash test.sh    
-
-This shell script uses the CRUD operations to create three players, return the information of two players, update a player, delete a player, create a game, return the game, and lasty create 4 instances of a game round (this is done in this order). View shell.sh for example curl commands that use http requests to access the created CRUD operations.   
-
-The tables can be viewed by accessing the psql terminal in the ubuntu terminal: 
-Commands:   
-    docker exec -it chopsticks-db-1 psql -h localhost -U postgres   
-    \c chopsticks   
-    \dt 
-    \ds 
-    SELECT * FROM player;   
-    SELECT * FROM game; 
-    SELECT * FROM game_round;   
-    SELECT * FROM leaderboard;  
-
+ 
+ IMPORTANT NOTE: To use database/backend that is running locally, must change line 7 of Dockerfile in ECE-366-Project/client/chopsticks 
+    from: ENV REACT_APP_BACKEND_URL=http://20.246.192.106:8080
+    to: ENV REACT_APP_BACKEND_URL=http://localhost:8080
+    
+ Enter the ECE-366-Project/client/chopsticks directory and create the UI container. The terminal will tell the user the url to access the front end in browser.
+ Command: 
+    docker compose build
+    docker compose up
+---------------------------------------------
 **JaCoCo Testing**
 ---------------------------------------------
   ![Screenshot (58)](https://user-images.githubusercontent.com/100239942/236953758-265ebc5c-bd51-4cd6-b027-ce62eee15ac4.png)
