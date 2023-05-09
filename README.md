@@ -1,5 +1,6 @@
 Chopsticks Game
 ---------------------------------------------
+
 Game is hosted online at http://52.249.210.200/
 Create user or login -> then able to create/join game or check settings/leaderboard
 database can be viewed on dBeaver using database/backend ip 20.246.192.106 port 5432 and username: postgres and password: password
