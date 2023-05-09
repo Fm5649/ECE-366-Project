@@ -35,6 +35,9 @@ public class PlayerDAOTest {
   public void setupMocks() {
         Mockito.when(playerDAO.deleteById(100)).thenReturn(player);      
         Mockito.when(playerDAO.updateStats(player)).thenReturn(player);
+        Mockito.when(playerDAO.findById(100)).thenReturn(player);
+        Mockito.when(playerDAO.findByUserName("tester")).thenReturn(player);
+        Mockito.when(playerDAO.insertUserName("testing@cooper.edu","tester","testing","250")).thenReturn(player);
     }
   @Test
     @DisplayName("Delete player by id successfully")
@@ -46,4 +49,19 @@ public class PlayerDAOTest {
     public void testUpdateStats() {
         assertEquals(player, playerDAO.updateStats(player));
     }
+  @Test
+    @DisplayName("Find by id successfully")
+    public void testFindById() {
+        assertEquals(player, playerDAO.findById(100));
+    }
+  @Test
+    @DisplayName("Find by username successfully")
+    public void testFindByUserName() {
+        assertEquals(player, playerDAO.findByUserName("tester"));
+    }
+  @Test
+    @DisplayName("insert Player successfully")
+    public void testInsertPlayer(){
+        assertEquals(player, playerDAO.insertUserName("testing@cooper.edu","tester","testing","250"));
+                     }                
 }
