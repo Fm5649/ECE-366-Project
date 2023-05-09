@@ -1,4 +1,4 @@
-/*
+
 import com.teamchop.chopsticks.GameLogic;
 import com.teamchop.chopsticks.GameRound;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,43 +6,48 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@ExtendWith(MockitoExtension.class)
 @DisplayName("Test Game Logic class")
 public class GameLogicTest{
   
   private GameRound gameRound;
-  @Mock
-    GameLogic gameLogic;
+  private GameLogic gameLogic;
   
   @BeforeEach
-    public void setupMocks() {
-        //Mockito.when(gameLogic.validMoves(gameRound)).thenReturn(4);
-        //Mockito.when(gameLogic.isValidMove(gameRound)).thenReturn(5);
-        Mockito.when(gameLogic.winner(gameRound)).thenReturn(1);      
-    }
-                     
+  void setup(){
+    gameRound = new GameRound();
+    gameLogic = new gameLogic();
+    gameRound.setGameId(15);
+    gameRound.setRoundNumber(4);
+    gameRound.setPlayerTurn("player1");
+    gameRound.setPlayerChoice("Attack"); 
+    gameRound.setPlayerHandUsed("left");
+    gameRound.setTarget("right");
+    gameRound.setAmount(3);
+    gameRound.setP1Hand1(3);
+    gameRound.setP1Hand2(2);
+    gameRound.setP2Hand1(1);
+    gameRound.setP2Hand2(4);
+  }
+        /*             
  @Test
     public void testValidMoves() {
         assertEquals(4, gameLogic.validMoves(gameRound));
-    }
+    }*/
  @Test
     public void testIsValidMoves() {
-        assertEquals(5, gameLogic.isValidMove(gameRound));
+        assertEquals(true, gameLogic.isValidMove(gameRound));
     }
   
  @Test
     public void testIsWinner() {
-        assertEquals(1, gameLogic.winner(gameRound));
+        assertEquals(0, gameLogic.winner(gameRound));
     }
                   
 }
-*/
+
