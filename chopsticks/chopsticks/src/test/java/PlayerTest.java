@@ -70,6 +70,6 @@ public class PlayerTest {
     }
   @Test
     public void testToString(){
-            assertEquals("GameRound{playerId=100, playerEmail='testing@cooper.edu', playerName='tester', password='testing', totalGames=10, totalWins=7, totalLosses=3, playerELO=1000, achievementFirstWin=1, achievementFirstGame=1}",gameRound.toString());
+            assertEquals("Player{playerId=100, playerEmail='testing@cooper.edu', playerName='tester', password='testing', totalGames=10, totalWins=7, totalLosses=3, playerELO=1000, achievementFirstWin=1, achievementFirstGame=1}",player.toString());
     }
 }
