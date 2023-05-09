@@ -85,5 +85,9 @@ public class GameRoundTest {
     public void testGetP2Hand2() {
         assertEquals(4, gameRound.getP2Hand2());
     }
+  @Test
+    public void testToString(){
+            assertEquals("GameRound{gameId=15, roundNumber=4, playerTurn='player1', playerChoice='Attack', target='right', p1Hand1=3, p1Hand2=2, p2Hand1=1, p2Hand2=4}",gameRound.toString());
+    }
 }
 
