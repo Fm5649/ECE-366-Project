@@ -38,6 +38,6 @@ public class FriendListTest {
     }
   @Test
     public void testToString(){
-            assertEquals("FriendList{userId=50, username='person'}",gameRound.toString());
+            assertEquals("FriendList{userId=50, username='person'}",friendList.toString());
     }
 }
