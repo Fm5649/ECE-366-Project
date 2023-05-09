@@ -36,4 +36,8 @@ public class FriendListTest {
     public void testGetIdToken() {
         assertEquals("player1", friendList.getIdToken());
     }
+  @Test
+    public void testToString(){
+            assertEquals("FriendList{userId=50, username='person'}",gameRound.toString());
+    }
 }
