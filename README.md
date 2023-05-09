@@ -24,11 +24,12 @@ Command:
 ---------------------------------------------
 **JaCoCo Testing**
 ---------------------------------------------
-  ![Screenshot (58)](https://user-images.githubusercontent.com/100239942/236953758-265ebc5c-bd51-4cd6-b027-ce62eee15ac4.png)
+file://wsl.localhost/Ubuntu/home/fm5649/testing2/ECE-366-Project/chopsticks/chopsticks/target/site/surefire-report.html
+file://wsl.localhost/Ubuntu/home/fm5649/testing2/ECE-366-Project/chopsticks/chopsticks/target/site/jacoco/index.html
+![Screenshot (79)](https://user-images.githubusercontent.com/100239942/237052398-9a60e55d-473a-466b-8b8b-258ba5e47844.png)
 
- ![Screenshot (60)](https://user-images.githubusercontent.com/100239942/236953552-48c63a57-d18d-4766-80fa-fc03b36efe57.png)
-![Screenshot (61)](https://user-images.githubusercontent.com/100239942/236953553-65d2f866-5180-42fb-8ae1-9098b8f3ce6e.png)
-   
+   ![Screenshot (78)](https://user-images.githubusercontent.com/100239942/237052080-457733b4-ca31-4efd-8330-d46c8249a3e3.png)
+
 **Project Ethics**
 ---------------------------------------------
 In the course of developing this project, we have sought to follow the Software Engineering Code of Ethics and Professional Practice.
