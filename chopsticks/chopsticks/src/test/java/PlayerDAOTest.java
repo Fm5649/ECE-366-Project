@@ -17,11 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Test PlayerDAO class")
 public class PlayerDAOTest {
 
-  private Player player;
   @Mock
   private PlayerDAO playerDAO;
-
-  @BeforeEach
+    private Player player;
+  
   void setup() {
     player = new Player();
     player.setPlayerId(100);
@@ -35,10 +34,16 @@ public class PlayerDAOTest {
   }
   public void setupMocks() {
         Mockito.when(playerDAO.deleteById(100)).thenReturn(player);      
+        Mockito.when(playerDAO.updateStats(player)).thenReturn(player);
     }
   @Test
     @DisplayName("Delete player by id successfully")
     public void testGetPlayerId() {
         assertEquals(player, playerDAO.deleteById(100));
+    }
+  @Test
+    @DisplayName("Update Player successfully")
+    public void testUpdateStats() {
+        assertEquals(player, playerDAO.updateStats(player));
     }
 }
