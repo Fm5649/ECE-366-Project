@@ -21,7 +21,7 @@ public class GameLogicTest{
   @BeforeEach
   void setup(){
     gameRound = new GameRound();
-    gameLogic = new gameLogic();
+    gameLogic = new GameLogic();
     gameRound.setGameId(15);
     gameRound.setRoundNumber(4);
     gameRound.setPlayerTurn("player1");
