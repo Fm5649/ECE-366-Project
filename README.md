@@ -24,11 +24,12 @@ Command:
 ---------------------------------------------
 **JaCoCo Testing**
 ---------------------------------------------
-file://wsl.localhost/Ubuntu/home/fm5649/testing2/ECE-366-Project/chopsticks/chopsticks/target/site/surefire-report.html
-file://wsl.localhost/Ubuntu/home/fm5649/testing2/ECE-366-Project/chopsticks/chopsticks/target/site/jacoco/index.html
-![Screenshot (79)](https://user-images.githubusercontent.com/100239942/237052398-9a60e55d-473a-466b-8b8b-258ba5e47844.png)
+The DAO files were tested using Mockito and do not contribute to the percentage of units tested in the jacoco file.
 
-   ![Screenshot (78)](https://user-images.githubusercontent.com/100239942/237052080-457733b4-ca31-4efd-8330-d46c8249a3e3.png)
+![Screenshot (80)](https://github.com/Fm5649/ECE-366-Project/assets/100239942/37ec34d2-f9a5-421d-a79c-749eea4a238c)
+
+![Screenshot (81)](https://github.com/Fm5649/ECE-366-Project/assets/100239942/4a54abc7-110c-402c-acac-6f385dcb573a)
+
 
 **Project Ethics**
 ---------------------------------------------
