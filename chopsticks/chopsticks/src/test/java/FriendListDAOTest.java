@@ -38,6 +38,6 @@ public class FriendListDAOTest {
   @Test
     @DisplayName("insert successfully")
     public void testInsertFriend() {
-        assertEquals((friendList, friendListDAO.insertFriend("person",50L));
+        assertEquals(friendList, friendListDAO.insertFriend("person",50L));
     }
 }
