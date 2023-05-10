@@ -42,6 +42,6 @@ public class LeaderboardDAOTest {
   @Test
     @DisplayName("insert successfully")
     public void testInsertLeaderboard() {
-        assertEquals((leaderboard, leaderboardDAO.insertLeaderboard(1,"player1",1000,0,1000,2500,50L));
+        assertEquals(leaderboard, leaderboardDAO.insertLeaderboard(1,"player1",1000,0,1000,2500,50L));
     }
 }
