@@ -62,4 +62,8 @@ public class LeaderboardTest {
     public void testGetElo() {
         assertEquals(2500, leaderboard.getElo());
     }
+  @Test
+    public void testToString(){
+            assertEquals("Leaderboard{userId=50, rank=1, userName='player1', wins=1000, losses=0, totalGames=1000, playerELO=2500}",leaderboard.toString());
+    }
 }

@@ -56,5 +56,9 @@ public class GameTest {
     public void testGetPlayerTwoName() {
         assertEquals("secondMan", game.getPlayerTwoName());
     }
+  @Test
+    public void testToString(){
+            assertEquals("Game{gameId=10, p1Id=12, p2Id=24, winner=12}",game.toString());
+    }
 }
 
