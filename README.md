@@ -24,6 +24,7 @@ Command:
 ---------------------------------------------
 **JaCoCo Testing**
 ---------------------------------------------
+Unit testing was done on files in ECE-366-Project/chopsticks/chopsticks/src/main/java/com/teamchop/chopsticks
 The DAO files were tested using Mockito and do not contribute to the percentage of units tested in the jacoco file.
 
 ![Screenshot (80)](https://github.com/Fm5649/ECE-366-Project/assets/100239942/37ec34d2-f9a5-421d-a79c-749eea4a238c)
